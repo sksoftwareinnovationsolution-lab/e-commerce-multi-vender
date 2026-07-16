@@ -1,0 +1,79 @@
+/* ========================================
+   CategoryStrip.css — Horizontal Menu
+   ======================================== */
+
+.catstrip {
+  margin-bottom: 1.5rem;
+}
+
+.catstrip__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.catstrip__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.catstrip__item {
+  flex-shrink: 0;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .catstrip__item {
+  color: #d1d5db;
+  background-color: #1a1a2e;
+  border-color: #2d2d44;
+}
+
+.catstrip__item:hover {
+  border-color: #7c3aed;
+  color: #7c3aed;
+  background-color: #f5f3ff;
+}
+
+[data-theme="dark"] .catstrip__item:hover {
+  border-color: #a78bfa;
+  color: #a78bfa;
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.catstrip__item--active {
+  background-color: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
+}
+
+[data-theme="dark"] .catstrip__item--active {
+  background-color: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
+}
+
+.catstrip__item--active:hover {
+  background-color: #6d28d9;
+  color: #ffffff;
+  border-color: #6d28d9;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .catstrip__item {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}

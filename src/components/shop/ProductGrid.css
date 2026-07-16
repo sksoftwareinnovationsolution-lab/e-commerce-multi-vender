@@ -1,0 +1,199 @@
+/* ========================================
+   ProductGrid.css — Product Grid + Toolbar
+   ======================================== */
+
+.pgrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Toolbar */
+.pgrid__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+}
+
+[data-theme="dark"] .pgrid__toolbar {
+  background-color: #1a1a2e;
+  border-color: #2d2d44;
+}
+
+.pgrid__toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pgrid__filter-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+[data-theme="dark"] .pgrid__filter-toggle {
+  color: #d1d5db;
+  background-color: #16213e;
+  border-color: #2d2d44;
+}
+
+.pgrid__filter-toggle:hover {
+  background-color: #f3f4f6;
+}
+
+.pgrid__showing {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+[data-theme="dark"] .pgrid__showing {
+  color: #9ca3af;
+}
+
+.pgrid__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pgrid__sort {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .pgrid__sort {
+  color: #d1d5db;
+  background-color: #16213e;
+  border-color: #2d2d44;
+}
+
+.pgrid__sort:focus {
+  border-color: #7c3aed;
+}
+
+.pgrid__view-btns {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.pgrid__view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .pgrid__view-btn {
+  background-color: #16213e;
+  border-color: #2d2d44;
+  color: #6b7280;
+}
+
+.pgrid__view-btn:first-child {
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.pgrid__view-btn:last-child {
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.pgrid__view-btn--active {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  color: #ffffff;
+}
+
+.pgrid__view-btn:hover:not(.pgrid__view-btn--active) {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+[data-theme="dark"] .pgrid__view-btn:hover:not(.pgrid__view-btn--active) {
+  background-color: #1e2a4a;
+  color: #d1d5db;
+}
+
+/* Product grid */
+.pgrid__items {
+  display: grid;
+  gap: 1rem;
+}
+
+.pgrid__items--grid {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.pgrid__items--list {
+  grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 576px) {
+  .pgrid__items--grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Laptop: 3 columns */
+@media (min-width: 992px) {
+  .pgrid__items--grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 1200px) {
+  .pgrid__items--grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile: show filter toggle */
+@media (max-width: 767px) {
+  .pgrid__filter-toggle {
+    display: inline-flex;
+  }
+
+  .pgrid__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pgrid__toolbar-left {
+    justify-content: space-between;
+  }
+
+  .pgrid__toolbar-right {
+    justify-content: space-between;
+  }
+}

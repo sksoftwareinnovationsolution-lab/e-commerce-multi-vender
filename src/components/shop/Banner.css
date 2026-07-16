@@ -1,0 +1,131 @@
+/* ========================================
+   Banner.css — Promotional Banner
+   ======================================== */
+
+.banner {
+  margin-bottom: 1.5rem;
+}
+
+.banner__container {
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.banner__gradient {
+  height: 340px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .banner__gradient {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+}
+
+.banner__content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.banner__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.banner__highlight {
+  color: #fde68a;
+}
+
+.banner__subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.banner__features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+[data-theme="dark"] .banner__features {
+  background-color: #1a1a2e;
+  border-color: #2d2d44;
+}
+
+.banner__feature {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+[data-theme="dark"] .banner__feature {
+  color: #d1d5db;
+}
+
+.banner__feature:not(:last-child) {
+  border-right: 1px solid #e5e7eb;
+}
+
+[data-theme="dark"] .banner__feature:not(:last-child) {
+  border-color: #2d2d44;
+}
+
+.banner__feature-icon {
+  font-size: 0.9rem;
+  color: #7c3aed;
+}
+
+.banner__feature-label {
+  white-space: nowrap;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .banner__gradient {
+    height: 340px;
+  }
+
+  .banner__title {
+    font-size: 2.25rem;
+  }
+
+  .banner__subtitle {
+    font-size: 1.1rem;
+  }
+
+  .banner__feature {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .banner__title {
+    font-size: 2.75rem;
+  }
+
+  .banner__subtitle {
+    font-size: 1.15rem;
+  }
+
+  .banner__feature {
+    padding: 0.75rem 2rem;
+  }
+}
