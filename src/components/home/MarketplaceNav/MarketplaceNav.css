@@ -1,0 +1,192 @@
+/* ========================================
+   MarketplaceNav.css — Sticky Marketplace Navigation
+   ======================================== */
+
+/* ---------- Container ---------- */
+.mpnav {
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+  padding: 0.625rem 0;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+}
+
+[data-theme="dark"] .mpnav {
+  background-color: rgba(15, 15, 35, 0.78);
+  border-bottom-color: rgba(45, 45, 68, 0.6);
+}
+
+.mpnav--scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .mpnav--scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Inner Row ---------- */
+.mpnav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ---------- Chip Button ---------- */
+.mpnav__chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1.125rem;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  background-color: transparent;
+  color: #6b7280;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+[data-theme="dark"] .mpnav__chip {
+  color: #9ca3af;
+}
+
+.mpnav__chip:hover {
+  color: #7c3aed;
+  background-color: #f5f3ff;
+  transform: scale(1.04);
+}
+
+[data-theme="dark"] .mpnav__chip:hover {
+  background-color: rgba(124, 58, 237, 0.12);
+  color: #a78bfa;
+}
+
+/* ---------- Active State ---------- */
+.mpnav__chip--active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  border-color: transparent;
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.35);
+}
+
+[data-theme="dark"] .mpnav__chip--active {
+  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  box-shadow: 0 2px 16px rgba(124, 58, 237, 0.45);
+}
+
+.mpnav__chip--active:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+/* ---------- Icon & Label ---------- */
+.mpnav__chip-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.mpnav__chip:hover .mpnav__chip-icon {
+  transform: scale(1.15);
+}
+
+.mpnav__chip--active .mpnav__chip-icon {
+  transform: scale(1.1);
+}
+
+.mpnav__chip-label {
+  line-height: 1;
+}
+
+/* ---------- Animated Underline ---------- */
+.mpnav__underline {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 1px;
+  animation: mpnav-underline-in 0.3s ease forwards;
+}
+
+@keyframes mpnav-underline-in {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60%;
+    opacity: 1;
+  }
+}
+
+/* ---------- Ripple Effect ---------- */
+.mpnav__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: mpnav-ripple-anim 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes mpnav-ripple-anim {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+/* Tablet: allow wrap if needed */
+@media (max-width: 768px) {
+  .mpnav__inner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    gap: 0.375rem;
+    padding-bottom: 2px;
+  }
+
+  .mpnav__inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mpnav__chip {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mpnav {
+    top: 70px;
+    padding: 0.5rem 0;
+  }
+
+  .mpnav__inner {
+    padding: 0 0.75rem;
+  }
+}

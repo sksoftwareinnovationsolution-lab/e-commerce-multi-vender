@@ -1,0 +1,70 @@
+/* ========================================
+   ProductDetails.css — Page Layout
+   ======================================== */
+
+/* ---------- Main 3-column layout ---------- */
+.pd-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.pd-main__gallery {
+  min-width: 0;
+}
+
+.pd-main__info {
+  min-width: 0;
+}
+
+.pd-main__vendor {
+  min-width: 0;
+}
+
+/* ---------- Tablet: Gallery + Info, then Vendor below ---------- */
+@media (min-width: 768px) and (max-width: 991px) {
+  .pd-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .pd-main__gallery {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .pd-main__info {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .pd-main__vendor {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+/* ---------- Desktop: Gallery (45%) | Info (35%) | Vendor (20%) ---------- */
+@media (min-width: 992px) {
+  .pd-main {
+    grid-template-columns: 45% 1fr 280px;
+    gap: 1.75rem;
+    align-items: start;
+  }
+
+  .pd-main__gallery {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .pd-main__info {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .pd-main__vendor {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}

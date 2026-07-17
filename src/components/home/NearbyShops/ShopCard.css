@@ -1,0 +1,388 @@
+/* ========================================
+   ShopCard.css — Individual Shop Card
+   ======================================== */
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+[data-theme="dark"] .shop-card {
+  background-color: #1a1a2e;
+  border-color: #2d2d44;
+}
+
+.shop-card:hover {
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.15);
+  transform: translateY(-4px);
+}
+
+[data-theme="dark"] .shop-card:hover {
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.25);
+}
+
+.shop-card:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+.shop-card__link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+/* ========================================
+   Cover Image
+   ======================================== */
+
+.shop-card__cover {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.shop-card__cover-img {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+[data-theme="dark"] .shop-card__cover-img {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+}
+
+.shop-card:hover .shop-card__cover-img {
+  transform: scale(1.05);
+}
+
+.shop-card__cover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-card__cover-placeholder {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a78bfa;
+  letter-spacing: 0.05em;
+}
+
+[data-theme="dark"] .shop-card__cover-placeholder {
+  color: #6d28d9;
+}
+
+/* ========================================
+   Status Badge
+   ======================================== */
+
+.shop-card__status {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 1rem;
+  z-index: 2;
+  transition: background-color 0.3s ease;
+}
+
+.shop-card__status--open {
+  background-color: #10b981;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.shop-card__status--closed {
+  background-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* ========================================
+   Logo
+   ======================================== */
+
+.shop-card__logo-wrap {
+  position: absolute;
+  bottom: -22px;
+  left: 1rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.375rem;
+  z-index: 2;
+}
+
+.shop-card__logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .shop-card__logo {
+  border-color: #1a1a2e;
+}
+
+.shop-card__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-card__logo-placeholder {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.shop-card__verified {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #7c3aed;
+  color: #ffffff;
+  border-radius: 50%;
+  animation: shopcard-pulse 2s ease-in-out infinite;
+}
+
+@keyframes shopcard-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(124, 58, 237, 0);
+  }
+}
+
+/* ========================================
+   Card Body
+   ======================================== */
+
+.shop-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.875rem 0.875rem 0.625rem;
+  flex: 1;
+}
+
+.shop-card__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.shop-card__name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .shop-card__name {
+  color: #f3f4f6;
+}
+
+.shop-card__category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #7c3aed;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   Rating
+   ======================================== */
+
+.shop-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.shop-card__stars {
+  font-size: 0.8rem;
+  color: #f59e0b;
+  letter-spacing: -1px;
+}
+
+.shop-card__rating-value {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+[data-theme="dark"] .shop-card__rating-value {
+  color: #d1d5db;
+}
+
+.shop-card__review-count {
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+/* ========================================
+   Meta Info (Location + Distance)
+   ======================================== */
+
+.shop-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.125rem;
+}
+
+.shop-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+[data-theme="dark"] .shop-card__meta-item {
+  color: #9ca3af;
+}
+
+.shop-card__meta-item svg {
+  flex-shrink: 0;
+  color: #9ca3af;
+}
+
+/* ========================================
+   Stats Row
+   ======================================== */
+
+.shop-card__stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 0.375rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid #f3f4f6;
+}
+
+[data-theme="dark"] .shop-card__stats {
+  border-top-color: #2d2d44;
+}
+
+.shop-card__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.shop-card__stat-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+[data-theme="dark"] .shop-card__stat-value {
+  color: #f3f4f6;
+}
+
+.shop-card__stat-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.shop-card__stat-divider {
+  width: 1px;
+  height: 28px;
+  background-color: #e5e7eb;
+}
+
+[data-theme="dark"] .shop-card__stat-divider {
+  background-color: #2d2d44;
+}
+
+/* ========================================
+   Actions
+   ======================================== */
+
+.shop-card__actions {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid #f3f4f6;
+}
+
+[data-theme="dark"] .shop-card__actions {
+  border-top-color: #2d2d44;
+}
+
+.shop-card__btn {
+  flex: 1;
+  padding: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+}
+
+.shop-card__btn--visit {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+[data-theme="dark"] .shop-card__btn--visit {
+  background-color: #16213e;
+  color: #d1d5db;
+}
+
+.shop-card__btn--visit:hover {
+  background-color: #7c3aed;
+  color: #ffffff;
+}
+
+.shop-card__btn--products {
+  background-color: #7c3aed;
+  color: #ffffff;
+}
+
+.shop-card__btn--products:hover {
+  background-color: #6d28d9;
+  color: #ffffff;
+}
+
+.shop-card__btn:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: -2px;
+}

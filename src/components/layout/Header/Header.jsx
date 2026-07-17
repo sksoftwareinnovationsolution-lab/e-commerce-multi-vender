@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiSun, FiMoon, FiShoppingCart } from "react-icons/fi";
 import { useTheme } from "../../../context/useTheme";
+import { useCart } from "../../../context/useCart";
 import logo from "../../../assets/images/logo.jpeg";
 import "../Header.css";
 
@@ -9,6 +10,7 @@ import "../Header.css";
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  const { totalItems } = useCart();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -96,7 +98,7 @@ function Header() {
           <Link to="/cart" className="header__cart-link" aria-label="Shopping cart">
             <div className="header__cart-wrapper">
               <FiShoppingCart className="header__cart-icon" />
-              <span className="header__cart-badge">0</span>
+              <span className="header__cart-badge">{totalItems}</span>
             </div>
           </Link>
 
@@ -128,7 +130,7 @@ function Header() {
               <Link to="/cart" className="header__cart-link" aria-label="Shopping cart">
                 <div className="header__cart-wrapper">
                   <FiShoppingCart className="header__cart-icon" />
-                  <span className="header__cart-badge">0</span>
+                  <span className="header__cart-badge">{totalItems}</span>
                 </div>
               </Link>
             </div>

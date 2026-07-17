@@ -1,0 +1,212 @@
+/* ========================================
+   VendorCard.css — Sticky Vendor Info Card
+   ======================================== */
+
+.vcard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .vcard {
+  background-color: #1a1a2e;
+  border-color: #2d2d44;
+}
+
+/* ---------- Header ---------- */
+.vcard__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vcard__logo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 100%);
+  border-radius: 0.625rem;
+  border: 1px solid #e5e7eb;
+}
+
+[data-theme="dark"] .vcard__logo {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  border-color: #2d2d44;
+}
+
+.vcard__logo-text {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #7c3aed;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .vcard__logo-text {
+  color: #a78bfa;
+}
+
+.vcard__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.vcard__name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+[data-theme="dark"] .vcard__name {
+  color: #f3f4f6;
+}
+
+.vcard__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.vcard__stars {
+  font-size: 0.8rem;
+  color: #f59e0b;
+  letter-spacing: -1px;
+}
+
+.vcard__rating-value {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+[data-theme="dark"] .vcard__rating-value {
+  color: #d1d5db;
+}
+
+.vcard__rating-label {
+  font-size: 0.72rem;
+  color: #9ca3af;
+}
+
+/* ---------- Details ---------- */
+.vcard__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+[data-theme="dark"] .vcard__details {
+  background-color: #16213e;
+}
+
+.vcard__detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vcard__detail-icon {
+  flex-shrink: 0;
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .vcard__detail-icon {
+  color: #6b7280;
+}
+
+.vcard__detail-text {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+[data-theme="dark"] .vcard__detail-text {
+  color: #9ca3af;
+}
+
+.vcard__detail-text strong {
+  color: #374151;
+}
+
+[data-theme="dark"] .vcard__detail-text strong {
+  color: #d1d5db;
+}
+
+/* ---------- Actions ---------- */
+.vcard__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vcard__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.625rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.vcard__btn--chat {
+  color: #7c3aed;
+  background-color: #f5f3ff;
+  border: 1px solid #e0e7ff;
+}
+
+[data-theme="dark"] .vcard__btn--chat {
+  background-color: #1e1b4b;
+  border-color: #312e81;
+  color: #a78bfa;
+}
+
+.vcard__btn--chat:hover {
+  background-color: #ede9fe;
+  border-color: #c4b5fd;
+}
+
+[data-theme="dark"] .vcard__btn--chat:hover {
+  background-color: #2e1065;
+}
+
+.vcard__btn--store {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+.vcard__btn--store:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.vcard__btn:active {
+  transform: scale(0.97);
+}
+
+.vcard__btn:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+/* ---------- Desktop Sticky ---------- */
+@media (min-width: 992px) {
+  .vcard {
+    position: sticky;
+    top: 90px;
+  }
+}

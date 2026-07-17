@@ -5,6 +5,9 @@ import CategoryStrip from "../../components/shop/CategoryStrip";
 import Sidebar from "../../components/shop/Sidebar";
 import ProductGrid from "../../components/shop/ProductGrid";
 import Pagination from "../../components/shop/Pagination";
+import NearbyShops from "../../components/home/NearbyShops/NearbyShops";
+import MarketplaceNav from "../../components/home/MarketplaceNav/MarketplaceNav";
+import NearbyServices from "../../components/home/NearbyServices/NearbyServices";
 import "../../pages/Home/Home.css";
 
 function Home() {
@@ -33,8 +36,11 @@ function Home() {
       {/* Horizontal Category Menu */}
       <CategoryStrip />
 
-      {/* Main Shop Layout */}
-      <div className="shop-layout">
+      {/* Sticky Marketplace Navigation */}
+      <MarketplaceNav />
+
+      {/* Main Shop Layout — Featured Products */}
+      <div className="shop-layout" id="featured-products">
         {/* Desktop Sidebar */}
         <div className="shop-layout__sidebar">
           <Sidebar />
@@ -65,6 +71,14 @@ function Home() {
           <Pagination />
         </div>
       </div>
+
+      {/* Nearby Shops Section */}
+      <div id="nearby-shops">
+        <NearbyShops />
+      </div>
+
+      {/* Nearby Services Section */}
+      <NearbyServices />
 
       {/* Bottom Promotional Banner */}
       <div className="promo-banner">

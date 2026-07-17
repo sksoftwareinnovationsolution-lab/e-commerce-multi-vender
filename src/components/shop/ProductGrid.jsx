@@ -77,7 +77,7 @@ function ProductGrid({ onOpenSidebar }) {
 
       <div className={`pgrid__items pgrid__items--${viewMode}`}>
         {placeholderProducts.map((id) => (
-          <ProductCard key={id} />
+          <ProductCard key={id} id={id} />
         ))}
       </div>
     </section>

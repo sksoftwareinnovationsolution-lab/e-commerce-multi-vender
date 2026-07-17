@@ -2,6 +2,12 @@
    ProductCard.css — Product Card
    ======================================== */
 
+.pcard-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .pcard {
   display: flex;
   flex-direction: column;
