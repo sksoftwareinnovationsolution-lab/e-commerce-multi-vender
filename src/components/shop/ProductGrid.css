@@ -147,6 +147,7 @@
 .pgrid__items {
   display: grid;
   gap: 1rem;
+  grid-auto-rows: 1fr;
 }
 
 .pgrid__items--grid {

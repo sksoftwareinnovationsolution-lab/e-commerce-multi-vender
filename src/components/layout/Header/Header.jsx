@@ -1,19 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiSun, FiMoon, FiShoppingCart } from "react-icons/fi";
 import { useTheme } from "../../../context/useTheme";
 import { useCart } from "../../../context/useCart";
 import logo from "../../../assets/images/logo.jpeg";
 import "../Header.css";
 
+const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/shop", label: "Shop" },
+  { to: "/services", label: "Services" },
+];
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const { totalItems } = useCart();
+  const location = useLocation();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const isActive = (path) => {
+    if (path === "/") return location.pathname === "/";
+    return location.pathname.startsWith(path);
   };
 
   return (
@@ -27,6 +38,18 @@ function Header() {
               className="header__logo-img"
             />
           </Link>
+
+          <nav className="header__nav" aria-label="Main navigation">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`header__nav-link ${isActive(link.to) ? "header__nav-link--active" : ""}`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
           <button
             className="header__hamburger"
@@ -133,6 +156,19 @@ function Header() {
                   <span className="header__cart-badge">{totalItems}</span>
                 </div>
               </Link>
+            </div>
+
+            <div className="header__mobile-links">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`header__mobile-link ${isActive(link.to) ? "header__mobile-link--active" : ""}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
 
             <button className="header__mobile-location" type="button">

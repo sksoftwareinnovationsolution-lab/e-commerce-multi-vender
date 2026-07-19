@@ -4,8 +4,8 @@ import "./MarketplaceNav.css";
 const NAV_ITEMS = [
   { id: "all", label: "All", icon: "\u{1F3E0}", sectionId: null },
   { id: "products", label: "Products", icon: "\u{1F4E6}", sectionId: "featured-products" },
-  { id: "shops", label: "Shops", icon: "\u{1F3EA}", sectionId: "nearby-shops" },
-  { id: "services", label: "Services", icon: "\u{1F6E0}", sectionId: "nearby-services" },
+  { id: "shops", label: "Shops", icon: "\u{1F3EA}", sectionId: "featured-shops" },
+  { id: "services", label: "Services", icon: "\u{1F6E0}", sectionId: "featured-services" },
 ];
 
 function MarketplaceNav() {
@@ -13,7 +13,7 @@ function MarketplaceNav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef(null);
   const observerRef = useRef(null);
-  const sectionIdsRef = useRef(["featured-products", "nearby-shops", "nearby-services"]);
+  const sectionIdsRef = useRef(["featured-products", "featured-shops", "featured-services"]);
   const isClickScrolling = useRef(false);
 
   /* Detect scroll for shadow effect */
@@ -50,8 +50,8 @@ function MarketplaceNav() {
 
         const idMap = {
           "featured-products": "products",
-          "nearby-shops": "shops",
-          "nearby-services": "services",
+          "featured-shops": "shops",
+          "featured-services": "services",
         };
         const chipId = idMap[best.target.id];
         if (chipId) setActiveId(chipId);

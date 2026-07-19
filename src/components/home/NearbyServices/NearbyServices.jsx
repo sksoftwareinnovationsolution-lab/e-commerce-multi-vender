@@ -57,7 +57,7 @@ function EmptyState() {
 /* ========================================
    NearbyServices — Main Section
    ======================================== */
-function NearbyServices({ services = DUMMY_SERVICES }) {
+function NearbyServices({ services = DUMMY_SERVICES, compact }) {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -73,9 +73,9 @@ function NearbyServices({ services = DUMMY_SERVICES }) {
 
   /* Simulate initial loading */
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1800);
+    const timer = setTimeout(() => setIsLoading(false), compact ? 800 : 1800);
     return () => clearTimeout(timer);
-  }, []);
+  }, [compact]);
 
   /* Responsive visible count */
   useEffect(() => {
@@ -93,8 +93,8 @@ function NearbyServices({ services = DUMMY_SERVICES }) {
 
   /* Filtered services */
   const filteredServices = useMemo(
-    () => filterServices(services, searchQuery, activeCategory),
-    [services, searchQuery, activeCategory]
+    () => filterServices(services, searchQuery, activeCategory).slice(0, compact ? 4 : services.length),
+    [services, searchQuery, activeCategory, compact]
   );
 
   /* Max index for slider */
@@ -119,7 +119,7 @@ function NearbyServices({ services = DUMMY_SERVICES }) {
 
   /* Auto-play */
   useEffect(() => {
-    if (isPaused || filteredServices.length <= visibleCount) {
+    if (compact || isPaused || filteredServices.length <= visibleCount) {
       clearInterval(autoPlayRef.current);
       return;
     }
@@ -127,7 +127,7 @@ function NearbyServices({ services = DUMMY_SERVICES }) {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 4000);
     return () => clearInterval(autoPlayRef.current);
-  }, [isPaused, maxIndex, filteredServices.length, visibleCount]);
+  }, [compact, isPaused, maxIndex, filteredServices.length, visibleCount]);
 
   /* Navigation */
   const goPrev = useCallback(() => {
@@ -171,88 +171,106 @@ function NearbyServices({ services = DUMMY_SERVICES }) {
   return (
     <section
       className="nearby-services"
-      id="nearby-services"
-      aria-label="Nearby Services"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      id="featured-services"
+      aria-label="Featured Services"
+      {...(!compact && { onMouseEnter: () => setIsPaused(true), onMouseLeave: () => setIsPaused(false) })}
     >
       {/* Section Header */}
       <div className="nearby-services__header">
         <div className="nearby-services__header-text">
-          <h2 className="nearby-services__title">Nearby Services</h2>
+          <h2 className="nearby-services__title">Featured Services</h2>
           <p className="nearby-services__subtitle">
             Find trusted professionals around your location.
           </p>
         </div>
         <Link to="/services" className="nearby-services__view-all">
-          View All Services
+          View All
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </Link>
       </div>
 
-      {/* Search Bar */}
-      <div className="nearby-services__search-wrap">
-        <div className="nearby-services__search">
-          <svg className="nearby-services__search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input
-            type="text"
-            className="nearby-services__search-input"
-            placeholder="Search services, providers, categories..."
-            value={searchQuery}
-            onChange={(e) => handleSearchChange(e.target.value)}
-            aria-label="Search services"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              className="nearby-services__search-clear"
-              onClick={() => handleSearchChange("")}
-              aria-label="Clear search"
-            >
-              \u2715
-            </button>
-          )}
-        </div>
-      </div>
+      {/* Search Bar — only in full mode */}
+      {!compact && (
+        <>
+          <div className="nearby-services__search-wrap">
+            <div className="nearby-services__search">
+              <svg className="nearby-services__search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="text"
+                className="nearby-services__search-input"
+                placeholder="Search services, providers, categories..."
+                value={searchQuery}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                aria-label="Search services"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="nearby-services__search-clear"
+                  onClick={() => handleSearchChange("")}
+                  aria-label="Clear search"
+                >
+                  \u2715
+                </button>
+              )}
+            </div>
+          </div>
 
-      {/* Category Filter Chips */}
-      <div className="nearby-services__chips" role="tablist" aria-label="Service categories">
-        {SERVICE_CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            role="tab"
-            aria-selected={activeCategory === cat.id}
-            className={`nearby-services__chip ${activeCategory === cat.id ? "nearby-services__chip--active" : ""}`}
-            onClick={() => handleCategoryChange(cat.id)}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+          {/* Category Filter Chips */}
+          <div className="nearby-services__chips" role="tablist" aria-label="Service categories">
+            {SERVICE_CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                role="tab"
+                aria-selected={activeCategory === cat.id}
+                className={`nearby-services__chip ${activeCategory === cat.id ? "nearby-services__chip--active" : ""}`}
+                onClick={() => handleCategoryChange(cat.id)}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Content */}
       {isLoading ? (
-        <div className="nearby-services__slider">
-          <div className="nearby-services__track">
-            {Array.from({ length: visibleCount }).map((_, i) => (
-              <div
-                key={i}
-                className="nearby-services__slide"
-                style={{ flex: `0 0 ${100 / visibleCount}%` }}
-              >
-                <ServiceSkeletonCard />
-              </div>
+        compact ? (
+          <div className="nearby-services__compact-grid">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <ServiceSkeletonCard key={i} />
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="nearby-services__slider">
+            <div className="nearby-services__track">
+              {Array.from({ length: visibleCount }).map((_, i) => (
+                <div
+                  key={i}
+                  className="nearby-services__slide"
+                  style={{ flex: `0 0 ${100 / visibleCount}%` }}
+                >
+                  <ServiceSkeletonCard />
+                </div>
+              ))}
+            </div>
+          </div>
+        )
       ) : filteredServices.length === 0 ? (
         <EmptyState />
+      ) : compact ? (
+        /* Compact grid for homepage */
+        <div className="nearby-services__compact-grid">
+          {filteredServices.map((service, idx) => (
+            <ServiceCard key={service.id} service={service} index={idx} />
+          ))}
+        </div>
       ) : (
         <>
           {/* Slider */}

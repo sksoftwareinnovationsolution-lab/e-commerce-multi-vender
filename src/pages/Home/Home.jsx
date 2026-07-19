@@ -1,90 +1,46 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import Banner from "../../components/shop/Banner";
+import Hero from "../../components/ui/Hero/Hero";
 import CategoryStrip from "../../components/shop/CategoryStrip";
-import Sidebar from "../../components/shop/Sidebar";
 import ProductGrid from "../../components/shop/ProductGrid";
-import Pagination from "../../components/shop/Pagination";
-import NearbyShops from "../../components/home/NearbyShops/NearbyShops";
-import MarketplaceNav from "../../components/home/MarketplaceNav/MarketplaceNav";
-import NearbyServices from "../../components/home/NearbyServices/NearbyServices";
+import ShopByCategories from "../../components/home/ShopByCategories/ShopByCategories";
+import BookTopServices from "../../components/home/BookTopServices/BookTopServices";
+import TopServiceProviders from "../../components/home/TopServiceProviders/TopServiceProviders";
+import WhyChooseOmnivixo from "../../components/home/WhyChooseOmnivixo/WhyChooseOmnivixo";
 import "../../pages/Home/Home.css";
 
 function Home() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
-    <div className="container">
-      {/* Breadcrumb */}
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <ol className="breadcrumb__list">
-          <li className="breadcrumb__item">
-            <Link to="/" className="breadcrumb__link">
-              Home
+    <div className="home-page">
+      <Hero />
+
+      <div className="container">
+        <CategoryStrip />
+
+        <ShopByCategories />
+
+        <BookTopServices />
+
+        <div id="featured-products">
+          <div className="section-header">
+            <div className="section-header__text">
+              <h2 className="section-header__title">Featured Products</h2>
+              <p className="section-header__subtitle">
+                Handpicked products just for you.
+              </p>
+            </div>
+            <Link to="/shop" className="section-header__view-all">
+              View All
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
             </Link>
-          </li>
-          <li className="breadcrumb__separator">/</li>
-          <li className="breadcrumb__item breadcrumb__item--active" aria-current="page">
-            Shop
-          </li>
-        </ol>
-      </nav>
-
-      {/* Promotional Banner */}
-      <Banner />
-
-      {/* Horizontal Category Menu */}
-      <CategoryStrip />
-
-      {/* Sticky Marketplace Navigation */}
-      <MarketplaceNav />
-
-      {/* Main Shop Layout — Featured Products */}
-      <div className="shop-layout" id="featured-products">
-        {/* Desktop Sidebar */}
-        <div className="shop-layout__sidebar">
-          <Sidebar />
-        </div>
-
-        {/* Mobile Sidebar Drawer */}
-        {sidebarOpen && (
-          <div className="shop-layout__overlay" onClick={() => setSidebarOpen(false)} />
-        )}
-        <div className={`shop-layout__drawer ${sidebarOpen ? "shop-layout__drawer--open" : ""}`}>
-          <div className="shop-layout__drawer-header">
-            <span className="shop-layout__drawer-title">Filters</span>
-            <button
-              className="shop-layout__drawer-close"
-              type="button"
-              onClick={() => setSidebarOpen(false)}
-              aria-label="Close filters"
-            >
-              ✕
-            </button>
           </div>
-          <Sidebar />
+          <ProductGrid limit={4} hideToolbar />
         </div>
 
-        {/* Right Content */}
-        <div className="shop-layout__content">
-          <ProductGrid onOpenSidebar={() => setSidebarOpen(true)} />
-          <Pagination />
-        </div>
-      </div>
+        <TopServiceProviders />
 
-      {/* Nearby Shops Section */}
-      <div id="nearby-shops">
-        <NearbyShops />
-      </div>
-
-      {/* Nearby Services Section */}
-      <NearbyServices />
-
-      {/* Bottom Promotional Banner */}
-      <div className="promo-banner">
-        <div className="promo-banner__placeholder">
-          Promotional Banner
-        </div>
+        <WhyChooseOmnivixo />
       </div>
     </div>
   );

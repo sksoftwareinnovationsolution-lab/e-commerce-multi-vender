@@ -1,129 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ShopCard from "./ShopCard";
+import { DUMMY_SHOPS } from "../../../data/shops";
 import "../NearbyShops/NearbyShops.css";
-
-const DUMMY_SHOPS = [
-  {
-    id: "shop-001",
-    name: "TechGadget Hub",
-    category: "Electronics & Gadgets",
-    rating: 4.8,
-    totalReviews: 1243,
-    location: "Koramangala, Bangalore",
-    distance: "1.2 km away",
-    totalProducts: 186,
-    deliveryTime: "2-4 hrs",
-    isOpen: true,
-    isVerified: true,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-002",
-    name: "StyleBazaar Fashion",
-    category: "Fashion & Apparel",
-    rating: 4.5,
-    totalReviews: 876,
-    location: "Indiranagar, Bangalore",
-    distance: "2.8 km away",
-    totalProducts: 342,
-    deliveryTime: "3-5 hrs",
-    isOpen: true,
-    isVerified: true,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-003",
-    name: "FreshMart Organics",
-    category: "Grocery & Organic",
-    rating: 4.6,
-    totalReviews: 534,
-    location: "HSR Layout, Bangalore",
-    distance: "0.8 km away",
-    totalProducts: 97,
-    deliveryTime: "1-2 hrs",
-    isOpen: false,
-    isVerified: false,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-004",
-    name: "HomeDecor Studio",
-    category: "Home & Living",
-    rating: 4.3,
-    totalReviews: 321,
-    location: "Whitefield, Bangalore",
-    distance: "5.4 km away",
-    totalProducts: 214,
-    deliveryTime: "4-6 hrs",
-    isOpen: true,
-    isVerified: true,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-005",
-    name: "Gourmet Kitchen",
-    category: "Food & Beverages",
-    rating: 4.7,
-    totalReviews: 698,
-    location: "JP Nagar, Bangalore",
-    distance: "3.1 km away",
-    totalProducts: 153,
-    deliveryTime: "2-3 hrs",
-    isOpen: true,
-    isVerified: false,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-006",
-    name: "FitnessFuel Sports",
-    category: "Sports & Fitness",
-    rating: 4.4,
-    totalReviews: 412,
-    location: "Marathahalli, Bangalore",
-    distance: "4.7 km away",
-    totalProducts: 128,
-    deliveryTime: "3-5 hrs",
-    isOpen: true,
-    isVerified: true,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-007",
-    name: "PetPals Paradise",
-    category: "Pets & Animals",
-    rating: 4.9,
-    totalReviews: 267,
-    location: "Electronic City, Bangalore",
-    distance: "7.2 km away",
-    totalProducts: 89,
-    deliveryTime: "5-7 hrs",
-    isOpen: false,
-    isVerified: true,
-    coverImage: null,
-    logoImage: null,
-  },
-  {
-    id: "shop-008",
-    name: "BookNook Library",
-    category: "Books & Stationery",
-    rating: 4.6,
-    totalReviews: 543,
-    location: "MG Road, Bangalore",
-    distance: "2.3 km away",
-    totalProducts: 276,
-    deliveryTime: "3-4 hrs",
-    isOpen: true,
-    isVerified: false,
-    coverImage: null,
-    logoImage: null,
-  },
-];
 
 function SkeletonCard() {
   return (
@@ -180,24 +59,24 @@ function NearbyShops({ shops = DUMMY_SHOPS, isLoading = false, showEmpty = false
   }, []);
 
   const loading = isLoading || !dataReady;
-  const displayShops = showEmpty ? [] : dataReady ? shops : [];
+  const displayShops = showEmpty ? [] : dataReady ? shops.slice(0, 4) : [];
 
   return (
-    <section className="nearby-shops" aria-label="Nearby Shops">
+    <section className="nearby-shops" id="featured-shops" aria-label="Featured Shops">
       {/* Section Header */}
       <div className="nearby-shops__header">
         <div className="nearby-shops__header-text">
-          <h2 className="nearby-shops__title">Nearby Shops</h2>
+          <h2 className="nearby-shops__title">Featured Shops</h2>
           <p className="nearby-shops__subtitle">
             Explore trusted stores near your selected location.
           </p>
         </div>
-        <a href="/shops" className="nearby-shops__view-all">
-          View All Shops
+        <Link to="/shops" className="nearby-shops__view-all">
+          View All
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6" />
           </svg>
-        </a>
+        </Link>
       </div>
 
       {/* Content */}

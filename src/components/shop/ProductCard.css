@@ -3,7 +3,9 @@
    ======================================== */
 
 .pcard-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -11,6 +13,7 @@
 .pcard {
   display: flex;
   flex-direction: column;
+  flex: 1;
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
