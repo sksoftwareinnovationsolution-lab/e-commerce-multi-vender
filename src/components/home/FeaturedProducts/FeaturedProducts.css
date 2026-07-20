@@ -1,0 +1,261 @@
+/* ========================================
+   FeaturedProducts.css — Featured Product Cards
+   ======================================== */
+
+/* Section */
+.fp-section {
+  padding: 0.5rem 0 0;
+}
+
+/* Grid: 5 columns on desktop */
+.fp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+/* ========================================
+   Card
+   ======================================== */
+.fp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+[data-theme="dark"] .fp-card {
+  background-color: #1a1a2e;
+  border-color: #2d2d44;
+}
+
+.fp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .fp-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   Discount Badge
+   ======================================== */
+.fp-card__badge {
+  position: absolute;
+  top: 0.625rem;
+  left: 0.625rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  border-radius: 0.375rem;
+  line-height: 1.3;
+}
+
+/* ========================================
+   Image
+   ======================================== */
+.fp-card__image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 1rem 0.75rem;
+  min-height: 160px;
+}
+
+.fp-card__image {
+  width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.fp-card:hover .fp-card__image {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   Body
+   ======================================== */
+.fp-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0 0.875rem 0.75rem;
+  flex: 1;
+}
+
+.fp-card__name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.4;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.3em;
+}
+
+[data-theme="dark"] .fp-card__name {
+  color: #f3f4f6;
+}
+
+.fp-card__subtitle {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+}
+
+[data-theme="dark"] .fp-card__subtitle {
+  color: #9ca3af;
+}
+
+/* ========================================
+   Rating
+   ======================================== */
+.fp-card__rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.fp-card__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.fp-star {
+  line-height: 1;
+}
+
+.fp-star--full {
+  color: #f59e0b;
+}
+
+.fp-star--half {
+  color: #f59e0b;
+  opacity: 0.6;
+}
+
+.fp-star--empty {
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .fp-star--empty {
+  color: #4b5563;
+}
+
+.fp-card__rating-text {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* ========================================
+   Prices
+   ======================================== */
+.fp-card__prices {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.fp-card__price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+[data-theme="dark"] .fp-card__price {
+  color: #f3f4f6;
+}
+
+.fp-card__old-price {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* ========================================
+   Footer / Button
+   ======================================== */
+.fp-card__footer {
+  padding: 0 0.875rem 0.875rem;
+}
+
+.fp-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #7c3aed;
+  background-color: transparent;
+  border: 1.5px solid #7c3aed;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fp-card__btn:hover {
+  background-color: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+[data-theme="dark"] .fp-card__btn {
+  color: #a78bfa;
+  border-color: #a78bfa;
+}
+
+[data-theme="dark"] .fp-card__btn:hover {
+  background-color: #7c3aed;
+  color: #ffffff;
+}
+
+/* ========================================
+   Responsive — Tablet (3 cards)
+   ======================================== */
+@media (max-width: 991px) {
+  .fp-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.875rem;
+  }
+}
+
+/* ========================================
+   Responsive — Mobile (1 card)
+   ======================================== */
+@media (max-width: 575px) {
+  .fp-grid {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  .fp-card__image-wrap {
+    min-height: 180px;
+  }
+}

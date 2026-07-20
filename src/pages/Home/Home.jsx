@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Hero from "../../components/ui/Hero/Hero";
-import ProductGrid from "../../components/shop/ProductGrid";
+import FeaturedProducts from "../../components/home/FeaturedProducts/FeaturedProducts";
 import ShopByCategories from "../../components/home/ShopByCategories/ShopByCategories";
 import BookTopServices from "../../components/home/BookTopServices/BookTopServices";
 import TopServiceProviders from "../../components/home/TopServiceProviders/TopServiceProviders";
@@ -32,7 +32,7 @@ function Home() {
               </svg>
             </Link>
           </div>
-          <ProductGrid limit={4} hideToolbar />
+          <FeaturedProducts />
         </div>
 
         <TopServiceProviders />
