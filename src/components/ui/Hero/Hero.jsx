@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import CategoryStrip from "../../shop/CategoryStrip";
 import "../Hero.css";
 
 function Hero() {
@@ -109,38 +110,41 @@ function Hero() {
           </div>
         </div>
 
-        {/* Search Section */}
-        <div className="hero__search-section">
-          <div className="hero__search-container">
-            <div className="hero__search-bar">
-              <input
-                type="text"
-                className="hero__search-input"
-                placeholder="Search products, services, or stores..."
-                aria-label="Search marketplace"
-              />
+        {/* Search + Category Navigation */}
+        <div className="hero__search-nav">
+          <div className="hero__search-section">
+            <div className="hero__search-container">
+              <div className="hero__search-bar">
+                <input
+                  type="text"
+                  className="hero__search-input"
+                  placeholder="Search products, services, or stores..."
+                  aria-label="Search marketplace"
+                />
 
-              <button
-                className="hero__search-button"
-                type="button"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <button
+                  className="hero__search-button"
+                  type="button"
                 >
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                Search
-              </button>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  Search
+                </button>
+              </div>
             </div>
           </div>
+          <CategoryStrip />
         </div>
       </div>
     </section>

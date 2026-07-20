@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Hero from "../../components/ui/Hero/Hero";
-import CategoryStrip from "../../components/shop/CategoryStrip";
 import ProductGrid from "../../components/shop/ProductGrid";
 import ShopByCategories from "../../components/home/ShopByCategories/ShopByCategories";
 import BookTopServices from "../../components/home/BookTopServices/BookTopServices";
@@ -14,8 +13,6 @@ function Home() {
       <Hero />
 
       <div className="container">
-        <CategoryStrip />
-
         <ShopByCategories />
 
         <BookTopServices />
