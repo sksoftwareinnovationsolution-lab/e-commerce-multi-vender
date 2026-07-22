@@ -949,17 +949,6 @@
   color: #f3f4f6;
 }
 
-.why-choose__subtitle {
-  font-size: 0.82rem;
-  font-weight: 400;
-  color: #6b7280;
-  margin-top: 0.25rem;
-}
-
-[data-theme="dark"] .why-choose__subtitle {
-  color: #9ca3af;
-}
-
 .why-choose__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -968,7 +957,7 @@
 
 @media (max-width: 767px) {
   .why-choose__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -980,15 +969,16 @@
 
 .why-choose__card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.625rem;
-  padding: 1.5rem 1rem;
+  gap: 18px;
+  padding: 18px 22px;
   background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  text-align: center;
-  transition: all 0.2s ease;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  height: 110px;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 [data-theme="dark"] .why-choose__card {
@@ -997,8 +987,14 @@
 }
 
 .why-choose__card:hover {
-  border-color: #7c3aed;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #d4d4d4;
+}
+
+[data-theme="dark"] .why-choose__card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: #3d3d54;
 }
 
 .why-choose__card-icon {
@@ -1007,19 +1003,41 @@
   justify-content: center;
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
-  border-radius: 0.75rem;
-  color: #7c3aed;
+  min-width: 56px;
+  border-radius: 50%;
 }
 
-[data-theme="dark"] .why-choose__card-icon {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(109, 40, 217, 0.15) 100%);
-  color: #a78bfa;
+.why-choose__card-icon.bg-purple-500 {
+  background-color: #6C4CF7;
+}
+
+.why-choose__card-icon.bg-orange-500 {
+  background-color: #FF8A1F;
+}
+
+.why-choose__card-icon.bg-blue-500 {
+  background-color: #3B82F6;
+}
+
+.why-choose__card-icon.bg-green-500 {
+  background-color: #22C55E;
+}
+
+.why-choose__card-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.why-choose__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .why-choose__card-title {
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   color: #111827;
 }
 
@@ -1028,8 +1046,8 @@
 }
 
 .why-choose__card-desc {
-  font-size: 0.78rem;
-  color: #6b7280;
+  font-size: 14px;
+  color: #666666;
   line-height: 1.5;
 }
 

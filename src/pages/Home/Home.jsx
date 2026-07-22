@@ -5,7 +5,10 @@ import ShopByCategories from "../../components/home/ShopByCategories/ShopByCateg
 import BookTopServices from "../../components/home/BookTopServices/BookTopServices";
 import TopServiceProviders from "../../components/home/TopServiceProviders/TopServiceProviders";
 import WhyChooseOmnivixo from "../../components/home/WhyChooseOmnivixo/WhyChooseOmnivixo";
+import SellerCTABanner from "../../components/home/SellerCTABanner/SellerCTABanner";
+import AppShowcase from "../../components/home/AppShowcase/AppShowcase";
 import "../../pages/Home/Home.css";
+import Testimonials from "../../components/home/Testimonials/Testimonials";
 
 function Home() {
   return (
@@ -38,6 +41,18 @@ function Home() {
         <TopServiceProviders />
 
         <WhyChooseOmnivixo />
+
+        <SellerCTABanner />
+
+        <div className="mt-8">
+          <AppShowcase />
+        </div>
+
+       
+
+<div className="mt-12">
+  <Testimonials />
+</div>
       </div>
     </div>
   );
