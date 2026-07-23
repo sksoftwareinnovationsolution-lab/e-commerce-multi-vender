@@ -2,19 +2,18 @@ import { Star } from "lucide-react";
 
 function TestimonialCard({ image, name, review, rating }) {
   return (
-    <div className="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-      {/* Quote */}
+<div className="rounded-2xl border border-gray-100 bg-white p-6 md:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">      {/* Quote */}
       <div className="text-5xl font-bold leading-none text-[#7C5CFF]/20">
         ❝
       </div>
 
       {/* Review */}
-      <p className="mt-4 min-h-[90px] text-[16px] leading-7 text-gray-600">
+      <p className="mt-4 min-h-[60px] md:min-h-[70px] text-[16px] leading-7 text-gray-600">
         "{review}"
       </p>
 
       {/* Profile */}
-      <div className="mt-8 flex items-center gap-4">
+      <div className="mt-5 flex items-center gap-4">
         <img
           src={image}
           alt={name}

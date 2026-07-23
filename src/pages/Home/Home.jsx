@@ -9,6 +9,11 @@ import SellerCTABanner from "../../components/home/SellerCTABanner/SellerCTABann
 import AppShowcase from "../../components/home/AppShowcase/AppShowcase";
 import "../../pages/Home/Home.css";
 import Testimonials from "../../components/home/Testimonials/Testimonials";
+import StatsBanner from "../../components/home/StatsBanner/StatsBanner";
+import FAQ from "../../components/home/FAQ/FAQ";
+import NewsletterBanner from "../../components/home/NewsletterBanner/NewsletterBanner";
+import Footer from "../../components/layout/Footer";
+
 
 function Home() {
   return (
@@ -48,11 +53,25 @@ function Home() {
           <AppShowcase />
         </div>
 
-       
 
-<div className="mt-12">
-  <Testimonials />
-</div>
+
+        <div className="mt-12 mb-10 lg:mb-12">
+          <Testimonials />
+        </div>
+
+        <div style={{ marginTop: "50px" }}>
+          <StatsBanner />
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <FAQ />
+        </div>
+
+
+        <div style={{ marginTop: "20px"}}>
+          <NewsletterBanner />
+        </div>
+
+        <Footer />
       </div>
     </div>
   );

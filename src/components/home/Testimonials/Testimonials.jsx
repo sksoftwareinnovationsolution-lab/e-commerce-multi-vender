@@ -1,5 +1,4 @@
 import TestimonialCard from "./TestimonialCard";
-
 import customer1 from "../../../assets/images/testimonials/customer-1.png";
 import customer2 from "../../../assets/images/testimonials/customer-2.png";
 import customer3 from "../../../assets/images/testimonials/customer-3.png";
@@ -30,8 +29,8 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="bg-[#F8FAFF] py-16">
-      <div className="mx-auto max-w-7xl px-4">
+   <section className="bg-[#F8FAFF]">
+  <div className="mx-auto max-w-7xl px-4 py-16 pb-24">
 
         <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
           What Our Customers Say
@@ -49,8 +48,8 @@ function Testimonials() {
           ))}
         </div>
 
-      </div>
-    </section>
+       </div>
+</section>
   );
 }
 
