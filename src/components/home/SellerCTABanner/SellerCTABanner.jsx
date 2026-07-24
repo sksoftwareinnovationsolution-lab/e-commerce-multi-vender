@@ -28,27 +28,24 @@ function SellerCTABanner() {
 </div>
 
         {/* Button */}
-   <div className="flex w-[260px] justify-start">
-  <div className="rounded-2xl bg-white px-1 py-8 shadow-sm">
-    <button className="flex h-10 items-center gap-2 rounded-lg bg-transparent px-5 text-[15px] font-semibold text-gray-900 transition-all duration-300">
-      Start Selling Now
-
-      <svg
-        className="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M5 12h14M12 5l7 7-7 7"
-        />
-      </svg>
-    </button>
-  </div>
-</div>
+        <div className="flex w-[260px] justify-start">
+          <button className="flex h-9 w-45 items-center gap-2.5 rounded-lg bg-white px-4 text-sm font-semibold text-gray-900 shadow-sm transition-all duration-300 hover:shadow-md active:scale-[0.97]">
+            <span className="flex-1 text-center">Start Selling Now</span>
+            <svg
+              className="h-3.5 w-6.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 12h14M12 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
 
       </div>
     </section>

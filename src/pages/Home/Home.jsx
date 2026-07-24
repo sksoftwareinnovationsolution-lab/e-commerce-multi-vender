@@ -12,7 +12,6 @@ import Testimonials from "../../components/home/Testimonials/Testimonials";
 import StatsBanner from "../../components/home/StatsBanner/StatsBanner";
 import FAQ from "../../components/home/FAQ/FAQ";
 import NewsletterBanner from "../../components/home/NewsletterBanner/NewsletterBanner";
-import Footer from "../../components/layout/Footer";
 
 
 function Home() {
@@ -70,8 +69,6 @@ function Home() {
         <div style={{ marginTop: "20px"}}>
           <NewsletterBanner />
         </div>
-
-        <Footer />
       </div>
     </div>
   );
