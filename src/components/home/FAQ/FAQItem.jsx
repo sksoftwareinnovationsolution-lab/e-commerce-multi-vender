@@ -19,7 +19,7 @@ function FAQItem({ question, answer, isOpen, onToggle }) {
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="w-full flex items-center justify-between gap-4 px-[22px] py-[18px] text-left text-gray-900 font-medium transition-colors duration-200 hover:text-purple-600 cursor-pointer"
+        className="w-full flex items-center justify-between gap-4 px-[22px] h-[58px] text-left text-gray-900 font-medium transition-colors duration-200 hover:text-purple-600 cursor-pointer"
       >
         <span>{question}</span>
         <ChevronDownIcon
@@ -32,12 +32,15 @@ function FAQItem({ question, answer, isOpen, onToggle }) {
         id={panelId}
         role="region"
         aria-labelledby={buttonId}
-        className={`overflow-hidden transition-all duration-[250ms] ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        inert={!isOpen}
+        className={`grid transition-all duration-[250ms] ${
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
-        <div className="px-[22px] pb-[18px] text-gray-600 leading-relaxed">
-          {answer}
+        <div className="overflow-hidden">
+          <div className="px-[22px] pb-[18px] text-gray-600 leading-relaxed">
+            {answer}
+          </div>
         </div>
       </div>
     </div>

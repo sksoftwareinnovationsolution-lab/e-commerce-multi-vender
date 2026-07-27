@@ -76,29 +76,31 @@ function Header() {
         <div className="hidden md:flex items-center w-full">
 
           {/* ---- LEFT: Logo ---- */}
-          <Link to="/" className="flex-shrink-0">
-            <img
-              src={logo}
-              alt="Omnivixo"
-              className="h-[50px] lg:h-[56px] w-auto object-contain"
-            />
-          </Link>
+          <div className="flex-shrink-0 logo-wrapper">
+            <Link to="/">
+              <img
+                src={logo}
+                alt="Omnivixo"
+                className="h-[70px] lg:h-[95px] w-auto object-contain"
+              />
+            </Link>
+          </div>
+
 
           {/* ---- CENTER: Navigation ---- */}
-          <nav className="flex items-center gap-4 lg:gap-7 ml-10 lg:ml-[40px]">
+          <nav className="flex items-center gap-11 lg:gap-11">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="group relative py-2 text-[16px] font-medium text-gray-500 hover:text-purple-600 transition-colors duration-200 whitespace-nowrap"
+                className="group relative py-3 text-[16px] font-medium text-gray-500 hover:text-purple-600 transition-colors duration-200 whitespace-nowrap"
               >
                 {link.label}
                 <span
-                  className={`absolute bottom-0 left-0 right-0 h-[2px] bg-purple-600 rounded-full transition-transform duration-300 ease-out origin-left ${
-                    isActive(link.to)
-                      ? "scale-x-100"
-                      : "scale-x-0 group-hover:scale-x-100"
-                  }`}
+                  className={`absolute bottom-0 left-0 right-0 h-[2px] bg-purple-600 rounded-full transition-transform duration-300 ease-out origin-left ${isActive(link.to)
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                    }`}
                 />
               </Link>
             ))}
@@ -112,9 +114,8 @@ function Header() {
               >
                 All Categories
                 <FiChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    categoriesOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -144,7 +145,7 @@ function Header() {
           </nav>
 
           {/* ---- Flexible spacer ---- */}
-          <div className="flex-1" />
+          <div className="flex-1  min-w-[85px]" />
 
           {/* ---- RIGHT: Search + Icons ---- */}
           <div className="flex items-center gap-3 lg:gap-5">
@@ -302,11 +303,10 @@ function Header() {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`block px-6 py-3 text-[16px] font-medium transition-colors duration-150 ${
-                      isActive(link.to)
-                        ? "text-purple-600 bg-purple-50"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-purple-600"
-                    }`}
+                    className={`block px-6 py-3 text-[16px] font-medium transition-colors duration-150 ${isActive(link.to)
+                      ? "text-purple-600 bg-purple-50"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-purple-600"
+                      }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
