@@ -6,8 +6,8 @@ import logo from "../../../assets/images/logo2.png";
 function Footer() {
   return (
     <footer className="bg-[#060A2B] border-t border-white/10">
-      <div className="max-w-[1450px] mx-auto px-8 xl:px-10 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-18">
+      <div className="container py-10">
+       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-18">
           <div>
             <img
               src={logo}
