@@ -12,9 +12,9 @@ const FEATURES = [
 function AppShowcase() {
   return (
     <section>
-      <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-lg px-8 py-12 lg:px-14 lg:py-16">
+      <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-lg px-6 py-6 lg:px-10 lg:py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          <div className="md:col-span-1 lg:col-span-4 flex justify-center lg:-mt-8">
+          <div className="md:col-span-1 lg:col-span-4 flex justify-center lg:pt-6">
             <img
               src={appScreen}
               alt="Omnivixo App"
@@ -33,8 +33,11 @@ function AppShowcase() {
               {FEATURES.map((feature, idx) => {
                 const Icon = feature.icon;
                 return (
-                  <div key={idx} className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${feature.bgColor}`}>
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 min-h-[64px]"
+                  >
+                    <div className={`w-10 h-10  rounded-full flex items-center justify-center ${feature.bgColor}`}>
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                     <span className="text-base font-medium text-gray-800">

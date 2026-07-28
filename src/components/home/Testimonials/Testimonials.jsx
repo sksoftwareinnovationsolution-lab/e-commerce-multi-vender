@@ -32,11 +32,11 @@ function Testimonials() {
    <section className="bg-[#F8FAFF]">
   <div className="mx-auto max-w-7xl px-4 py-16 pb-24">
 
-        <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
+        <h2 className="mb-16 text-center text-4xl font-bold text-gray-900">
           What Our Customers Say
         </h2>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+   <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={index}

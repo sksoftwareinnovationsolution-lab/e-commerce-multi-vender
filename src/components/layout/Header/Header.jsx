@@ -70,13 +70,13 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full h-[76px] bg-white border-b border-gray-100">
-      <div className="flex items-center h-full max-w-[1450px] mx-auto px-8 xl:px-10">
+      <div className="flex items-center h-full max-w-[1450px] mx-auto px-4 lg:px-6">
 
         {/* ===== DESKTOP / TABLET ===== */}
         <div className="hidden md:flex items-center w-full">
 
           {/* ---- LEFT: Logo ---- */}
-          <div className="flex-shrink-0 logo-wrapper">
+          <div className="flex-shrink-0 mr-6">
             <Link to="/">
               <img
                 src={logo}
@@ -145,7 +145,7 @@ function Header() {
           </nav>
 
           {/* ---- Flexible spacer ---- */}
-          <div className="flex-1  min-w-[85px]" />
+          <div className="flex-1" />
 
           {/* ---- RIGHT: Search + Icons ---- */}
           <div className="flex items-center gap-3 lg:gap-5">
