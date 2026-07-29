@@ -54,14 +54,14 @@ function Home() {
 
 
 
-        <div className="mt-12 mb-10 lg:mb-12">
+        <div className="mt-5">
           <Testimonials />
         </div>
 
-        <div className="mt-[50px]">
+        <div className="mt-5">
           <StatsBanner />
         </div>
-        <div className="mt-[10px]">
+        <div className="mt-0">
           <FAQ />
         </div>
 

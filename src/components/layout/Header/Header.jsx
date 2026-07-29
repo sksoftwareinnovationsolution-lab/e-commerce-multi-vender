@@ -70,13 +70,13 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full h-[76px] bg-white border-b border-gray-100">
-      <div className="flex items-center h-full max-w-[1450px] mx-auto px-4 lg:px-6">
+      <div className="flex items-center h-full max-w-[1650px] mx-auto px-4 lg:px-6">
 
         {/* ===== DESKTOP / TABLET ===== */}
         <div className="hidden md:flex items-center w-full">
 
           {/* ---- LEFT: Logo ---- */}
-          <div className="flex-shrink-0 mr-6">
+          <div className="flex-shrink-0 mr-32">
             <Link to="/">
               <img
                 src={logo}
