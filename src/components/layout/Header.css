@@ -20,28 +20,3 @@
 .animate-slide-in {
   animation: slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.logo-wrapper {
-  margin-left: 14px;
-  margin-right: 26px;
-}
-
-@media (min-width: 768px) {
-  .logo-wrapper {
-    margin-left: 14px;
-    margin-right: 26px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .logo-wrapper {
-    margin-left: 14px;
-    margin-right: 26px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .logo-wrapper {
-    margin-left: 14px;
-    margin-right: 26px;
-  }
-}

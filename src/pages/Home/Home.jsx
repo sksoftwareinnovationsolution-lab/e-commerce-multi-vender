@@ -54,19 +54,18 @@ function Home() {
 
 
 
-        <div className="mt-12 mb-10 lg:mb-12">
+        <div className="mt-5">
           <Testimonials />
         </div>
 
-        <div style={{ marginTop: "50px" }}>
+        <div className="mt-5">
           <StatsBanner />
         </div>
-        <div style={{ marginTop: "10px" }}>
+        <div className="mt-0">
           <FAQ />
         </div>
 
-
-        <div style={{ marginTop: "20px"}}>
+        <div className="mt-5">
           <NewsletterBanner />
         </div>
       </div>
