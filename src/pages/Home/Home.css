@@ -73,7 +73,7 @@
 }
 
 .breadcrumb__item {
-  font-size: 0.8rem;
+  font-size: 1.0625rem;
   color: #9ca3af;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .breadcrumb__separator {
-  font-size: 0.8rem;
+  font-size: 1.0625rem;
   color: #d1d5db;
 }
 
