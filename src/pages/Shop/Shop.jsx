@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ShopHeroBanner from "../../components/shop/ShopHeroBanner";
 import Sidebar from "../../components/shop/Sidebar";
 import ProductGrid from "../../components/shop/ProductGrid";
 import Pagination from "../../components/shop/Pagination";
@@ -25,6 +26,8 @@ function Shop() {
           </li>
         </ol>
       </nav>
+
+      <ShopHeroBanner />
 
       <div className="listing-page__header">
         <div className="listing-page__header-text">
