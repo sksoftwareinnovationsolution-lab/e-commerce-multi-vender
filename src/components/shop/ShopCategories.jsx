@@ -1,20 +1,27 @@
 import { useState } from "react";
-import {
-  Grid3X3, Monitor, Shirt, Home, Sparkles,
-  ShoppingBag, Car, Trophy, BookOpen, MoreHorizontal,
-} from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
+
+import allBag from "../../assets/images/categories/all-bag.png";
+import electronics from "../../assets/images/categories/electronics (2).png";
+import fashion from "../../assets/images/categories/fashion (2).png";
+import home from "../../assets/images/categories/home.png";
+import beauty from "../../assets/images/categories/beauty (2).png";
+import grocery from "../../assets/images/categories/grocery (2).png";
+import automobile from "../../assets/images/categories/automobile.png";
+import sports from "../../assets/images/categories/sports.png";
+import books from "../../assets/images/categories/books.png";
 
 const CATEGORIES = [
-  { id: "all", label: "All", icon: Grid3X3, image: null },
-  { id: "electronics", label: "Electronics", icon: Monitor, image: null },
-  { id: "fashion", label: "Fashion", icon: Shirt, image: null },
-  { id: "home", label: "Home", icon: Home, image: null },
-  { id: "beauty", label: "Beauty", icon: Sparkles, image: null },
-  { id: "grocery", label: "Grocery", icon: ShoppingBag, image: null },
-  { id: "automobile", label: "Automobile", icon: Car, image: null },
-  { id: "sports", label: "Sports", icon: Trophy, image: null },
-  { id: "books", label: "Books", icon: BookOpen, image: null },
-  { id: "more", label: "More", icon: MoreHorizontal, image: null },
+  { id: "all", label: "All", image: allBag },
+  { id: "electronics", label: "Electronics", image: electronics },
+  { id: "fashion", label: "Fashion", image: fashion },
+  { id: "home", label: "Home", image: home },
+  { id: "beauty", label: "Beauty", image: beauty },
+  { id: "grocery", label: "Grocery", image: grocery },
+  { id: "automobile", label: "Automobile", image: automobile },
+  { id: "sports", label: "Sports", image: sports },
+  { id: "books", label: "Books", image: books },
+  { id: "more", label: "More", image: null },
 ];
 
 function ShopCategories() {
@@ -22,8 +29,9 @@ function ShopCategories() {
 
   return (
     <section className="mt-10 mb-8" aria-label="Browse Categories">
-      <div className="flex items-stretch gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory scroll-smooth">
-        {CATEGORIES.map(({ id, label, icon: Icon }) => (
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-stretch gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-10 lg:gap-2 xl:gap-3 lg:overflow-visible lg:snap-none">
+        {CATEGORIES.map(({ id, label, image }) => (
           <button
             key={id}
             type="button"
@@ -33,20 +41,28 @@ function ShopCategories() {
               w-[126px] h-[148px] rounded-2xl border
               transition-all duration-300 ease-out cursor-pointer
               shrink-0 snap-start select-none
+              lg:w-auto lg:min-w-0
+              bg-white border-gray-200 text-gray-500 shadow-sm
+              hover:-translate-y-1 hover:scale-[1.02]
+              hover:border-purple-500 hover:shadow-lg
               ${
                 activeCategory === id
-                  ? "bg-[#F4EEFF] border-[#7c3aed] text-[#6D28D9] shadow-md"
-                  : "bg-white border-gray-200 text-gray-500 shadow-sm hover:bg-gray-50 hover:border-gray-300 hover:shadow-lg"
+                  ? "bg-[#F4EEFF] border-[#7c3aed] text-[#6D28D9] shadow-lg"
+                  : ""
               }
-              hover:-translate-y-[3px]
             `}
             aria-pressed={activeCategory === id}
             aria-label={label === "All" ? "Show all categories" : `Browse ${label} category`}
           >
-            <Icon className="h-8 w-8" strokeWidth={1.5} />
+            {image ? (
+              <img src={image} alt={label} className="w-14 h-14 object-contain" />
+            ) : (
+              <MoreHorizontal className="h-8 w-8" strokeWidth={1.5} />
+            )}
             <span className="text-sm font-medium leading-tight">{label}</span>
           </button>
         ))}
+        </div>
       </div>
     </section>
   );
