@@ -225,7 +225,7 @@ function Sidebar() {
         type="button"
         onClick={clearFilters}
       >
-        Clear Filters
+        Clear All Filters
       </button>
     </aside>
   );

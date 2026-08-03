@@ -5,12 +5,22 @@
   import Sidebar from "../../components/shop/Sidebar";
   import ProductGrid from "../../components/shop/ProductGrid";
   import Pagination from "../../components/shop/Pagination";
+  import FooterPromoBanner from "../../components/shop/FooterPromoBanner";
   import { ALL_PRODUCTS } from "../../data/products";
   import "../Home/Home.css";
   import "./Shop.css";
 
   function Shop() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage, setPerPage] = useState(16);
+
+    const totalPages = Math.max(1, Math.ceil(ALL_PRODUCTS.length / perPage));
+
+    const handlePerPageChange = (value) => {
+      setPerPage(value);
+      setCurrentPage(1);
+    };
 
     return (
       <div className="container">
@@ -31,15 +41,6 @@
         <ShopHeroBanner />
 
         <ShopCategories />
-
-        <div className="listing-page__header">
-          <div className="listing-page__header-text">
-            <h1 className="listing-page__title">All Products</h1>
-            <p className="listing-page__subtitle">
-              Browse our complete collection of {ALL_PRODUCTS.length} products.
-            </p>
-          </div>
-        </div>
 
         <div className="shop-layout">
           <div className="shop-layout__sidebar">
@@ -65,8 +66,23 @@
           </div>
 
           <div className="shop-layout__content">
-            <ProductGrid onOpenSidebar={() => setSidebarOpen(true)} total={ALL_PRODUCTS.length} />
-            <Pagination />
+            <ProductGrid
+              onOpenSidebar={() => setSidebarOpen(true)}
+              total={ALL_PRODUCTS.length}
+              currentPage={currentPage}
+              perPage={perPage}
+            />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              perPage={perPage}
+              onPageChange={setCurrentPage}
+              onPerPageChange={handlePerPageChange}
+            />
+          </div>
+
+          <div className="shop-layout__banner">
+            <FooterPromoBanner />
           </div>
         </div>
 

@@ -29,22 +29,23 @@ function ShopCategories() {
 
   return (
     <section className="mt-10 mb-8" aria-label="Browse Categories">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-stretch gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-10 lg:gap-2 xl:gap-3 lg:overflow-visible lg:snap-none">
+      <div className="w-full">
+        <div className="flex items-stretch gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] 
+        [&::-webkit-scrollbar]:hidden snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-10 lg:gap-12 2xl:gap-14 lg:overflow-visible lg:snap-none">
         {CATEGORIES.map(({ id, label, image }) => (
           <button
             key={id}
             type="button"
             onClick={() => setActiveCategory(id)}
             className={`
-              flex flex-col items-center justify-center gap-[10px]
-              w-[126px] h-[148px] rounded-2xl border
+              flex flex-col items-center justify-center gap-1.5
+              w-[136px] h-[120px] rounded-2xl border
               transition-all duration-300 ease-out cursor-pointer
               shrink-0 snap-start select-none
               lg:w-auto lg:min-w-0
               bg-white border-gray-200 text-gray-500 shadow-sm
-              hover:-translate-y-1 hover:scale-[1.02]
-              hover:border-purple-500 hover:shadow-lg
+              hover:-translate-y-0.5
+              hover:border-purple-500 hover:shadow-md
               ${
                 activeCategory === id
                   ? "bg-[#F4EEFF] border-[#7c3aed] text-[#6D28D9] shadow-lg"
@@ -55,11 +56,18 @@ function ShopCategories() {
             aria-label={label === "All" ? "Show all categories" : `Browse ${label} category`}
           >
             {image ? (
-              <img src={image} alt={label} className="w-14 h-14 object-contain" />
+              <img src={image} alt={label} className="w-16 h-16 object-contain" />
             ) : (
-              <MoreHorizontal className="h-8 w-8" strokeWidth={1.5} />
+              <MoreHorizontal className="h-16 w-16" strokeWidth={1.5} />
             )}
-            <span className="text-sm font-medium leading-tight">{label}</span>
+            <span
+              className={`
+                text-[#111827] font-semibold leading-tight
+                ${activeCategory === id ? "text-[#6D28D9]" : ""}
+              `}
+            >
+              {label}
+            </span>
           </button>
         ))}
         </div>

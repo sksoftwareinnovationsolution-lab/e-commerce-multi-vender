@@ -4,7 +4,7 @@
    Replace ALL_PRODUCTS with API call later.
    ======================================== */
 
-export const ALL_PRODUCTS = Array.from({ length: 24 }, (_, i) => i + 1);
+export const ALL_PRODUCTS = Array.from({ length: 150 }, (_, i) => i + 1);
 
 /**
  * Helper to get product by ID.

@@ -1,1 +1,27 @@
 @import "../Products/Products.css";
+
+.shop-layout {
+  flex-wrap: wrap;
+}
+
+/* Sidebar: fixed 280px on the left */
+.shop-layout__sidebar {
+  flex: 0 0 280px;
+  width: 280px;
+  max-width: 280px;
+}
+
+/* Full-width promotional banner: spans sidebar + product grid */
+.shop-layout__banner {
+  flex: 0 0 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .shop-layout__sidebar {
+    position: sticky;
+    top: 90px;
+    align-self: flex-start;
+  }
+}
