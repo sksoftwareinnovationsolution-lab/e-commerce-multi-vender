@@ -33,7 +33,7 @@
                     <div className="grid lg:grid-cols-[1.05fr_0.95fr] items-start px-8 lg:px-10 pt-8">
 
               {/* Left */}
-            <div className="relative z-20 -ml-3 lg:-ml-10 mt-16">
+            <div className="relative z-20 lg:ml-8 mt-19">
 
                 <h1 className="text-[42px] leading-tight font-bold text-[#111827]">
                   Shop Everything You Need
@@ -55,7 +55,7 @@
                     w-full
                     max-w-[650px]
                     object-contain
-                    translate-x-[52px] xl:translate-x-[58px]
+                 -translate-x-[80px]
                     -translate-y-6
                   "
                 />
@@ -65,7 +65,7 @@
             </div>
 
             {/* Cards */}
-          <div className="relative z-30 px-6 lg:px-8 pb-7 -mt-45 lg:-ml-8">
+        <div className="relative z-30 px-8 lg:px-10 pb-7 -mt-45 lg:ml-10">
 
               <div className="flex flex-wrap lg:flex-nowrap gap-4">
 
