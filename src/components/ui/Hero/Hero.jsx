@@ -1,33 +1,39 @@
 import { Link } from "react-router-dom";
 import CategoryStrip from "../../shop/CategoryStrip";
-import "../Hero.css";
 
 function Hero() {
 
   return (
-    <section className="hero">
-      <div className="hero__container">
+    <section className="bg-[linear-gradient(135deg,#eff6ff_0%,#f9fafb_50%,#fefce8_100%)] [transition:background_0.3s_ease] dark:bg-[linear-gradient(135deg,#0f1729_0%,#1a1a2e_50%,#16213e_100%)]">
+      <div className="mx-auto flex max-w-[none] flex-col gap-6 px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 xl:gap-8 xl:px-8 xl:py-4">
         {/* Content: Left Text + Right Placeholder */}
-        <div className="hero__content">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
           {/* Left Column */}
-          <div className="hero__left">
-            <span className="hero__badge">Multi-Vendor Marketplace</span>
+          <div className="flex flex-1 flex-col gap-5 lg:gap-6">
+            <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[linear-gradient(135deg,#2563eb,#7c3aed)] px-4 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.5px] text-white lg:px-5 lg:py-2 lg:text-[0.8rem]">
+              Multi-Vendor Marketplace
+            </span>
 
-            <h1 className="hero__title">
+            <h1 className="text-[2rem] leading-[1.15] font-extrabold tracking-[-0.025em] text-gray-900 dark:text-gray-100 md:text-[2.5rem] lg:text-[2.75rem] xl:text-[3.25rem]">
               Everything You Need,<br />
-              <span className="hero__title-accent">One Platform</span>
+              <span
+                className="bg-[linear-gradient(135deg,#7c3aed,#ec4899)] bg-clip-text text-transparent dark:bg-[linear-gradient(135deg,#a78bfa,#f472b6)]"
+                style={{ WebkitTextFillColor: "transparent" }}
+              >
+                One Platform
+              </span>
             </h1>
 
-            <p className="hero__description">
+            <p className="max-w-[540px] text-[0.95rem] leading-[1.7] text-gray-500 dark:text-gray-400 md:text-[1rem] xl:text-[1.1rem] xl:leading-[1.8]">
               Shop products, book services, hire professionals,
               and grow your business from one powerful platform.
             </p>
 
             {/* CTA Buttons */}
-            <div className="hero__ctas">
+            <div className="flex flex-wrap gap-3">
               <Link
                 to="/shop"
-                className="hero__cta hero__cta--primary"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[0.625rem] px-6 py-3 text-[0.875rem] font-semibold transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 md:px-7 md:py-3.5 md:text-[0.9rem] xl:px-8 xl:py-4 xl:text-[0.95rem] bg-blue-600 text-white shadow-[0_4px_14px_rgba(37,99,235,0.3)] hover:bg-blue-700 hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]"
               >
                 <svg
                   width="18"
@@ -48,7 +54,7 @@ function Hero() {
 
               <Link
                 to="/services"
-                className="hero__cta hero__cta--secondary"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[0.625rem] px-6 py-3 text-[0.875rem] font-semibold transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 md:px-7 md:py-3.5 md:text-[0.9rem] xl:px-8 xl:py-4 xl:text-[0.95rem] border-[1.5px] border-solid border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 hover:-translate-y-px dark:border-[#2d2d44] dark:bg-[#1a1a2e] dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-[#16213e]"
               >
                 <svg
                   width="18"
@@ -75,7 +81,7 @@ function Hero() {
               </Link>
 
               <button
-                className="hero__cta hero__cta--outline"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[0.625rem] px-6 py-3 text-[0.875rem] font-semibold transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 md:px-7 md:py-3.5 md:text-[0.9rem] xl:px-8 xl:py-4 xl:text-[0.95rem] border-[1.5px] border-solid border-blue-600 bg-transparent text-blue-600 hover:bg-[rgba(37,99,235,0.08)] hover:-translate-y-px dark:border-blue-400 dark:text-blue-400 dark:hover:bg-[rgba(96,165,250,0.12)]"
                 type="button"
               >
                 <svg
@@ -100,30 +106,30 @@ function Hero() {
           </div>
 
           {/* Right Column */}
-          <div className="hero__right">
+          <div className="flex flex-1 items-center justify-center">
             <img
               src="/images/hero-banner.png"
               alt="Multi-Vendor Marketplace — Products, Service Providers, Secure Payments, Fast Delivery"
-              className="hero__image"
+              className="h-auto w-full max-w-full rounded-2xl object-contain xl:max-w-[600px]"
               loading="eager"
             />
           </div>
         </div>
 
         {/* Search + Category Navigation */}
-        <div className="hero__search-nav">
-          <div className="hero__search-section">
-            <div className="hero__search-container">
-              <div className="hero__search-bar">
+        <div className="flex flex-col gap-1">
+          <div className="mt-0">
+            <div className="flex justify-center gap-3">
+              <div className="flex w-full max-w-[80%] items-center overflow-hidden rounded-xl border-[1.5px] border-solid border-gray-200 bg-white [transition:border-color_0.25s_ease,box-shadow_0.25s_ease,transform_0.2s_ease] hover:border-gray-300 focus-within:border-blue-600 focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] focus-within:transform-none md:max-w-[75%] lg:max-w-[65%] dark:border-[#2d2d44] dark:bg-[#1a1a2e] dark:hover:border-gray-700 dark:focus-within:border-blue-400 dark:focus-within:shadow-[0_0_0_3px_rgba(96,165,250,0.18)]">
                 <input
                   type="text"
-                  className="hero__search-input"
+                  className="min-w-0 flex-1 border-none bg-transparent px-4 py-3.5 text-[0.9rem] text-gray-900 outline-none [transition:color_0.2s_ease] placeholder:text-gray-400 dark:text-gray-200"
                   placeholder="Search products, services, or stores..."
                   aria-label="Search marketplace"
                 />
 
                 <button
-                  className="hero__search-button"
+                  className="inline-flex cursor-pointer items-center justify-center gap-2 border-none bg-blue-600 px-6 py-3.5 text-[0.875rem] font-semibold text-white [transition:background_0.25s_ease,transform_0.15s_ease] hover:scale-[1.02] hover:bg-blue-700 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:-outline-offset-2"
                   type="button"
                 >
                   <svg

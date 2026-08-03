@@ -32,10 +32,10 @@
           </Link>
         </div>
 
-        <div className="relative z-10 flex flex-[0_1_auto] items-center gap-7 max-[991px]:gap-6 max-[767px]:justify-center max-[767px]:gap-[22px]">
-          <div className="relative h-[190px] w-[260px] flex items-center justify-center overflow-visible min-[768px]:max-[991px]:mt-[clamp(0.55rem,1.2vw,0.9rem)] min-[768px]:max-[991px]:-mb-[clamp(0.55rem,1.2vw,0.9rem)] min-[992px]:mt-[clamp(0.6rem,1.1vw,1rem)] min-[992px]:-mb-[clamp(0.6rem,1.1vw,1rem)] max-[767px]:scale-[1.5]">
+        <div className="relative z-10 flex flex-[0_1_auto] items-center gap-1 max-[991px]:gap-1 max-[767px]:justify-center max-[767px]:gap-[22px]">
+          <div className="relative h-[250px] w-[340px] flex items-center justify-center overflow-visible min-[768px]:max-[991px]:mt-[3px] min-[768px]:max-[991px]:-mb-[3px] min-[992px]:mt-[3px] min-[992px]:-mb-[3px] max-[767px]:scale-[1.5]">
             <img
-              className="absolute bottom-0 left-0 h-[220px] w-auto object-contain drop-shadow-[0_22px_34px_rgba(15,10,50,0.5)] -translate-x-6 min-[768px]:-translate-x-[136px] min-[768px]:max-[991px]:w-[335px] min-[992px]:w-[350px]"
+              className="absolute bottom-0 left-0 h-full w-auto drop-shadow-[0_22px_34px_rgba(15,10,50,0.5)] -translate-x-6 min-[768px]:-translate-x-[136px]"
                src={giftImage}
               alt="Festive gift with surprise offers"
             />
