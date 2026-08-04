@@ -6,6 +6,7 @@
   import ProductGrid from "../../components/shop/ProductGrid";
   import Pagination from "../../components/shop/Pagination";
   import FooterPromoBanner from "../../components/shop/FooterPromoBanner";
+  import WhyChooseOmnivixo from "../../components/shop/WhyChooseOmnivixo";
   import { ALL_PRODUCTS } from "../../data/products";
   import "../Home/Home.css";
   import "./Shop.css";
@@ -86,14 +87,7 @@
           </div>
         </div>
 
-        <div className="view-less">
-          <Link to="/" className="view-less__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="18 15 12 9 6 15" />
-            </svg>
-            Back to Home
-          </Link>
-        </div>
+        <WhyChooseOmnivixo />
       </div>
     );
   }
