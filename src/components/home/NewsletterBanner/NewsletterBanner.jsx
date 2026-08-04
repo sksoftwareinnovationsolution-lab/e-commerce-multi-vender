@@ -4,13 +4,11 @@ function NewsletterBanner() {
   return (
     <section className="w-full">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="rounded-2xl py-4 pl-8 pr-6 shadow-lg md:pl-10 md:pr-8 md:py-5" style={{ backgroundImage: "linear-gradient(90deg, #3B2BD6 0%, #6B21F3 20%, #9D1DFF 40%, #D61BE7 55%, #FF4F8A 75%, #FF8A1F 100%)" }}>
+        <div className="rounded-2xl py-3 pl-8 pr-6 shadow-lg md:pl-10 md:pr-8 md:py-3" style={{ backgroundImage: "linear-gradient(90deg, #3B2BD6 0%, #6B21F3 20%, #9D1DFF 40%, #D61BE7 55%, #FF4F8A 75%, #FF8A1F 100%)" }}>
           <div className="flex flex-col gap-90 md:flex-row md:items-center">
-            <div className="pl-2 md:pl-4 flex items-center gap-8">
-              <div className="flex h-25 w-22 shrink-0 items-center justify-center rounded-xl bg-white/20 ring-1 ring-white/20">
-             <Mail className="h-25 w-13 text-white translate-x-2" />
-              </div>
-              <div> 
+            <div className="pl-2 md:pl-4 flex items-center gap-4 md:flex-1">
+               <Mail className="h-[7.5rem] w-[5.5rem] text-white shrink-0 md:h-20 md:w-14" />
+               <div className="md:whitespace-nowrap">
                 <h2 className="text-lg font-bold text-white md:text-xl">
                   Stay Updated with Omnivixo
                 </h2>

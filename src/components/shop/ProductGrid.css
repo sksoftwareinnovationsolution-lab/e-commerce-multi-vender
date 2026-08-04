@@ -146,7 +146,7 @@
 /* Product grid */
 .pgrid__items {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   grid-auto-rows: 1fr;
 }
 
@@ -165,15 +165,8 @@
   }
 }
 
-/* Laptop: 3 columns */
+/* Laptop + Desktop: 4 columns */
 @media (min-width: 992px) {
-  .pgrid__items--grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Desktop: 4 columns */
-@media (min-width: 1200px) {
   .pgrid__items--grid {
     grid-template-columns: repeat(4, 1fr);
   }

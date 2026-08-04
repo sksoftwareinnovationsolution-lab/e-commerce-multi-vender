@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @layer base {
   *,
   *::before,
@@ -64,14 +66,23 @@ input {
 
 /* ========================================
    Reusable Container
+   Applies one consistent content width to
+   every page. Spans the full viewport so
+   only the horizontal padding remains as
+   small side margins.
    ======================================== */
 .container {
   width: 100%;
-  max-width: 1400px;
+  max-width: none;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+/* Navbar and Footer keep their original width, padding and alignment. */
+footer .container {
+  max-width: 1400px;
 }
 
 @media (min-width: 768px) {

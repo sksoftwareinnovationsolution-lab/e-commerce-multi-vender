@@ -3,12 +3,22 @@ import ProductCard from "./ProductCard";
 import { ALL_PRODUCTS } from "../../data/products";
 import "../shop/ProductGrid.css";
 
-function ProductGrid({ onOpenSidebar, limit, total, hideToolbar }) {
+function ProductGrid({ onOpenSidebar, limit, total, hideToolbar, currentPage = 1, perPage = 24 }) {
   const [viewMode, setViewMode] = useState("grid");
   const [sortBy, setSortBy] = useState("relevance");
 
-  const displayProducts = limit ? ALL_PRODUCTS.slice(0, limit) : ALL_PRODUCTS;
   const totalCount = total || ALL_PRODUCTS.length;
+
+  let displayProducts;
+  let startIndex = 1;
+  if (currentPage && perPage) {
+    const start = (currentPage - 1) * perPage;
+    displayProducts = ALL_PRODUCTS.slice(start, start + perPage);
+    startIndex = start + 1;
+  } else {
+    displayProducts = limit ? ALL_PRODUCTS.slice(0, limit) : ALL_PRODUCTS;
+  }
+  const endIndex = startIndex + displayProducts.length - 1;
 
   return (
     <section className="pgrid">
@@ -27,7 +37,7 @@ function ProductGrid({ onOpenSidebar, limit, total, hideToolbar }) {
               </svg>
               Filters
             </button>
-            <span className="pgrid__showing">Showing 1–{displayProducts.length} of {totalCount} products</span>
+            <span className="pgrid__showing">Showing {startIndex}–{endIndex} of {totalCount} products</span>
           </div>
           <div className="pgrid__toolbar-right">
             <select
