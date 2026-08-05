@@ -80,9 +80,9 @@ input {
   padding-right: 1rem;
 }
 
-/* Navbar and Footer keep their original width, padding and alignment. */
+/* Footer keeps its alignment but widens to reduce side whitespace. */
 footer .container {
-  max-width: 1400px;
+  max-width: 1600px;
 }
 
 @media (min-width: 768px) {

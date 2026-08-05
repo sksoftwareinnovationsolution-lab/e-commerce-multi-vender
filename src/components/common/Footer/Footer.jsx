@@ -7,12 +7,12 @@ function Footer() {
   return (
     <footer className="bg-[#060A2B] border-t border-white/10">
       <div className="container py-10">
-       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-18">
-          <div>
+       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-10 md:gap-10 lg:gap-20">
+          <div className="text-center md:text-left">
             <img
               src={logo}
               alt="Omnivixo"
-              className="h-10 w-auto mb-5"
+              className="h-13 w-auto mb-6 inline-block md:inline"
             />
             <p className="text-gray-300 text-sm leading-relaxed">
               Shop. Sell. Book. Serve.
@@ -21,7 +21,7 @@ function Footer() {
               <br />
               one platform.
             </p>
-            <div className="flex items-center gap-3 mt-6">
+            <div className="flex items-center justify-center md:justify-start gap-3 mt-6">
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -62,10 +62,10 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold tracking-wide text-sm mb-4">
+            <h3 className="text-white font-semibold tracking-wide text-base mb-5">
               Quick Links
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               <li>
                 <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                   Home
@@ -95,10 +95,10 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold tracking-wide text-sm mb-4">
+            <h3 className="text-white font-semibold tracking-wide text-base mb-5">
               For Customers
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               <li>
                 <Link to="/my-orders" className="text-gray-300 hover:text-white transition-colors text-sm">
                   My Orders
@@ -128,10 +128,10 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold tracking-wide text-sm mb-4">
+            <h3 className="text-white font-semibold tracking-wide text-base mb-5">
               For Sellers
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               <li>
                 <Link to="/become-a-seller" className="text-gray-300 hover:text-white transition-colors text-sm">
                   Become a Seller
@@ -156,10 +156,10 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold tracking-wide text-sm mb-4">
+            <h3 className="text-white font-semibold tracking-wide text-base mb-5">
               Company
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               <li>
                 <Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm">
                   About Us
@@ -184,13 +184,13 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold tracking-wide text-sm mb-4">
+            <h3 className="text-white font-semibold tracking-wide text-base mb-5">
               Support
             </h3>
             <ul className="space-y-3">
               <li>
-                <div className="flex items-start gap-2">
-                  <Mail size={16} className="text-gray-300 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3">
+                  <Mail size={18} className="text-gray-300 shrink-0 mt-1" />
                   <div>
                     <span className="text-gray-400 text-xs">Email:</span>
                     <p className="text-gray-300 text-sm">support@omnivixo.com</p>
@@ -198,8 +198,8 @@ function Footer() {
                 </div>
               </li>
               <li>
-                <div className="flex items-start gap-2">
-                  <Phone size={16} className="text-gray-300 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3">
+                  <Phone size={18} className="text-gray-300 shrink-0 mt-1" />
                   <div>
                     <span className="text-gray-400 text-xs">Phone:</span>
                     <p className="text-gray-300 text-sm">+91 12345 67890</p>
@@ -207,8 +207,8 @@ function Footer() {
                 </div>
               </li>
               <li>
-                <div className="flex items-start gap-2">
-                  <MapPin size={16} className="text-gray-300 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3">
+                  <MapPin size={18} className="text-gray-300 shrink-0 mt-1" />
                   <div>
                     <span className="text-gray-400 text-xs">Address:</span>
                     <p className="text-gray-300 text-sm">Omnivixo Pvt. Ltd.<br />India</p>
@@ -224,23 +224,23 @@ function Footer() {
             <p className="text-gray-400 text-sm">
               &copy; 2026 Omnivixo. All rights reserved.
             </p>
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-7 bg-white rounded flex items-center justify-center">
-                <svg viewBox="0 0 50 16" className="h-3.5">
-                  <text x="25" y="12" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#1A1F71" fontFamily="Arial, sans-serif">VISA</text>
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-3">
+              <div className="w-12 h-8 bg-white rounded flex items-center justify-center">
+                <svg viewBox="0 0 48 16" className="h-4">
+                  <text x="24" y="12" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#1A1F71" fontFamily="Arial, sans-serif">VISA</text>
                 </svg>
               </div>
-              <div className="w-10 h-7 bg-white rounded flex items-center justify-center px-1">
+              <div className="w-12 h-8 bg-white rounded flex items-center justify-center px-1">
                 <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-[#EB001B] -mr-1.5"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#F79E1B] -ml-1.5"></div>
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#EB001B] -mr-1.5"></div>
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#F79E1B] -ml-1.5"></div>
                 </div>
               </div>
-              <div className="w-10 h-7 bg-white rounded flex items-center justify-center">
-                <span className="text-[#096B3F] text-[9px] font-bold" style={{ fontFamily: "Arial, sans-serif" }}>RuPay</span>
+              <div className="w-12 h-8 bg-white rounded flex items-center justify-center">
+                <span className="text-[#096B3F] text-[11px] font-bold" style={{ fontFamily: "Arial, sans-serif" }}>RuPay</span>
               </div>
-              <div className="w-10 h-7 bg-white rounded flex items-center justify-center">
-                <span className="text-[#097B43] text-[9px] font-bold" style={{ fontFamily: "Arial, sans-serif" }}>UPI</span>
+              <div className="w-12 h-8 bg-white rounded flex items-center justify-center">
+                <span className="text-[#097B43] text-[11px] font-bold" style={{ fontFamily: "Arial, sans-serif" }}>UPI</span>
               </div>
             </div>
           </div>
