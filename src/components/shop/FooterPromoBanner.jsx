@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import giftImage from "../../assets/images/footer/footer-gift-banner.png";
-import discountImage from "../../assets/images/footer/Discount-50.png";
+import discountImage from "../../assets/images/footer/discount-50.png";
 
 function FooterPromoBanner() {
   return (
