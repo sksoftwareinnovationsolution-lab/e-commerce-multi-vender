@@ -30,7 +30,7 @@ const testimonials = [
 function Testimonials() {
   return (
    <section className="bg-[#F8FAFF]">
-    <div className="mx-auto max-w-7xl px-4 py-10 pb-10">
+    <div className="py-10 pb-10">
 
         <h2 className="mb-8 text-center text-4xl font-bold text-gray-900">
           What Our Customers Say

@@ -49,7 +49,7 @@ function FAQ() {
 
   return (
     <section className="bg-white py-16">
-      <div className="mx-auto max-w-7xl px-4">
+      <div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
             Frequently Asked Questions

@@ -11,7 +11,7 @@
     return (
       <section className="bg-white py-12">
 
-        <div className="mx-auto max-w-7xl px-4">
+        <div>
 
           <div className="min-h-[90px] md:min-h-[95px] overflow-hidden rounded-xl bg-gradient-to-r from-[#0D0B52] to-[#3224A8] shadow-xl">
 

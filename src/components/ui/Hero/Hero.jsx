@@ -9,7 +9,7 @@ function Hero() {
         {/* Content: Left Text + Right Placeholder */}
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
           {/* Left Column */}
-          <div className="flex flex-1 flex-col gap-5 lg:gap-6">
+          <div className="flex flex-1 flex-col gap-5 lg:mt-10 lg:gap-6">
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[linear-gradient(135deg,#2563eb,#7c3aed)] px-4 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.5px] text-white lg:px-5 lg:py-2 lg:text-[0.8rem]">
               Multi-Vendor Marketplace
             </span>
