@@ -1,29 +1,44 @@
 import { useState } from "react";
 import "../shop/Sidebar.css";
 
+const MIN_PRICE = 0;
+const MAX_PRICE = 50000;
+const PRICE_STEP = 500;
+
 const categoryList = [
   { label: "Electronics", count: 1240 },
   { label: "Fashion", count: 890 },
   { label: "Home & Kitchen", count: 560 },
   { label: "Beauty", count: 320 },
-  { label: "Grocery", count: 410 },
-  { label: "Automobile", count: 185 },
   { label: "Sports", count: 230 },
-  { label: "Books", count: 175 },
+  { label: "Bags & Luggage", count: 175 },
 ];
 
 const brandList = [
+  { label: "boAt", count: 267 },
+  { label: "Noise", count: 198 },
   { label: "Samsung", count: 312 },
-  { label: "Apple", count: 198 },
-  { label: "HP", count: 145 },
-  { label: "Dell", count: 112 },
-  { label: "Boat", count: 267 },
-  { label: "Sony", count: 89 },
   { label: "LG", count: 134 },
+  { label: "HP", count: 145 },
+  { label: "Sony", count: 89 },
   { label: "Puma", count: 203 },
+  { label: "Mi", count: 156 },
+  { label: "Philips", count: 112 },
+  { label: "Bella Vita", count: 98 },
+  { label: "Safari", count: 76 },
+  { label: "Wildcraft", count: 64 },
 ];
 
-const ratingOptions = [5, 4, 3, 2, 1];
+const ratingOptions = [5, 4, 3];
+
+const availabilityOptions = ["In Stock", "Out of Stock"];
+
+const discountOptions = [
+  "10% or more",
+  "20% or more",
+  "30% or more",
+  "50% or more",
+];
 
 function renderStars(count) {
   return Array.from({ length: 5 }, (_, i) =>
@@ -33,7 +48,8 @@ function renderStars(count) {
 
 function Sidebar() {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState(50000);
+  const [minPrice, setMinPrice] = useState(MIN_PRICE);
+  const [maxPrice, setMaxPrice] = useState(MAX_PRICE);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedAvailability, setSelectedAvailability] = useState([]);
@@ -48,12 +64,23 @@ function Sidebar() {
 
   const clearFilters = () => {
     setSelectedCategories([]);
-    setPriceRange(50000);
+    setMinPrice(MIN_PRICE);
+    setMaxPrice(MAX_PRICE);
     setSelectedBrands([]);
     setSelectedRating(null);
     setSelectedAvailability([]);
     setSelectedDiscount([]);
     setBrandSearch("");
+  };
+
+  const handleMinPrice = (e) => {
+    const value = Math.min(Number(e.target.value), maxPrice - PRICE_STEP);
+    setMinPrice(value);
+  };
+
+  const handleMaxPrice = (e) => {
+    const value = Math.max(Number(e.target.value), minPrice + PRICE_STEP);
+    setMaxPrice(value);
   };
 
   const filteredBrands = brandList.filter((b) =>
@@ -87,28 +114,42 @@ function Sidebar() {
             </li>
           ))}
         </ul>
-        <button className="sidebar__view-all" type="button">
-          View All Categories
-        </button>
       </div>
 
       {/* Price */}
       <div className="sidebar__section">
         <h3 className="sidebar__heading">Filter by Price</h3>
-        <div className="sidebar__price">
+        <div
+          className="sidebar__price-range"
+          style={{
+            "--range-min": `${(minPrice / MAX_PRICE) * 100}%`,
+            "--range-max": `${(maxPrice / MAX_PRICE) * 100}%`,
+          }}
+        >
           <input
             type="range"
-            className="sidebar__slider"
-            min="0"
-            max="50000"
-            step="500"
-            value={priceRange}
-            onChange={(e) => setPriceRange(Number(e.target.value))}
+            className="sidebar__slider sidebar__slider--min"
+            min={MIN_PRICE}
+            max={MAX_PRICE}
+            step={PRICE_STEP}
+            value={minPrice}
+            onChange={handleMinPrice}
+            aria-label="Minimum price"
           />
-          <div className="sidebar__price-labels">
-            <span>₹0</span>
-            <span>₹{priceRange.toLocaleString("en-IN")}</span>
-          </div>
+          <input
+            type="range"
+            className="sidebar__slider sidebar__slider--max"
+            min={MIN_PRICE}
+            max={MAX_PRICE}
+            step={PRICE_STEP}
+            value={maxPrice}
+            onChange={handleMaxPrice}
+            aria-label="Maximum price"
+          />
+        </div>
+        <div className="sidebar__price-labels">
+          <span>₹{minPrice.toLocaleString("en-IN")}</span>
+          <span>₹{maxPrice.toLocaleString("en-IN")}</span>
         </div>
       </div>
 
@@ -172,7 +213,7 @@ function Sidebar() {
       <div className="sidebar__section">
         <h3 className="sidebar__heading">Availability</h3>
         <ul className="sidebar__list">
-          {["In Stock", "Out Of Stock"].map((opt) => (
+          {availabilityOptions.map((opt) => (
             <li key={opt}>
               <label className="sidebar__option">
                 <input
@@ -198,7 +239,7 @@ function Sidebar() {
       <div className="sidebar__section">
         <h3 className="sidebar__heading">Discount</h3>
         <ul className="sidebar__list">
-          {["10%+", "20%+", "30%+", "40%+", "50%+"].map((d) => (
+          {discountOptions.map((d) => (
             <li key={d}>
               <label className="sidebar__option">
                 <input
