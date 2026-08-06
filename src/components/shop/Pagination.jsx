@@ -1,6 +1,6 @@
 import "../shop/Pagination.css";
 
-const PER_PAGE_OPTIONS = [16, 24, 32, 48];
+const PER_PAGE_OPTIONS = [12, 24, 36, 48];
 
 function buildPageItems(current, total) {
   if (total <= 7) {
