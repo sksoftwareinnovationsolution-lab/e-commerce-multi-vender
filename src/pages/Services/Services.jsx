@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import ServiceCard from "../../components/home/NearbyServices/ServiceCard";
+import HeroBanner from "../../components/service/HeroBanner";
 import { DUMMY_SERVICES, SERVICE_CATEGORIES, filterServices } from "../../data/services";
 import "../Home/Home.css";
 import "../Products/Products.css";
@@ -92,6 +93,8 @@ function Services() {
           </li>
         </ol>
       </nav>
+
+      <HeroBanner />
 
       {/* Services Banner */}
       <div className="services-banner">
