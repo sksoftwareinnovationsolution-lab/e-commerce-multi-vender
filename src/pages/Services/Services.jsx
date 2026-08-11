@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import ServiceCard from "../../components/home/NearbyServices/ServiceCard";
 import HeroBanner from "../../components/service/HeroBanner";
+import ServiceListingCard from "../../components/service/ServiceListingCard";
+import PopularServiceCategories from "../../components/service/PopularServiceCategories";
+import FeaturedServices from "../../components/service/FeaturedServices";
 import { DUMMY_SERVICES, SERVICE_CATEGORIES, filterServices } from "../../data/services";
 import "../Home/Home.css";
 import "../Products/Products.css";
@@ -96,6 +98,10 @@ function Services() {
 
       <HeroBanner />
 
+      <PopularServiceCategories />
+
+      <FeaturedServices />
+
       {/* Services Banner */}
       <div className="services-banner">
         <h1 className="services-banner__title">Find Trusted Services</h1>
@@ -172,8 +178,8 @@ function Services() {
         </div>
       ) : (
         <div className="services-listing__grid">
-          {filteredServices.map((service, idx) => (
-            <ServiceCard key={service.id} service={service} index={idx} />
+          {filteredServices.map((service) => (
+            <ServiceListingCard key={service.id} service={service} />
           ))}
         </div>
       )}

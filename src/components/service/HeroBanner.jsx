@@ -48,6 +48,39 @@ const statCards = [
   },
 ];
 
+function StatCard({ card, className = "", compact = false }) {
+  return (
+    <div
+      className={`flex items-center rounded-2xl bg-white/95 shadow-xl shadow-purple-200/60 backdrop-blur ${
+        compact
+          ? "w-full min-w-0 gap-2 p-2.5 sm:gap-2.5 sm:p-3"
+          : "gap-2.5 p-3 sm:gap-3 sm:p-3.5"
+      } ${className}`}
+    >
+      <span
+        className={`flex shrink-0 items-center justify-center rounded-lg ${
+          compact ? "h-8 w-8" : "h-9 w-9 sm:h-10 sm:w-10"
+        } ${card.iconColor}`}
+      >
+        <card.icon className="h-[18px] w-[18px]" aria-hidden="true" />
+      </span>
+      <div className="min-w-0 leading-tight">
+        <p className="text-sm font-bold text-[#0B1535] sm:text-base">
+          {card.value}
+          {card.value === "4.8" && (
+            <span className="ml-1 text-amber-500" aria-hidden="true">
+              ★
+            </span>
+          )}
+        </p>
+        <p className="text-[11px] font-medium text-gray-500 sm:text-xs">
+          {card.label}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function HeroBanner() {
   return (
     <section className="mb-8">
@@ -114,48 +147,63 @@ function HeroBanner() {
           </div>
 
           {/* Right Side */}
-          <div className="order-2 relative mx-auto w-full max-w-md lg:max-w-none">
-            {/* Soft purple blob */}
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,#E6DCFF_0%,#F2EAFF_45%,rgba(242,234,255,0)_72%)] blur-2xl"
-              aria-hidden="true"
-            />
+          <div className="order-2 mx-auto w-full max-w-md lg:max-w-none">
+            {/* Mobile & tablet layout (below lg): grid cards + centered image */}
+            <div className="lg:hidden">
+              {/* Top stat cards */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                {statCards.slice(0, 2).map((card) => (
+                  <StatCard key={card.label} card={card} compact />
+                ))}
+              </div>
 
-            {/* Technician image */}
-            <div className="relative z-[1]">
-              <img
-                src={serviceHeroBanner}
-                alt="Service technician"
-                className="mx-auto w-full max-w-[420px] object-contain lg:max-w-[520px]"
-              />
+              {/* Technician image */}
+              <div className="relative z-[1] my-6 w-full sm:my-8">
+                <div
+                  className="pointer-events-none absolute left-1/2 top-1/2 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,#E6DCFF_0%,#F2EAFF_45%,rgba(242,234,255,0)_72%)] blur-2xl"
+                  aria-hidden="true"
+                />
+                <img
+                  src={serviceHeroBanner}
+                  alt="Service technician"
+                  className="relative mx-auto w-full max-w-[420px] object-contain"
+                />
+              </div>
+
+              {/* Bottom stat cards */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                {statCards.slice(2).map((card) => (
+                  <StatCard key={card.label} card={card} compact />
+                ))}
+              </div>
             </div>
 
-            {/* Floating cards */}
-            {statCards.map((card) => (
+            {/* Desktop layout (lg and above): floating cards */}
+            <div className="relative hidden lg:block">
+              {/* Soft purple blob */}
               <div
-                key={card.label}
-                className={`absolute z-10 flex items-center gap-2.5 rounded-2xl bg-white/95 p-3 shadow-xl shadow-purple-200/60 backdrop-blur sm:gap-3 sm:p-3.5 ${card.position}`}
-              >
-                <span
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 ${card.iconColor}`}
-                >
-                  <card.icon className="h-[18px] w-[18px]" aria-hidden="true" />
-                </span>
-                <div className="leading-tight">
-                  <p className="text-sm font-bold text-[#0B1535] sm:text-base">
-                    {card.value}
-                    {card.value === "4.8" && (
-                      <span className="ml-1 text-amber-500" aria-hidden="true">
-                        ★
-                      </span>
-                    )}
-                  </p>
-                  <p className="text-[11px] font-medium text-gray-500 sm:text-xs">
-                    {card.label}
-                  </p>
-                </div>
+                className="pointer-events-none absolute left-1/2 top-1/2 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,#E6DCFF_0%,#F2EAFF_45%,rgba(242,234,255,0)_72%)] blur-2xl"
+                aria-hidden="true"
+              />
+
+              {/* Technician image */}
+              <div className="relative z-[1]">
+                <img
+                  src={serviceHeroBanner}
+                  alt="Service technician"
+                  className="mx-auto w-full max-w-[420px] object-contain lg:max-w-[520px]"
+                />
               </div>
-            ))}
+
+              {/* Floating cards */}
+              {statCards.map((card) => (
+                <StatCard
+                  key={card.label}
+                  card={card}
+                  className={`absolute z-10 ${card.position}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
