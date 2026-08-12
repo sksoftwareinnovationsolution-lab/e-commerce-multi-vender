@@ -9,7 +9,8 @@ import "./FeaturedProducts.css";
 const FEATURED_PRODUCTS = [
   {
     id: 1,
-    name: "boAt Wave Call 2 Smart Watch",
+    name: "boAt Wave Call 2",
+    description: "Smart Watch",
     price: 1599,
     oldPrice: 1999,
     discount: -20,
@@ -19,7 +20,8 @@ const FEATURED_PRODUCTS = [
   },
   {
     id: 2,
-    name: "Noise Buds VS103 Wireless Earbuds",
+    name: "Noise Buds VS103",
+    description: "Wireless Earbuds",
     price: 1099,
     oldPrice: 1299,
     discount: -15,
@@ -29,7 +31,8 @@ const FEATURED_PRODUCTS = [
   },
   {
     id: 3,
-    name: "LG 43 Inch 4K Ultra HD Smart TV",
+    name: "LG 43 Inch 4K TV",
+    description: "Ultra HD Smart TV",
     price: 28999,
     oldPrice: 31999,
     discount: -10,
@@ -39,7 +42,8 @@ const FEATURED_PRODUCTS = [
   },
   {
     id: 4,
-    name: "Puma Men's Street Running Shoes",
+    name: "Puma Men's Shoes",
+    description: "Running Shoes",
     price: 1799,
     oldPrice: 2399,
     discount: -25,
@@ -50,7 +54,7 @@ const FEATURED_PRODUCTS = [
   {
     id: 5,
     name: "Mi 20000mAh Power Bank",
-    subtitle: "18W Fast Charging",
+    description: "18W Fast Charging",
     price: 1299,
     oldPrice: 1599,
     discount: -18,
@@ -125,8 +129,8 @@ function FeaturedProducts() {
               <h3 className="fp-card__name" title={product.name}>
                 {product.name}
               </h3>
-              {product.subtitle && (
-                <span className="fp-card__subtitle">{product.subtitle}</span>
+              {product.description && (
+                <span className="fp-card__subtitle">{product.description}</span>
               )}
 
               <StarRating rating={product.rating} reviews={product.reviews} />

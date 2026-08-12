@@ -88,6 +88,18 @@
   padding: 1rem;
 }
 
+.pcard__img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+[data-theme="dark"] .pcard__img {
+  background-color: #16213e;
+}
+
 .pcard__placeholder {
   width: 100%;
   height: 160px;
@@ -136,6 +148,17 @@
 
 [data-theme="dark"] .pcard__name {
   color: #f3f4f6;
+}
+
+.pcard__description {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9ca3af;
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .pcard__description {
+  color: #6b7280;
 }
 
 .pcard__rating {

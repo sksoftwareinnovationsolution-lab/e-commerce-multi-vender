@@ -14,7 +14,7 @@
   function Shop() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [perPage, setPerPage] = useState(16);
+    const [perPage, setPerPage] = useState(12);
 
     const totalPages = Math.max(1, Math.ceil(ALL_PRODUCTS.length / perPage));
 
