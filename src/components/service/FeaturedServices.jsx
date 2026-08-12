@@ -55,7 +55,7 @@ function ServiceCard({ service }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-purple-100 hover:shadow-md hover:shadow-purple-200/40">
       {/* Image */}
-      <div className="h-28 w-full shrink-0 overflow-hidden bg-gray-100">
+      <div className="h-36 w-full shrink-0 overflow-hidden bg-gray-100 sm:h-32 xl:h-[140px]">
         <img
           src={service.image}
           alt={`${service.title} service`}

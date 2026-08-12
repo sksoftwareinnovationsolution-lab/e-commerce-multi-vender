@@ -4,6 +4,9 @@ import HeroBanner from "../../components/service/HeroBanner";
 import ServiceListingCard from "../../components/service/ServiceListingCard";
 import PopularServiceCategories from "../../components/service/PopularServiceCategories";
 import FeaturedServices from "../../components/service/FeaturedServices";
+import TopRatedServiceProviders from "../../components/service/TopRatedServiceProviders";
+import WhyChooseServices from "../../components/service/WhyChooseServices";
+import AppBanner from "../../components/service/AppBanner";
 import { DUMMY_SERVICES, SERVICE_CATEGORIES, filterServices } from "../../data/services";
 import "../Home/Home.css";
 import "../Products/Products.css";
@@ -101,6 +104,12 @@ function Services() {
       <PopularServiceCategories />
 
       <FeaturedServices />
+
+      <TopRatedServiceProviders />
+
+      <WhyChooseServices />
+
+      <AppBanner />
 
       {/* Services Banner */}
       <div className="services-banner">
