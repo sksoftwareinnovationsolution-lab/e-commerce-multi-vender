@@ -33,20 +33,20 @@ function AppBanner() {
           <div className="absolute -bottom-28 left-1/3 h-80 w-80 rounded-full bg-white/5" />
         </div>
 
-        <div className="relative grid h-full grid-cols-1 items-center gap-8 md:grid-cols-[1fr_1.9fr_1.9fr] md:gap-4 lg:gap-5">
+        <div className="relative grid h-full grid-cols-1 items-center gap-8 md:grid-cols-[1.6fr_1.9fr_1.9fr] md:gap-4 lg:gap-5">
           {/* Mobile image 1 — left */}
-          <div className="order-1 flex items-center justify-center md:order-none">
+          <div className="order-1 flex items-end justify-center md:order-none md:self-end">
             <img
               src={appScreen}
               alt="Omnivixo app home screen"
               loading="lazy"
-              className="h-auto max-h-[230px] w-auto max-w-full object-contain drop-shadow-2xl md:max-h-[216px] lg:max-h-[236px]"
+              className="h-auto max-h-[230px] w-auto max-w-full object-contain drop-shadow-2xl md:max-h-[250px] lg:max-h-[285px]"
             />
           </div>
 
           {/* Heading + features */}
           <div className="order-2 text-center md:order-none md:text-left">
-            <h2 className="text-2xl font-extrabold leading-tight text-white sm:text-3xl md:text-[26px] lg:text-4xl">
+            <h2 className="text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-[26px] lg:text-4xl">
               Get the Omnivixo App
             </h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-white/80 md:mx-0 md:text-sm lg:text-base">
@@ -57,9 +57,9 @@ function AppBanner() {
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:justify-start lg:mt-6">
               {features.map((feature) => (
                 <div key={feature.title} className="flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/25 bg-white/10 backdrop-blur-sm">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/25 bg-white/10 backdrop-blur-sm">
                     <feature.icon
-                      className="h-[18px] w-[18px] text-white"
+                      className="h-6 w-6 text-white"
                       aria-hidden="true"
                     />
                   </span>

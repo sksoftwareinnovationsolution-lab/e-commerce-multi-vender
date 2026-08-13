@@ -7,6 +7,8 @@ import FeaturedServices from "../../components/service/FeaturedServices";
 import TopRatedServiceProviders from "../../components/service/TopRatedServiceProviders";
 import WhyChooseServices from "../../components/service/WhyChooseServices";
 import AppBanner from "../../components/service/AppBanner";
+import StatsTrustMetrics from "../../components/service/StatsTrustMetrics";
+import ServiceInfoSection from "../../components/service/ServiceInfoSection";
 import { DUMMY_SERVICES, SERVICE_CATEGORIES, filterServices } from "../../data/services";
 import "../Home/Home.css";
 import "../Products/Products.css";
@@ -110,6 +112,10 @@ function Services() {
       <WhyChooseServices />
 
       <AppBanner />
+
+      <StatsTrustMetrics />
+
+      <ServiceInfoSection />
 
       {/* Services Banner */}
       <div className="services-banner">
