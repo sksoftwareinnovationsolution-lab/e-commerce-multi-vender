@@ -36,26 +36,26 @@ function ReviewCard({ review }) {
         aria-hidden="true"
       />
 
-      <p className="mt-3 flex-1 line-clamp-3 text-[11px] leading-relaxed text-gray-600">
+      <p className="mt-3 text-[15px] leading-[1.7] text-gray-600">
         "{review.comment}"
       </p>
 
-      <div className="mt-auto flex items-center gap-2 pt-4">
+      <div className="mt-auto flex items-center gap-3 pt-4">
         <img
           src={review.image}
           alt={review.name}
           loading="lazy"
-          className="h-8 w-8 shrink-0 rounded-full object-cover"
+          className="h-11 w-11 shrink-0 rounded-full object-cover"
         />
         <div className="min-w-0">
-          <h4 className="truncate text-[11px] font-bold leading-tight text-[#0B1535]">
+          <h4 className="truncate text-sm font-bold leading-tight text-[#0B1535]">
             {review.name}
           </h4>
-          <div className="mt-0.5 flex items-center gap-px">
+          <div className="mt-1 flex items-center gap-1">
             {[...Array(review.rating)].map((_, index) => (
               <Star
                 key={index}
-                className="h-3 w-3 fill-amber-400 text-amber-400"
+                className="h-4 w-4 fill-amber-400 text-amber-400"
                 aria-hidden="true"
               />
             ))}
@@ -82,7 +82,7 @@ function CustomerReviews() {
         </button>
       </div>
 
-      <div className="mt-6 grid flex-1 grid-cols-1 auto-rows-fr items-stretch gap-2 sm:gap-3 lg:grid-cols-3">
+      <div className="mt-6 grid flex-1 auto-rows-fr grid-cols-1 gap-2 sm:gap-3 lg:grid-cols-3">
         {reviews.map((review) => (
           <ReviewCard key={review.name} review={review} />
         ))}

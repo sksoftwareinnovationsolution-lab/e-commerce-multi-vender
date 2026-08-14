@@ -5,7 +5,7 @@ import FAQ from "./FAQ";
 function ServiceInfoSection() {
   return (
     <section className="mb-8" aria-label="How it works, Customer Reviews and FAQ">
-      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1.5fr_1.1fr]">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr]">
         <div className="border-b border-gray-100 md:border-b-0">
           <HowItWorks />
         </div>
