@@ -7,7 +7,6 @@ import {
   FiSearch,
   FiMenu,
   FiX,
-  FiChevronDown,
 } from "react-icons/fi";
 import { useCart } from "../../../context/useCart";
 import logo from "../../../assets/images/Logo.png";
@@ -17,44 +16,19 @@ const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/shop", label: "Shop" },
   { to: "/services", label: "Services" },
-  { to: "/shops", label: "Sell on Omnivixo" },
   { to: "/deals", label: "Deals" },
   { to: "/contact", label: "Contact" },
 ];
 
-const CATEGORIES = [
-  "Electronics",
-  "Fashion",
-  "Home & Living",
-  "Beauty",
-  "Automobile",
-  "Gaming",
-  "Grocery",
-  "Pets",
-];
-
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const { totalItems } = useCart();
   const location = useLocation();
-  const categoriesRef = useRef(null);
 
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
-
-  useEffect(() => {
-    if (!categoriesOpen) return;
-    const handleClickOutside = (e) => {
-      if (categoriesRef.current && !categoriesRef.current.contains(e.target)) {
-        setCategoriesOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [categoriesOpen]);
 
   const prevPathname = useRef(location.pathname);
 
@@ -63,7 +37,6 @@ function Header() {
     prevPathname.current = location.pathname;
     const raf = requestAnimationFrame(() => {
       setMobileMenuOpen(false);
-      setCategoriesOpen(false);
     });
     return () => cancelAnimationFrame(raf);
   }, [location.pathname]);
@@ -81,7 +54,7 @@ function Header() {
               <img
                 src={logo}
                 alt="Omnivixo"
-                className="h-[70px] lg:h-[95px] w-auto object-contain"
+                className="h-[85px] lg:h-[110px] w-auto object-contain"
               />
             </Link>
           </div>
@@ -104,54 +77,13 @@ function Header() {
                 />
               </Link>
             ))}
-
-            {/* Categories Dropdown */}
-            <div className="relative" ref={categoriesRef}>
-              <button
-                type="button"
-                onClick={() => setCategoriesOpen((prev) => !prev)}
-                className="group flex items-center gap-1.5 py-2 text-[16px] font-medium text-gray-500 hover:text-purple-600 transition-colors duration-200 whitespace-nowrap cursor-pointer"
-              >
-                All Categories
-                <FiChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? "rotate-180" : ""
-                    }`}
-                />
-              </button>
-
-              {categoriesOpen && (
-                <div className="absolute top-full left-0 mt-3 w-56 bg-white border border-gray-100 rounded-2xl shadow-xl shadow-gray-200/60 py-2 z-50">
-                  <div className="px-5 py-2 mb-1">
-                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
-                      Browse
-                    </span>
-                  </div>
-                  {CATEGORIES.map((cat) => (
-                    <Link
-                      key={cat}
-                      to={`/shop?category=${cat
-                        .toLowerCase()
-                        .replace(/ & /g, "-")
-                        .replace(/ /g, "-")}`}
-                      className="block px-5 py-2.5 text-[14px] font-medium text-gray-600 hover:bg-purple-50 hover:text-purple-600 transition-colors duration-150 rounded-lg mx-2"
-                      onClick={() => setCategoriesOpen(false)}
-                    >
-                      {cat}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
           </nav>
 
-          {/* ---- Flexible spacer ---- */}
-          <div className="flex-1" />
-
           {/* ---- RIGHT: Search + Icons ---- */}
-          <div className="flex items-center gap-3 lg:gap-5">
+          <div className="flex items-center gap-3 lg:gap-5 ml-auto">
 
             {/* Search Bar */}
-            <div className="hidden md:flex w-[240px] lg:w-[300px] flex-shrink-0">
+            <div className="hidden md:flex flex-1 min-w-[280px] max-w-[620px]">
               <div className="flex items-center w-full h-[42px] bg-gray-50 border border-gray-200 rounded-full overflow-hidden transition-all duration-200 focus-within:border-purple-400 focus-within:ring-2 focus-within:ring-purple-100">
                 <FiSearch className="flex-shrink-0 w-[18px] h-[18px] text-gray-400 ml-4" />
                 <input
@@ -310,27 +242,6 @@ function Header() {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
-                  </Link>
-                ))}
-
-                <div className="mx-6 my-3 border-t border-gray-100" />
-
-                <div className="px-6 py-2">
-                  <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
-                    Categories
-                  </span>
-                </div>
-                {CATEGORIES.map((cat) => (
-                  <Link
-                    key={cat}
-                    to={`/shop?category=${cat
-                      .toLowerCase()
-                      .replace(/ & /g, "-")
-                      .replace(/ /g, "-")}`}
-                    className="block px-6 py-2.5 text-[15px] text-gray-500 hover:bg-gray-50 hover:text-purple-600 transition-colors duration-150"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {cat}
                   </Link>
                 ))}
 
