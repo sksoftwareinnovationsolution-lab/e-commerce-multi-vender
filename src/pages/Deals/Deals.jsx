@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import DealsHeroBanner from "./DealsHeroBanner";
+import DealsCategories from "./DealsCategories";
+import FlashDeals from "./FlashDeals";
+import TodaysDeals from "./TodaysDeals";
 import "./Deals.css";
 
 function Deals() {
@@ -20,6 +23,9 @@ function Deals() {
       </nav>
 
       <DealsHeroBanner />
+      <DealsCategories />
+      <FlashDeals />
+      <TodaysDeals />
     </div>
   );
 }

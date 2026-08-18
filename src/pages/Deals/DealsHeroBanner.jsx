@@ -78,7 +78,7 @@ function DealsHeroBanner() {
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center gap-6 px-5 py-8 md:px-8 md:py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-4 lg:px-10 lg:py-10 xl:px-14">
+      <div className="relative z-10 flex flex-col items-center gap-5 px-5 py-6 md:px-8 md:py-7 lg:flex-row lg:items-center lg:justify-between lg:gap-4 lg:px-10 lg:py-7 xl:px-14">
 
         {/* LEFT — Text Content */}
         <div className="flex max-w-[420px] flex-col items-center gap-3 text-center lg:items-start lg:text-left xl:max-w-[480px]">
