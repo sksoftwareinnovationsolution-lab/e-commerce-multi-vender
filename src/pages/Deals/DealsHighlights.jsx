@@ -12,6 +12,9 @@ import {
 import shoesBy1Get1 from "../../assets/images/deals/shoes-by1get1.png";
 import tShirtBy1Get1 from "../../assets/images/deals/t-shirt-by1get1.png";
 import bodyWashBy1Get1 from "../../assets/images/deals/body-wash-by1get1.png";
+import hdfcLogo from "../../assets/images/deals/hdfc-deals.png";
+import iciciLogo from "../../assets/images/deals/icici-deals.png";
+import sbiLogo from "../../assets/images/deals/sbi-deals.png";
 
 const COUPONS = [
   {
@@ -69,8 +72,7 @@ const BANK_OFFERS = [
     card: "on HDFC Bank Cards",
     color: "bg-emerald-100",
     iconColor: "text-emerald-600",
-    logoBg: "bg-[#004b8d]",
-    logoText: "HDFC",
+    image: hdfcLogo,
   },
   {
     id: 2,
@@ -79,8 +81,7 @@ const BANK_OFFERS = [
     card: "on ICICI Bank Cards",
     color: "bg-orange-100",
     iconColor: "text-orange-600",
-    logoBg: "bg-[#f37a20]",
-    logoText: "ICICI",
+    image: iciciLogo,
   },
   {
     id: 3,
@@ -89,8 +90,7 @@ const BANK_OFFERS = [
     card: "on SBI Credit Cards",
     color: "bg-blue-100",
     iconColor: "text-blue-600",
-    logoBg: "bg-[#1a3c8a]",
-    logoText: "SBI",
+    image: sbiLogo,
   },
 ];
 
@@ -104,7 +104,7 @@ function CouponRow({ coupon }) {
   };
 
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/60 p-3 transition-all duration-250 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-[0_4px_16px_rgba(124,58,237,0.07)]">
+    <div className="flex flex-1 items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/60 p-3 transition-all duration-250 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-[0_4px_16px_rgba(124,58,237,0.07)]">
       <div className="flex h-[48px] min-w-[80px] flex-shrink-0 items-center justify-center rounded-lg border-2 border-dashed border-purple-300 bg-white px-3">
         <span className="text-[0.8rem] font-bold tracking-wide text-[#7c3aed]">
           {coupon.code}
@@ -185,7 +185,7 @@ function B1G1ProductCard({ product }) {
 
 function BankOfferRow({ offer }) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/60 p-3 transition-all duration-250 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-[0_4px_16px_rgba(124,58,237,0.07)]">
+    <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/60 px-3 py-1.5 transition-all duration-250 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-[0_4px_16px_rgba(124,58,237,0.07)]">
       <div
         className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full ${offer.color}`}
       >
@@ -200,11 +200,11 @@ function BankOfferRow({ offer }) {
         </span>
         <span className="text-[0.72rem] text-gray-500">{offer.card}</span>
       </div>
-      <div
-        className={`flex h-10 w-16 flex-shrink-0 items-center justify-center rounded-lg ${offer.logoBg} text-[0.7rem] font-bold text-white`}
-      >
-        {offer.logoText}
-      </div>
+      <img
+        src={offer.image}
+        alt={offer.bank}
+        className="h-16 w-24 flex-shrink-0 object-contain sm:h-20 sm:w-28"
+      />
     </div>
   );
 }
@@ -302,7 +302,7 @@ function DealsHighlights() {
               />
             </Link>
           </div>
-          <div className="flex flex-1 flex-col gap-3">
+          <div className="flex flex-1 flex-col gap-1.5">
             {BANK_OFFERS.map((offer) => (
               <BankOfferRow key={offer.id} offer={offer} />
             ))}
