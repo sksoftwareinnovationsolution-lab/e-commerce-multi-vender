@@ -8,6 +8,7 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Cart from "../pages/Cart/Cart";
 import ShopDetails from "../pages/ShopDetails/ShopDetails";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
+import Deals from "../pages/Deals/Deals";
 
 function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ function AppRoutes() {
           <Route path="shop" element={<Shop />} />
           <Route path="shops" element={<Shops />} />
           <Route path="services" element={<Services />} />
+          <Route path="deals" element={<Deals />} />
           <Route path="product/:id" element={<ProductDetails />} />
           <Route path="shop/:id" element={<ShopDetails />} />
           <Route path="service/:id" element={<ServiceDetails />} />
