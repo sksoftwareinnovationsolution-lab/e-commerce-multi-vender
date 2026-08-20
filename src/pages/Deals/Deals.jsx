@@ -4,6 +4,7 @@ import DealsCategories from "./DealsCategories";
 import FlashDeals from "./FlashDeals";
 import TodaysDeals from "./TodaysDeals";
 import TrendingDeals from "./TrendingDeals";
+import TopBrandsOnDeal from "./TopBrandsOnDeal";
 import DealsByCategory from "./DealsByCategory";
 import DealsHighlights from "./DealsHighlights";
 import "./Deals.css";
@@ -32,6 +33,7 @@ function Deals() {
       <TrendingDeals />
       <DealsByCategory />
       <DealsHighlights />
+      <TopBrandsOnDeal />
     </div>
   );
 }
