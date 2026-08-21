@@ -7,6 +7,9 @@ import TrendingDeals from "./TrendingDeals";
 import TopBrandsOnDeal from "./TopBrandsOnDeal";
 import DealsByCategory from "./DealsByCategory";
 import DealsHighlights from "./DealsHighlights";
+import LimitedTimeOffers from "./LimitedTimeOffers";
+import RecentlyViewed from "./RecentlyViewed";
+import DealsPromoBanner from "./DealsPromoBanner";
 import "./Deals.css";
 
 function Deals() {
@@ -34,6 +37,9 @@ function Deals() {
       <DealsByCategory />
       <DealsHighlights />
       <TopBrandsOnDeal />
+      <LimitedTimeOffers />
+      <RecentlyViewed />
+      <DealsPromoBanner />
     </div>
   );
 }
