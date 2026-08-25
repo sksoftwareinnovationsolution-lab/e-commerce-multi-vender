@@ -3,6 +3,13 @@
   background-color: #f9fafb;
 }
 
+.signup-layout {
+  display: flex;
+  max-width: 92vw;
+  margin: 0 auto;
+  min-height: calc(100vh - 76px);
+}
+
 .signup-left {
   display: flex;
   flex-direction: column;
@@ -463,6 +470,113 @@
   line-height: 1.5;
 }
 
+/* Signup Stats / Features Section */
+.signup-stats-section {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+}
+
+.signup-stats-card {
+  max-width: 92vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem 2.5rem;
+}
+
+.signup-stat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0 0.5rem;
+}
+
+.signup-stat-divider {
+  width: 1px;
+  background: #e5e7eb;
+  align-self: stretch;
+  margin: 0 0.25rem;
+  flex-shrink: 0;
+}
+
+.signup-stat-icon-bg {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.signup-stat-icon-bg img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.signup-stat-purple {
+  background-color: #f3f0ff;
+}
+
+.signup-stat-green {
+  background-color: #ecfdf5;
+}
+
+.signup-stat-orange {
+  background-color: #fff7ed;
+}
+
+.signup-stat-blue {
+  background-color: #eff6ff;
+}
+
+.signup-stat-text {
+  min-width: 0;
+}
+
+.signup-stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+.signup-stat-color-purple {
+  color: #7c3aed;
+}
+
+.signup-stat-color-green {
+  color: #059669;
+}
+
+.signup-stat-color-orange {
+  color: #ea580c;
+}
+
+.signup-stat-color-blue {
+  color: #2563eb;
+}
+
+.signup-stat-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1e1b4b;
+  margin-bottom: 0.25rem;
+}
+
+.signup-stat-desc {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .signup-heading {
@@ -472,10 +586,36 @@
   .signup-form-card {
     padding: 1.75rem;
   }
+
+  .signup-stats-card {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .signup-stat-number {
+    font-size: 1.3rem;
+  }
+
+  .signup-stat-title {
+    font-size: 0.875rem;
+  }
+
+  .signup-stat-desc {
+    font-size: 0.75rem;
+  }
+
+  .signup-stat-icon-bg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .signup-stat-icon-bg img {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @media (max-width: 768px) {
-  .signup-page .signup-layout {
+  .signup-layout {
     flex-direction: column;
   }
 
@@ -503,6 +643,25 @@
   .signup-join-cards {
     grid-template-columns: 1fr 1fr;
   }
+
+  .signup-stats-section {
+    padding: 2rem 1rem;
+  }
+
+  .signup-stats-card {
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .signup-stat-item {
+    flex: 1 1 calc(50% - 1.25rem);
+    min-width: 180px;
+  }
+
+  .signup-stat-divider {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -516,5 +675,19 @@
 
   .signup-social-buttons {
     grid-template-columns: 1fr;
+  }
+
+  .signup-stats-card {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .signup-stat-item {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .signup-stat-number {
+    font-size: 1.25rem;
   }
 }
