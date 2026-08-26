@@ -6,7 +6,7 @@ import feature2 from "../../assets/images/signup/signup-2.png";
 import feature3 from "../../assets/images/signup/signup-3.png";
 import feature4 from "../../assets/images/signup/signup-4.png";
 
-import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 import SignupFeatures from "./SignupFeatures";
 
 import "./SignUp.css";
@@ -18,7 +18,7 @@ const features = [
   { icon: feature4, title: "24/7 Support", desc: "We're here to help you anytime." },
 ];
 
-function SignUp() {
+function Login() {
   return (
     <div className="signup-page">
       <div className="signup-layout">
@@ -27,15 +27,15 @@ function SignUp() {
           <span className="signup-badge">Join Omnivixo</span>
 
           <h1 className="signup-heading">
-            <span className="signup-heading-dark">Create Your Account</span>
-            <span className="signup-heading-purple">and Get Started!</span>
+            <span className="signup-heading-dark">Welcome Back to</span>
+            <span className="signup-heading-purple">Omnivixo!</span>
           </h1>
 
           <p className="signup-description">
-            Join thousands of customers and service providers who trust Omnivixo for their shopping and service needs.
+            Login to access your account and continue shopping for products and services.
           </p>
 
-          <img src={signupImage} alt="Omnivixo Signup" className="signup-promo-image" />
+          <img src={signupImage} alt="Omnivixo Login" className="signup-promo-image" />
 
           <div className="signup-features">
             {features.map((f) => (
@@ -52,12 +52,12 @@ function SignUp() {
           </div>
 
           <p className="signup-login-link">
-            Already have an account? <Link to="/account/login">Login</Link>
+            Don't have an account? <Link to="/account">Sign Up</Link>
           </p>
         </div>
 
-        {/* RIGHT — Sign Up Form */}
-        <SignupForm />
+        {/* RIGHT — Login Form */}
+        <LoginForm />
       </div>
 
       {/* Signup Stats / Features Section */}
@@ -66,4 +66,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Login;

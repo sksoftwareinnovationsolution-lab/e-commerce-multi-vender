@@ -577,6 +577,48 @@
   line-height: 1.5;
 }
 
+/* Login-specific styles */
+.login-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.login-forgot-link {
+  font-size: 0.875rem;
+  color: #7c3aed;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.login-forgot-link:hover {
+  color: #6d28d9;
+  text-decoration: underline;
+}
+
+.login-signup-link {
+  color: #7c3aed;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.login-signup-link:hover {
+  color: #6d28d9;
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .signup-heading {

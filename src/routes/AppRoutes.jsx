@@ -11,6 +11,8 @@ import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import Deals from "../pages/Deals/Deals";
 import Contact from "../pages/Contact/Contact";
 import SignUp from "../pages/Account/SignUp";
+import Login from "../pages/Account/Login";
+import ForgotPassword from "../pages/Account/ForgotPassword";
 
 function AppRoutes() {
   return (
@@ -28,7 +30,9 @@ function AppRoutes() {
           <Route path="service/:id" element={<ServiceDetails />} />
           <Route path="cart" element={<Cart />} />
           <Route path="account" element={<SignUp />} />
+          <Route path="account/login" element={<Login />} />
         </Route>
+        <Route path="account/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </BrowserRouter>
   );
