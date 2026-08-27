@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
+import SuperAdminLayout from "../components/super-admin/SuperAdminLayout";
+import SuperAdminDashboard from "../components/super-admin/SuperAdminDashboard";
 import Home from "../pages/Home/Home";
 import Shop from "../pages/Shop/Shop";
 import Shops from "../pages/Shops/Shops";
@@ -33,6 +35,9 @@ function AppRoutes() {
           <Route path="account/login" element={<Login />} />
         </Route>
         <Route path="account/forgot-password" element={<ForgotPassword />} />
+        <Route path="super-admin" element={<SuperAdminLayout />}>
+          <Route index element={<SuperAdminDashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
