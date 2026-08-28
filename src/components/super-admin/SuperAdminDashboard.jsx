@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiCalendar, FiChevronDown } from "react-icons/fi";
 import StatCard from "./StatCard";
+import SaAnalyticsSection from "./SaAnalyticsSection";
 import "./SuperAdminDashboard.css";
 
 import revenueIcon from "../../assets/images/superadmin/total-revenue-admin.png";
@@ -107,6 +108,9 @@ function SuperAdminDashboard() {
           <StatCard key={card.id} {...card} />
         ))}
       </div>
+
+      {/* Analytics section (below stat cards) */}
+      <SaAnalyticsSection />
     </div>
   );
 }
