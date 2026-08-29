@@ -1,0 +1,28 @@
+
+> e-commerce-multi-vender@0.0.0 dev
+> vite --open --port 5199
+
+
+  [32m[1mVITE[22m v8.1.4[39m  [2mready in [0m[1m1848[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5199[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m6:14:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/StatCard.jsx[22m
+[2m6:14:33 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/StatCard.jsx[22m
+[2m6:14:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SaPlatformSummary.jsx[22m
+[2m6:14:43 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SaPlatformSummary.jsx[22m
+[2m6:14:47 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SystemHealth.jsx[22m
+[2m6:14:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SystemHealth.jsx[22m
+[2m6:14:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SystemHealth.jsx[22m
+[2m6:15:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SystemHealth.jsx[22m
+[2m6:15:13 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SaBottomSection.css[22m
+[2m6:15:18 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/RevenueOverview.jsx[22m
+[2m6:15:23 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/RevenueOverview.jsx[22m
+[2m6:15:28 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/RevenueOverview.jsx[22m
+[2m6:15:32 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/RevenueOverview.jsx[22m
+[2m6:15:40 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/RevenueOverview.jsx[22m
+[2m6:15:45 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/SaAnalyticsSection.css[22m
+[2m6:15:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/OrderOverview.jsx[22m
+[2m6:15:58 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/OrderOverview.jsx[22m
+[2m6:16:34 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/StatCard.jsx, /src/components/super-admin/SaPlatformSummary.jsx, /src/components/super-admin/SystemHealth.jsx, /src/components/super-admin/OrderOverview.jsx[22m
+[2m6:16:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/super-admin/StatCard.jsx, /src/components/super-admin/SaPlatformSummary.jsx, /src/components/super-admin/SystemHealth.jsx, /src/components/super-admin/OrderOverview.jsx[22m

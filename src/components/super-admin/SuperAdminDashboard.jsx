@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FiCalendar, FiChevronDown } from "react-icons/fi";
 import StatCard from "./StatCard";
 import SaAnalyticsSection from "./SaAnalyticsSection";
+import SaBottomSection from "./SaBottomSection";
+import SaAccessSection from "./SaAccessSection";
 import "./SuperAdminDashboard.css";
 
 import revenueIcon from "../../assets/images/superadmin/total-revenue-admin.png";
@@ -111,6 +113,12 @@ function SuperAdminDashboard() {
 
       {/* Analytics section (below stat cards) */}
       <SaAnalyticsSection />
+
+      {/* Recent activity + system health (below analytics) */}
+      <SaBottomSection />
+
+      {/* Quick access + platform summary (bottom) */}
+      <SaAccessSection />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import useCountUp from "./useCountUp";
+
 const STATUS = [
   { label: "Delivered", value: 7231, percent: "57.7%", color: "#22c55e" },
   { label: "Processing", value: 2543, percent: "20.3%", color: "#3b82f6" },
@@ -27,9 +29,9 @@ function buildSegments() {
 const SEGMENTS = buildSegments();
 
 /* Stroke-dasharray/dashoffset render for each segment */
-function SegmentArc({ segment }) {
+function SegmentArc({ segment, progress }) {
   const { start, fraction } = segment;
-  const dashLength = fraction * CIRC;
+  const dashLength = fraction * CIRC * progress;
   const gapLength = CIRC - dashLength;
   const offset = (1 - start) * CIRC;
   return (
@@ -49,6 +51,8 @@ function SegmentArc({ segment }) {
 }
 
 function OrderOverview() {
+  const progress = useCountUp(1, { duration: 1000 });
+
   return (
     <article className="sa-panel sa-order">
       <div className="sa-panel__header">
@@ -72,7 +76,7 @@ function OrderOverview() {
               strokeWidth={STROKE}
             />
             {SEGMENTS.map((seg) => (
-              <SegmentArc key={seg.label} segment={seg} />
+              <SegmentArc key={seg.label} segment={seg} progress={progress} />
             ))}
           </svg>
           <div className="sa-order__center">

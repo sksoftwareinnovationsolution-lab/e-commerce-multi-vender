@@ -95,6 +95,43 @@
   overflow: visible;
 }
 
+/* Entrance animation: draw the revenue line + area left to right */
+.sa-revenue__line {
+  transition: stroke-dashoffset 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sa-revenue__area-reveal {
+  transform-box: fill-box;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sa-revenue__area-reveal--done {
+  transform: scaleX(1);
+}
+
+.sa-revenue__point {
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.sa-revenue__svg--drawn .sa-revenue__point {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-revenue__line,
+  .sa-revenue__area-reveal {
+    transition: none;
+  }
+
+  .sa-revenue__point {
+    opacity: 1;
+    transition: none;
+  }
+}
+
 /* X axis labels */
 .sa-revenue__xaxis {
   position: absolute;

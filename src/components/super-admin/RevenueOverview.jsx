@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 const RANGE_LABEL = "This Week";
@@ -34,6 +35,9 @@ function buildPoints() {
 }
 
 const POINTS = buildPoints();
+const POINTS_START_X = POINTS[0].x;
+const POINTS_SPAN = POINTS[POINTS.length - 1].x - POINTS[0].x;
+const DRAW_DURATION = 1300;
 
 function smoothPath(points) {
   if (points.length < 2) return "";
@@ -69,6 +73,19 @@ function rgbToRgba(hex, alpha) {
 }
 
 function RevenueOverview() {
+  const lineRef = useRef(null);
+  const [revLen, setRevLen] = useState(0);
+  const [revDrawn, setRevDrawn] = useState(false);
+
+  useEffect(() => {
+    if (!lineRef.current) return;
+    setRevLen(lineRef.current.getTotalLength());
+    const raf = requestAnimationFrame(() =>
+      requestAnimationFrame(() => setRevDrawn(true))
+    );
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
     <article className="sa-panel sa-revenue">
       <div className="sa-panel__header">
@@ -82,7 +99,7 @@ function RevenueOverview() {
       <div className="sa-revenue__chart">
         <svg
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          className="sa-revenue__svg"
+          className={`sa-revenue__svg ${revDrawn ? "sa-revenue__svg--drawn" : ""}`}
           role="img"
           aria-label="Revenue trend for the week"
           preserveAspectRatio="none"
@@ -111,26 +128,44 @@ function RevenueOverview() {
           })}
 
           {/* Area + line */}
-          <path d={areaPath} fill="url(#sa-rev-fill)" />
+          <g
+            className={
+              revDrawn
+                ? "sa-revenue__area-reveal sa-revenue__area-reveal--done"
+                : "sa-revenue__area-reveal"
+            }
+          >
+            <path d={areaPath} fill="url(#sa-rev-fill)" />
+          </g>
           <path
+            ref={lineRef}
             d={linePath}
             fill="none"
             stroke="#8b5cf6"
             strokeWidth="4"
             strokeLinecap="round"
             strokeLinejoin="round"
+            strokeDasharray={revLen || 1}
+            strokeDashoffset={revDrawn ? 0 : revLen || 1}
+            className="sa-revenue__line"
           />
 
           {/* Points */}
           {POINTS.map((p) => (
             <circle
               key={p.label}
+              className="sa-revenue__point"
               cx={p.x}
               cy={p.y}
               r="7"
               fill="#ffffff"
               stroke="#8b5cf6"
               strokeWidth="3.5"
+              style={{
+                transitionDelay: revLen
+                  ? `${((p.x - POINTS_START_X) / POINTS_SPAN) * DRAW_DURATION}ms`
+                  : "0ms",
+              }}
             />
           ))}
         </svg>
