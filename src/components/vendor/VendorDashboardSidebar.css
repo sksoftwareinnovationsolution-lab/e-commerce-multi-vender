@@ -1,0 +1,193 @@
+/* ========================================
+   Vendor Dashboard Sidebar (White)
+   ======================================== */
+
+/* Dark blue used for the permanent Service Vendor card */
+/* Same dark blue used for the nav hover highlight */
+
+/* Mobile overlay */
+.vd-sidebar__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+}
+
+@media (min-width: 1024px) {
+  .vd-sidebar__overlay {
+    display: none;
+  }
+}
+
+/* Sidebar container */
+.vd-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  height: 100vh;
+  width: 270px;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.vd-sidebar--open {
+  transform: translateX(0);
+}
+
+/* Logo */
+.vd-sidebar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.vd-sidebar__logo-img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Scrollable content */
+.vd-sidebar__scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Vendor profile card (always dark blue, never changes on hover) */
+.vd-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.vd-profile-card:hover,
+.vd-profile-card:focus,
+.vd-profile-card:active {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+}
+
+.vd-profile-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.vd-profile-card__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.vd-profile-card__title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.vd-profile-card__subtitle {
+  font-size: 11px;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+
+/* Nav list */
+.vd-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* Nav item */
+.vd-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 42px;
+  padding: 0 0.75rem;
+  /* Rounded rectangle */
+  border-radius: 8px;
+  text-align: left;
+  position: relative;
+  color: #1f2937;
+  background-color: #ffffff;
+  /* Smooth transitions (approx. 250ms) */
+  transition: color 0.25s ease, transform 0.25s ease;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* Fade-in/out dark blue highlight layer */
+.vd-nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Show highlight on hover */
+.vd-nav-item:hover::before {
+  opacity: 1;
+}
+
+.vd-nav-item:hover {
+  color: #ffffff;
+}
+
+.vd-nav-item__icon {
+  position: relative;
+  flex-shrink: 0;
+  color: #374151;
+  transition: color 0.25s ease;
+  z-index: 1;
+}
+
+.vd-nav-item__label {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* Hover state: white icon */
+.vd-nav-item:hover .vd-nav-item__icon {
+  color: #ffffff;
+}
+
+/* Toggle button / menu header (for mobile closed state) is handled by navbar */
