@@ -1,0 +1,94 @@
+/* ========================================
+   Vendor Dashboard Header
+   ======================================== */
+
+.vd-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+}
+
+.vd-header__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .vd-header__title {
+  color: #f3f4f6;
+}
+
+.vd-header__desc {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+  max-width: 620px;
+}
+
+[data-theme="dark"] .vd-header__desc {
+  color: #9ca3af;
+}
+
+/* Date range selector */
+.vd-header__daterange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.6rem 0.9rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.625rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="dark"] .vd-header__daterange {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.vd-header__daterange:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
+}
+
+.vd-header__daterange-icon {
+  color: #6366f1;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .vd-header__daterange-icon {
+  color: #818cf8;
+}
+
+.vd-header__daterange-text {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+[data-theme="dark"] .vd-header__daterange-text {
+  color: #e5e7eb;
+}
+
+.vd-header__daterange-chevron {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* ---------- Responsive header ---------- */
+@media (min-width: 768px) {
+  .vd-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
