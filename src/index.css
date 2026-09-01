@@ -43,6 +43,22 @@ input {
 }
 
 /* ========================================
+   Super Admin Sidebar
+   Hide the vertical scrollbar visually
+   while keeping scrolling functional.
+   ======================================== */
+.super-admin-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.super-admin-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* ========================================
    Page Layout
    ======================================== */
 .page {

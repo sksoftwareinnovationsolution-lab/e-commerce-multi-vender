@@ -1,0 +1,47 @@
+/* ========================================
+   Super Admin Layout Shell
+   ======================================== */
+
+.sa-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
+
+[data-theme="dark"] .sa-layout {
+  background-color: #0f0f23;
+}
+
+/* Main area (to the right of sidebar) */
+.sa-layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: 0;
+}
+
+@media (min-width: 1024px) {
+  .sa-layout__main--sidebar-open {
+    margin-left: 270px;
+  }
+}
+
+/* Navbar dark mode overrides */
+[data-theme="dark"] header.sa-navbar {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+/* Content area */
+.sa-layout__content {
+  flex: 1;
+  padding: 1.5rem;
+  min-height: calc(100vh - 72px);
+}
+
+@media (min-width: 1024px) {
+  .sa-layout__content {
+    padding: 2rem;
+  }
+}
