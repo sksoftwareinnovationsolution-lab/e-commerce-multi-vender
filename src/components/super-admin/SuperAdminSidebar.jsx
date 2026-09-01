@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   FiHome,
   FiClock,
@@ -89,6 +89,9 @@ const DEMO_SUBMENUS = {
 
 function SuperAdminSidebar({ isOpen, onClose }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const path = location.pathname;
 
   const [activeId, setActiveId] = useState("dashboard");
   const [openDropdowns, setOpenDropdowns] = useState({});
@@ -96,13 +99,28 @@ function SuperAdminSidebar({ isOpen, onClose }) {
   const itemRefs = useRef({});
   const [indicator, setIndicator] = useState({ top: 0, height: 0 });
 
+  /* Route-driven active state for routed pages (Dashboard / Analytics / Reports) */
+  const routedActive =
+    path === "/super-admin/analytics"
+      ? "analytics"
+      : path === "/super-admin/reports"
+      ? "reports"
+      : "dashboard";
+
+  const isRoutedPage =
+    path === "/super-admin" ||
+    path === "/super-admin/analytics" ||
+    path === "/super-admin/reports";
+
+  const effectiveActive = isRoutedPage ? routedActive : activeId;
+
   const toggleDropdown = (id) => {
     setOpenDropdowns((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const handleSelect = (item) => {
     setActiveId(item.id);
-    if (item.path === "/super-admin") {
+    if (item.path && item.path !== location.pathname) {
       navigate(item.path);
     }
     if (window.innerWidth < 1024) onClose?.();
@@ -178,19 +196,19 @@ function SuperAdminSidebar({ isOpen, onClose }) {
 
   useEffect(() => {
     const list = listRef.current;
-    const el = itemRefs.current[activeId];
-    const isOverviewItem = OVERVIEW_ITEMS.some((i) => i.id === activeId);
+    const el = itemRefs.current[effectiveActive];
+    const isOverviewItem = OVERVIEW_ITEMS.some((i) => i.id === effectiveActive);
     if (list && el) {
       setIndicator({
         top: el.offsetTop - list.offsetTop,
         height: el.offsetHeight,
       });
-    } else if (!isOverviewItem && activeId !== "dashboard") {
+    } else if (!isOverviewItem && effectiveActive !== "dashboard") {
       setIndicator({ top: 0, height: 0 });
     }
-  }, [activeId, isOpen]);
+  }, [effectiveActive, isOpen]);
 
-  const primaryActive = activeId === "dashboard";
+  const primaryActive = effectiveActive === "dashboard";
 
   return (
     <>
@@ -262,7 +280,7 @@ function SuperAdminSidebar({ isOpen, onClose }) {
 
               {OVERVIEW_ITEMS.map((item) => {
                 const Icon = item.icon;
-                const isActive = activeId === item.id;
+                const isActive = effectiveActive === item.id;
                 return (
                   <button
                     key={item.id}
