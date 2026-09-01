@@ -1,0 +1,470 @@
+/* ========================================
+   Vendor Dashboard - Analytics Section
+   (Earnings / Booking Status / Notifications)
+   ======================================== */
+
+.vd-analytics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* ---------- Shared panel (matches sa-panel) ---------- */
+.vd-panel {
+  background-color: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+[data-theme="dark"] .vd-panel {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.vd-panel:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.vd-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.vd-panel__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .vd-panel__title {
+  color: #f3f4f6;
+}
+
+.vd-panel__dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.vd-panel__dropdown:hover {
+  border-color: #c7d2fe;
+  color: #4f46e5;
+}
+
+[data-theme="dark"] .vd-panel__dropdown {
+  background-color: #0f172a;
+  border-color: #334155;
+  color: #9ca3af;
+}
+
+.vd-panel__dropdown svg {
+  flex-shrink: 0;
+  color: #9ca3af;
+}
+
+/* ---------- Shared "View All" link ---------- */
+.vd-panel__viewall {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vd-panel__viewall svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.vd-panel__viewall:hover {
+  background-color: rgba(139, 92, 246, 0.08);
+  color: #7c3aed;
+}
+
+.vd-panel__viewall:hover svg {
+  transform: translateX(2px);
+}
+
+[data-theme="dark"] .vd-panel__viewall {
+  color: #a78bfa;
+}
+
+[data-theme="dark"] .vd-panel__viewall:hover {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #c4b5fd;
+}
+
+/* ========================================
+   Earnings Overview
+   ======================================== */
+.vd-earnings__chart {
+  position: relative;
+  width: 100%;
+}
+
+.vd-earnings__svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 360;
+  display: block;
+  overflow: visible;
+}
+
+/* Entrance animation */
+.vd-earnings__line {
+  transition: stroke-dashoffset 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vd-earnings__area-reveal {
+  transform-box: fill-box;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vd-earnings__area-reveal--done {
+  transform: scaleX(1);
+}
+
+.vd-earnings__point {
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.vd-earnings__svg--drawn .vd-earnings__point {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vd-earnings__line,
+  .vd-earnings__area-reveal {
+    transition: none;
+  }
+
+  .vd-earnings__point {
+    opacity: 1;
+    transition: none;
+  }
+}
+
+/* X axis */
+.vd-earnings__xaxis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42px;
+  pointer-events: none;
+}
+
+.vd-earnings__xlabel {
+  position: absolute;
+  bottom: 6px;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .vd-earnings__xlabel {
+  color: #64748b;
+}
+
+/* Y axis */
+.vd-earnings__yaxis {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 9.2%;
+  pointer-events: none;
+}
+
+.vd-earnings__ylabel {
+  position: absolute;
+  right: 6px;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .vd-earnings__ylabel {
+  color: #64748b;
+}
+
+/* ========================================
+   Booking Status
+   ======================================== */
+.vd-booking__body {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.vd-booking__donut {
+  position: relative;
+  width: 190px;
+  max-width: 46%;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
+
+.vd-booking__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.vd-booking__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.vd-booking__center-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .vd-booking__center-value {
+  color: #f3f4f6;
+}
+
+.vd-booking__center-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #9ca3af;
+  margin-top: 0.2rem;
+}
+
+[data-theme="dark"] .vd-booking__center-label {
+  color: #64748b;
+}
+
+.vd-booking__legend {
+  flex: 1;
+  min-width: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.vd-booking__legend-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vd-booking__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.vd-booking__legend-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .vd-booking__legend-name {
+  color: #e5e7eb;
+}
+
+.vd-booking__legend-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .vd-booking__legend-value {
+  color: #f3f4f6;
+}
+
+.vd-booking__legend-percent {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #9ca3af;
+  text-align: right;
+  white-space: nowrap;
+  min-width: 3.4rem;
+}
+
+[data-theme="dark"] .vd-booking__legend-percent {
+  color: #64748b;
+}
+
+/* ========================================
+   Recent Notifications
+   ======================================== */
+.vd-notifications__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.vd-notifications__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  min-width: 0;
+}
+
+.vd-notifications__item--bordered {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+[data-theme="dark"] .vd-notifications__item--bordered {
+  border-bottom-color: #334155;
+}
+
+.vd-notifications__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+[data-theme="dark"] .vd-notifications__icon {
+  background-color: #0f172a;
+}
+
+.vd-notifications__icon-img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.vd-notifications__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.vd-notifications__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .vd-notifications__title {
+  color: #f3f4f6;
+}
+
+.vd-notifications__desc {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .vd-notifications__desc {
+  color: #64748b;
+}
+
+.vd-notifications__time {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .vd-notifications__time {
+  color: #64748b;
+}
+
+/* ========================================
+   Responsive layout
+   ======================================== */
+
+/* Mobile: stack vertically */
+/* (default: grid-template-columns: 1fr) */
+
+/* Tablet: 2-col, notifications spans full width */
+@media (min-width: 768px) {
+  .vd-analytics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .vd-analytics__card--notifications {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Desktop: three panels in one row */
+@media (min-width: 1200px) {
+  .vd-analytics {
+    grid-template-columns: 1.5fr 1.1fr 1fr;
+  }
+  .vd-analytics__card--notifications {
+    grid-column: auto;
+  }
+}
+
+/* Large desktop: widen earnings slightly */
+@media (min-width: 1500px) {
+  .vd-analytics {
+    grid-template-columns: 1.6fr 1.05fr 0.95fr;
+  }
+}
