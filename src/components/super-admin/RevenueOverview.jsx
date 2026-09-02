@@ -87,19 +87,21 @@ function RevenueOverview() {
   }, []);
 
   return (
-    <article className="sa-panel sa-revenue">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Revenue Overview</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className="md:col-span-2 lg:col-span-1 bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-5 min-w-0 flex flex-col">
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-tight">
+          Revenue Overview
+        </h2>
+        <button className="inline-flex items-center gap-[0.35rem] px-[0.7rem] py-[0.4rem] bg-gray-50 dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg text-xs font-medium text-gray-500 dark:text-gray-400 cursor-pointer whitespace-nowrap transition-[border-color,background-color] duration-200 hover:border-[#c7d2fe] hover:text-indigo-600 dark:hover:text-[#a5b4fc]" type="button">
           <span>{RANGE_LABEL}</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
 
-      <div className="sa-revenue__chart">
+      <div className="relative w-full">
         <svg
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          className={`sa-revenue__svg ${revDrawn ? "sa-revenue__svg--drawn" : ""}`}
+          className="w-full h-auto aspect-[1000/360] block overflow-visible"
           role="img"
           aria-label="Revenue trend for the week"
           preserveAspectRatio="none"
@@ -130,9 +132,8 @@ function RevenueOverview() {
           {/* Area + line */}
           <g
             className={
-              revDrawn
-                ? "sa-revenue__area-reveal sa-revenue__area-reveal--done"
-                : "sa-revenue__area-reveal"
+              "[transform-box:fill-box] [transform-origin:left_center] [transition:transform_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none] " +
+              (revDrawn ? "[transform:scaleX(1)]" : "[transform:scaleX(0)]")
             }
           >
             <path d={areaPath} fill="url(#sa-rev-fill)" />
@@ -147,14 +148,17 @@ function RevenueOverview() {
             strokeLinejoin="round"
             strokeDasharray={revLen || 1}
             strokeDashoffset={revDrawn ? 0 : revLen || 1}
-            className="sa-revenue__line"
+            className="[transition:stroke-dashoffset_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none]"
           />
 
           {/* Points */}
           {POINTS.map((p) => (
             <circle
               key={p.label}
-              className="sa-revenue__point"
+              className={
+                (revDrawn ? "opacity-100 " : "opacity-0 ") +
+                "[transition:opacity_260ms_ease] motion-reduce:opacity-100 motion-reduce:[transition:none]"
+              }
               cx={p.x}
               cy={p.y}
               r="7"
@@ -171,11 +175,11 @@ function RevenueOverview() {
         </svg>
 
         {/* X axis labels */}
-        <div className="sa-revenue__xaxis">
+        <div className="absolute left-0 right-0 bottom-0 h-[42px] pointer-events-none">
           {POINTS.map((p) => (
             <span
               key={p.label}
-              className="sa-revenue__xlabel"
+              className="absolute bottom-1.5 -translate-x-1/2 text-[0.7rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
               style={{ left: `${(p.x / WIDTH) * 100}%` }}
             >
               {p.label}
@@ -184,14 +188,14 @@ function RevenueOverview() {
         </div>
 
         {/* Y axis labels */}
-        <div className="sa-revenue__yaxis">
+        <div className="absolute left-0 top-0 bottom-0 w-[9.2%] pointer-events-none">
           {Y_LABELS.map((label, idx) => {
             const v = GRID_LINES[idx];
             const y = PAD_TOP + innerH - (v / MAX_VALUE) * innerH;
             return (
               <span
                 key={label}
-                className="sa-revenue__ylabel"
+                className="absolute right-1.5 -translate-y-1/2 text-[0.7rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
                 style={{ top: `${(y / HEIGHT) * 100}%` }}
               >
                 {label}

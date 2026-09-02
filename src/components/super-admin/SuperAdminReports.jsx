@@ -6,7 +6,6 @@ import {
   FiFilter,
 } from "react-icons/fi";
 import useCountUp from "./useCountUp";
-import "./SuperAdminReports.css";
 
 import revenueIcon from "../../assets/images/superadmin/total-revenue-admin.png";
 import ordersIcon from "../../assets/images/superadmin/total-orders-admin.png";
@@ -25,6 +24,16 @@ function rgbToRgba(hex, alpha) {
   const b = parseInt(h.substring(4, 6), 16);
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+const RPT_CARD =
+  "bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-5 min-w-0 flex flex-col";
+const RPT_CARD_HEADER = "flex items-center justify-between gap-3 mb-4";
+const RPT_CARD_TITLE =
+  "text-base font-semibold text-gray-900 dark:text-gray-100 leading-[1.2]";
+const RPT_CARD_DROPDOWN =
+  "inline-flex items-center gap-[0.35rem] px-[0.7rem] py-[0.4rem] bg-gray-50 dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg text-xs font-medium text-gray-500 dark:text-gray-400 cursor-pointer whitespace-nowrap transition-[border-color,background-color] duration-200 hover:border-[#c7d2fe] hover:text-indigo-600";
+const RPT_CARD_BODY =
+  "flex flex-col md:flex-row items-center gap-4 flex-1";
 
 function MiniSpark({ color, data }) {
   const [drawn, setDrawn] = useState(false);
@@ -64,7 +73,9 @@ function MiniSpark({ color, data }) {
 
   return (
     <svg
-      className={`sa-reports-stat-card__mini ${drawn ? "sa-reports-stat-card__mini--drawn" : ""}`}
+      className={`block w-full h-[34px] mt-2 [transition:opacity_500ms_ease,transform_500ms_ease] motion-reduce:[transition:none] motion-reduce:opacity-100 motion-reduce:transform-none ${
+        drawn ? "opacity-100 scale-y-100" : "opacity-0 scale-y-[0.85]"
+      }`}
       viewBox={`0 0 ${W} ${H}`}
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -164,23 +175,23 @@ const KPI_CARDS = [
 
 function KpiCard({ card }) {
   return (
-    <article className="sa-reports-stat-card">
-      <div className="sa-reports-stat-card__body">
-        <div className="sa-reports-stat-card__info">
-          <h3 className="sa-reports-stat-card__title">{card.title}</h3>
-          <p className="sa-reports-stat-card__value">{card.value}</p>
-          <span className="sa-reports-stat-card__trend">
-            <span className="sa-reports-stat-card__arrow">↑</span>
+    <article className="bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-[0.875rem] min-w-0 flex flex-col hover:shadow-[0_6px_18px_rgba(0,0,0,0.08)] hover:-translate-y-[2px] transition-[box-shadow,transform] duration-200">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex flex-col gap-[0.2rem] min-w-0">
+          <h3 className="text-[0.6875rem] font-medium text-gray-500 dark:text-gray-400 leading-[1.3]">{card.title}</h3>
+          <p className="text-[1.15rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.2] whitespace-nowrap">{card.value}</p>
+          <span className="inline-flex items-center gap-[0.3rem] text-[0.72rem] font-semibold text-green-600 leading-[1.2]">
+            <span className="text-[0.8125rem] font-bold">↑</span>
             {card.percent}
-            <span className="sa-reports-stat-card__trend-label">{TREND_LABEL}</span>
+            <span className="font-normal text-gray-400 dark:text-gray-500 whitespace-nowrap">{TREND_LABEL}</span>
           </span>
         </div>
 
         <div
-          className="sa-reports-stat-card__icon"
+          className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-[0.625rem] overflow-hidden"
           style={{ backgroundColor: card.iconBg }}
         >
-          <img src={card.icon} alt="" className="sa-reports-stat-card__icon-img" />
+          <img src={card.icon} alt="" className="w-[68%] h-[68%] object-contain" />
         </div>
       </div>
 
@@ -277,29 +288,29 @@ function ReportsRevenueOverview() {
   }, []);
 
   return (
-    <article className="sa-reports-chart-card">
-      <div className="sa-reports-chart-card__header">
-        <h2 className="sa-reports-chart-card__title">Revenue Overview</h2>
-        <button className="sa-reports-chart-card__dropdown" type="button">
+    <article className={RPT_CARD}>
+      <div className={RPT_CARD_HEADER}>
+        <h2 className={RPT_CARD_TITLE}>Revenue Overview</h2>
+        <button className={RPT_CARD_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-reports-rev__legend">
-        <span className="sa-reports-rev__legend-item">
-          <span className="sa-reports-rev__legend-dot sa-reports-rev__legend-dot--solid" />
+      <div className="flex items-center gap-4 mb-3">
+        <span className="inline-flex items-center gap-[0.4rem] text-[0.75rem] font-medium text-gray-500 dark:text-gray-400">
+          <span className="w-[10px] h-[3px] rounded-[2px] flex-shrink-0 bg-[#8b5cf6]" />
           This Week
         </span>
-        <span className="sa-reports-rev__legend-item">
-          <span className="sa-reports-rev__legend-dot sa-reports-rev__legend-dot--dashed" />
+        <span className="inline-flex items-center gap-[0.4rem] text-[0.75rem] font-medium text-gray-500 dark:text-gray-400">
+          <span className="w-[10px] h-[3px] rounded-[2px] flex-shrink-0 [background:repeating-linear-gradient(90deg,#c4b5fd_0px,#c4b5fd_4px,transparent_4px,transparent_7px)]" />
           Last Week
         </span>
       </div>
-      <div className="sa-reports-chart-card__body sa-reports-rev__body">
-        <div className="sa-reports-chart-card__chart">
+      <div className="flex flex-col items-stretch gap-4 flex-1">
+        <div className="relative w-full">
           <svg
             viewBox={`0 0 ${RPT_REV_W} ${RPT_REV_H}`}
-            className={`sa-reports-rev__svg ${drawn ? "sa-reports-rev__svg--drawn" : ""}`}
+            className="w-full h-auto aspect-[600/220] block overflow-visible"
             role="img"
             aria-label="Revenue overview for the week"
             preserveAspectRatio="none"
@@ -324,7 +335,7 @@ function ReportsRevenueOverview() {
                 />
               );
             })}
-            <g className={drawn ? "sa-reports-rev__area-reveal sa-reports-rev__area-reveal--done" : "sa-reports-rev__area-reveal"}>
+            <g className={`[transform-box:fill-box] [transform-origin:left_center] [transition:transform_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none] ${drawn ? "[transform:scaleX(1)]" : "[transform:scaleX(0)]"}`}>
               <path d={areaPath} fill="url(#sa-rpt-rev-fill)" />
             </g>
             <path
@@ -348,12 +359,12 @@ function ReportsRevenueOverview() {
               strokeLinejoin="round"
               strokeDasharray={trendLen || 1}
               strokeDashoffset={drawn ? 0 : trendLen || 1}
-              className="sa-reports-rev__line-draw"
+              className="[transition:stroke-dashoffset_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none]"
             />
             {lastPts.map((p) => (
               <circle
                 key={`last-${p.label}`}
-                className="sa-reports-rev__data-dot"
+                className="[transition:opacity_400ms_ease_400ms]"
                 cx={p.x}
                 cy={p.y}
                 r="4"
@@ -361,13 +372,12 @@ function ReportsRevenueOverview() {
                 stroke="#c4b5fd"
                 strokeWidth="2"
                 opacity={drawn ? 1 : 0}
-                style={{ transition: "opacity 400ms ease 400ms" }}
               />
             ))}
             {thisPts.map((p) => (
               <circle
                 key={p.label}
-                className="sa-reports-rev__data-dot"
+                className={`${drawn ? "opacity-100" : "opacity-0"} [transition:opacity_260ms_ease] motion-reduce:opacity-100 motion-reduce:[transition:none]`}
                 cx={p.x}
                 cy={p.y}
                 r="5"
@@ -382,25 +392,25 @@ function ReportsRevenueOverview() {
               />
             ))}
           </svg>
-          <div className="sa-reports-rev__xaxis">
+          <div className="absolute left-0 right-0 bottom-0 h-[34px] pointer-events-none">
             {thisPts.map((p) => (
               <span
                 key={p.label}
-                className="sa-reports-rev__xlabel"
+                className="absolute bottom-1 -translate-x-1/2 text-[0.65rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
                 style={{ left: `${(p.x / RPT_REV_W) * 100}%` }}
               >
                 {p.label}
               </span>
             ))}
           </div>
-          <div className="sa-reports-rev__yaxis">
+          <div className="absolute left-0 top-0 bottom-0 w-[9.2%] pointer-events-none">
             {RPT_REV_YLABELS.map((label, idx) => {
               const v = RPT_REV_GRID[idx];
               const y = RPT_REV_PT + RPT_REV_IH - (v / RPT_REV_MAX) * RPT_REV_IH;
               return (
                 <span
                   key={label}
-                  className="sa-reports-rev__ylabel"
+                  className="absolute right-1 -translate-y-1/2 text-[0.65rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
                   style={{ top: `${(y / RPT_REV_H) * 100}%` }}
                 >
                   {label}
@@ -468,15 +478,15 @@ function ReportsOrdersByStatus() {
   const progress = useCountUp(1, { duration: 1000 });
 
   return (
-    <article className="sa-reports-chart-card">
-      <div className="sa-reports-chart-card__header">
-        <h2 className="sa-reports-chart-card__title">Orders by Status</h2>
+    <article className={RPT_CARD}>
+      <div className={RPT_CARD_HEADER}>
+        <h2 className={RPT_CARD_TITLE}>Orders by Status</h2>
       </div>
-      <div className="sa-reports-chart-card__body">
-        <div className="sa-reports-donut">
+      <div className={RPT_CARD_BODY}>
+        <div className="relative w-[170px] max-w-[45%] aspect-square flex-shrink-0">
           <svg
             viewBox={`0 0 ${RPT_ORD_SIZE} ${RPT_ORD_SIZE}`}
-            className="sa-reports-donut__svg"
+            className="w-full h-full block"
             role="img"
             aria-label="Order status breakdown"
           >
@@ -492,17 +502,17 @@ function ReportsOrdersByStatus() {
               <RptOrdArc key={seg.label} segment={seg} progress={progress} />
             ))}
           </svg>
-          <div className="sa-reports-donut__center">
-            <span className="sa-reports-donut__center-value">{RPT_ORD_TOTAL}</span>
-            <span className="sa-reports-donut__center-label">Total Orders</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+            <span className="text-[1.3rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.1] whitespace-nowrap">{RPT_ORD_TOTAL}</span>
+            <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 mt-0.5">Total Orders</span>
           </div>
         </div>
-        <ul className="sa-reports-legend">
+        <ul className="flex-1 min-w-0 list-none flex flex-col gap-[0.6rem] w-full md:w-auto">
           {RPT_ORD_STATUS.map((d) => (
-            <li key={d.label} className="sa-reports-legend__item">
-              <span className="sa-reports-legend__dot" style={{ backgroundColor: d.color }} />
-              <span className="sa-reports-legend__name">{d.label}</span>
-              <span className="sa-reports-legend__value">{d.display} ({d.percent})</span>
+            <li key={d.label} className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">{d.label}</span>
+              <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">{d.display} ({d.percent})</span>
             </li>
           ))}
         </ul>
@@ -567,19 +577,19 @@ function ReportsRevenueByCategory() {
   const progress = useCountUp(1, { duration: 1000 });
 
   return (
-    <article className="sa-reports-chart-card">
-      <div className="sa-reports-chart-card__header">
-        <h2 className="sa-reports-chart-card__title">Revenue by Category</h2>
-        <button className="sa-reports-chart-card__dropdown" type="button">
+    <article className={RPT_CARD}>
+      <div className={RPT_CARD_HEADER}>
+        <h2 className={RPT_CARD_TITLE}>Revenue by Category</h2>
+        <button className={RPT_CARD_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-reports-chart-card__body">
-        <div className="sa-reports-donut">
+      <div className={RPT_CARD_BODY}>
+        <div className="relative w-[170px] max-w-[45%] aspect-square flex-shrink-0">
           <svg
             viewBox={`0 0 ${RPT_CAT_SIZE} ${RPT_CAT_SIZE}`}
-            className="sa-reports-donut__svg"
+            className="w-full h-full block"
             role="img"
             aria-label="Revenue by category breakdown"
           >
@@ -595,17 +605,17 @@ function ReportsRevenueByCategory() {
               <RptCatArc key={seg.label} segment={seg} progress={progress} />
             ))}
           </svg>
-          <div className="sa-reports-donut__center">
-            <span className="sa-reports-donut__center-value">{RPT_CAT_TOTAL}</span>
-            <span className="sa-reports-donut__center-label">Total Revenue</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+            <span className="text-[1.3rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.1] whitespace-nowrap">{RPT_CAT_TOTAL}</span>
+            <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 mt-0.5">Total Revenue</span>
           </div>
         </div>
-        <ul className="sa-reports-legend">
+        <ul className="flex-1 min-w-0 list-none flex flex-col gap-[0.6rem] w-full md:w-auto">
           {RPT_CAT_DATA.map((d) => (
-            <li key={d.label} className="sa-reports-legend__item">
-              <span className="sa-reports-legend__dot" style={{ backgroundColor: d.color }} />
-              <span className="sa-reports-legend__name">{d.label}</span>
-              <span className="sa-reports-legend__value">{d.value} ({d.percent})</span>
+            <li key={d.label} className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">{d.label}</span>
+              <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">{d.value} ({d.percent})</span>
             </li>
           ))}
         </ul>
@@ -629,36 +639,41 @@ function SuperAdminReports() {
   const [activeTab, setActiveTab] = useState("Overview");
 
   return (
-    <div className="sa-reports-page">
+    <div className="flex flex-col gap-6 w-full max-w-full">
       {/* Header */}
-      <div className="sa-reports-page__header">
-        <div className="sa-reports-page__heading">
-          <h1 className="sa-reports-page__title">Reports</h1>
-          <nav className="sa-reports-page__breadcrumb" aria-label="Breadcrumb">
-            <a href="/super-admin" className="sa-reports-page__crumb-link">
+      <div className="flex flex-col gap-4 items-start justify-between md:flex-row md:items-center">
+        <div className="flex flex-col">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 leading-[1.2]">Reports</h1>
+          <nav className="flex items-center gap-[0.4rem] text-[0.8125rem] mt-1" aria-label="Breadcrumb">
+            <a href="/super-admin" className="text-gray-500 font-medium no-underline hover:text-indigo-600 hover:underline dark:text-gray-400">
               Dashboard
             </a>
-            <span className="sa-reports-page__crumb-sep">&gt;</span>
-            <span className="sa-reports-page__crumb-current">Reports</span>
+            <span className="text-gray-400">&gt;</span>
+            <span className="text-gray-600 font-semibold dark:text-gray-200">Reports</span>
           </nav>
         </div>
 
-        <button className="sa-reports-page__daterange" type="button">
-          <FiCalendar className="sa-reports-page__daterange-icon" size={17} />
-          <span className="sa-reports-page__daterange-text">{RANGE_LABEL}</span>
-          <FiChevronDown className="sa-reports-page__daterange-chevron" size={16} />
+        <button
+          className="inline-flex items-center gap-2 px-[0.9rem] py-[0.6rem] bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-gray-200 rounded-[0.625rem] shadow-[0_1px_2px_rgba(0,0,0,0.04)] cursor-pointer whitespace-nowrap transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_2px_8px_rgba(79,70,229,0.08)]"
+          type="button"
+        >
+          <FiCalendar className="text-indigo-500 dark:text-indigo-400 flex-shrink-0" size={17} />
+          <span className="text-[0.8125rem] font-medium text-gray-700 dark:text-gray-200">{RANGE_LABEL}</span>
+          <FiChevronDown className="text-gray-400 flex-shrink-0" size={16} />
         </button>
       </div>
 
       {/* Report navigation / action row */}
-      <div className="sa-reports-page__toolbar">
-        <div className="sa-reports-page__tabs" role="navigation">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-[0.35rem]" role="navigation">
           {REPORT_TABS.map((tab) => (
             <button
               key={tab}
               type="button"
-              className={`sa-reports-page__tab ${
-                tab === activeTab ? "sa-reports-page__tab--active" : ""
+              className={`px-3 py-[0.45rem] text-[0.8125rem] font-medium text-gray-800 bg-transparent border border-transparent rounded-lg cursor-pointer whitespace-nowrap transition-[color,background-color,border-color] duration-200 hover:text-indigo-600 hover:bg-[rgba(139,92,246,0.06)] dark:text-gray-200 dark:hover:text-[#a5b4fc] ${
+                tab === activeTab
+                  ? "text-[#7c3aed] bg-[#ede9fe] border-[#ddd6fe] font-semibold dark:text-[#c4b5fd] dark:bg-[rgba(139,92,246,0.18)] dark:border-[rgba(139,92,246,0.3)]"
+                  : ""
               }`}
               onClick={() => setActiveTab(tab)}
             >
@@ -667,84 +682,90 @@ function SuperAdminReports() {
           ))}
         </div>
 
-        <div className="sa-reports-page__actions">
-          <button className="sa-reports-page__filter" type="button">
-            <FiFilter size={14} />
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button
+            className="inline-flex items-center gap-[0.4rem] px-[0.9rem] py-2 text-[0.8125rem] font-medium rounded-[0.625rem] cursor-pointer whitespace-nowrap transition-[background-color,box-shadow,transform] duration-200 text-gray-700 bg-white dark:text-gray-200 dark:bg-[#1e293b] border dark:border-[#334155] border-gray-200 hover:border-[#c7d2fe] hover:shadow-[0_2px_6px_rgba(99,102,241,0.08)]"
+            type="button"
+          >
+            <FiFilter size={14} className="text-indigo-500" />
             <span>Filters</span>
           </button>
-          <button className="sa-reports-page__export" type="button">
+          <button
+            className="inline-flex items-center gap-[0.4rem] px-[0.9rem] py-2 text-[0.8125rem] font-medium rounded-[0.625rem] cursor-pointer whitespace-nowrap transition-[background-color,box-shadow,transform] duration-200 text-white bg-[linear-gradient(135deg,#6366f1,#8b5cf6)] border border-transparent shadow-[0_2px_8px_rgba(99,102,241,0.28)] hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(99,102,241,0.32)]"
+            type="button"
+          >
             <FiDownload size={14} />
             <span>Export Report</span>
-            <FiChevronDown size={14} />
+            <FiChevronDown size={14} className="text-white/[0.85]" />
           </button>
         </div>
       </div>
 
       {/* KPI cards */}
-      <div className="sa-reports-page__kpi-grid">
+      <div className="grid gap-4 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {KPI_CARDS.map((card) => (
           <KpiCard key={card.id} card={card} />
         ))}
       </div>
 
       {/* Report Filters */}
-      <div className="sa-reports-filters">
-        <div className="sa-reports-filters__controls">
-          <div className="sa-reports-filters__field">
-            <label className="sa-reports-filters__label">Date Range</label>
-            <div className="sa-reports-filters__input">
-              <FiCalendar className="sa-reports-filters__input-icon" size={15} />
-              <span className="sa-reports-filters__input-text">May 24, 2025 - May 30, 2025</span>
-              <FiChevronDown className="sa-reports-filters__input-chevron" size={14} />
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-end justify-between gap-[0.875rem] lg:gap-4 bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-[1rem_1.125rem]">
+        <div className="flex flex-wrap lg:flex-nowrap items-end gap-3 flex-1 min-w-0">
+          <div className="flex flex-col gap-[0.3rem] min-w-0 flex-[1_1_160px] lg:flex-[1_1_0%]">
+            <label className="text-[0.6875rem] font-semibold text-gray-500 dark:text-gray-400 leading-[1.2] tracking-[0.01em]">Date Range</label>
+            <div className="flex items-center gap-[0.4rem] px-[0.65rem] py-[0.45rem] bg-white dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_1px_4px_rgba(99,102,241,0.08)]">
+              <FiCalendar className="text-indigo-500 dark:text-indigo-400 flex-shrink-0" size={15} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis min-w-0">May 24, 2025 - May 30, 2025</span>
+              <FiChevronDown className="text-gray-400 flex-shrink-0 ml-auto" size={14} />
             </div>
           </div>
 
-          <div className="sa-reports-filters__field">
-            <label className="sa-reports-filters__label">Compare With</label>
-            <div className="sa-reports-filters__input">
-              <FiCalendar className="sa-reports-filters__input-icon" size={15} />
-              <span className="sa-reports-filters__input-text">Apr 17, 2025 - Apr 23, 2025</span>
-              <FiChevronDown className="sa-reports-filters__input-chevron" size={14} />
+          <div className="flex flex-col gap-[0.3rem] min-w-0 flex-[1_1_160px] lg:flex-[1_1_0%]">
+            <label className="text-[0.6875rem] font-semibold text-gray-500 dark:text-gray-400 leading-[1.2] tracking-[0.01em]">Compare With</label>
+            <div className="flex items-center gap-[0.4rem] px-[0.65rem] py-[0.45rem] bg-white dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_1px_4px_rgba(99,102,241,0.08)]">
+              <FiCalendar className="text-indigo-500 dark:text-indigo-400 flex-shrink-0" size={15} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis min-w-0">Apr 17, 2025 - Apr 23, 2025</span>
+              <FiChevronDown className="text-gray-400 flex-shrink-0 ml-auto" size={14} />
             </div>
           </div>
 
-          <div className="sa-reports-filters__field">
-            <label className="sa-reports-filters__label">Group By</label>
-            <div className="sa-reports-filters__input">
-              <span className="sa-reports-filters__input-text">Day</span>
-              <FiChevronDown className="sa-reports-filters__input-chevron" size={14} />
+          <div className="flex flex-col gap-[0.3rem] min-w-0 flex-[1_1_160px] lg:flex-[1_1_0%]">
+            <label className="text-[0.6875rem] font-semibold text-gray-500 dark:text-gray-400 leading-[1.2] tracking-[0.01em]">Group By</label>
+            <div className="flex items-center gap-[0.4rem] px-[0.65rem] py-[0.45rem] bg-white dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_1px_4px_rgba(99,102,241,0.08)]">
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis min-w-0">Day</span>
+              <FiChevronDown className="text-gray-400 flex-shrink-0 ml-auto" size={14} />
             </div>
           </div>
 
-          <div className="sa-reports-filters__field">
-            <label className="sa-reports-filters__label">Category</label>
-            <div className="sa-reports-filters__input">
-              <span className="sa-reports-filters__input-text">All Categories</span>
-              <FiChevronDown className="sa-reports-filters__input-chevron" size={14} />
+          <div className="flex flex-col gap-[0.3rem] min-w-0 flex-[1_1_160px] lg:flex-[1_1_0%]">
+            <label className="text-[0.6875rem] font-semibold text-gray-500 dark:text-gray-400 leading-[1.2] tracking-[0.01em]">Category</label>
+            <div className="flex items-center gap-[0.4rem] px-[0.65rem] py-[0.45rem] bg-white dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_1px_4px_rgba(99,102,241,0.08)]">
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis min-w-0">All Categories</span>
+              <FiChevronDown className="text-gray-400 flex-shrink-0 ml-auto" size={14} />
             </div>
           </div>
 
-          <div className="sa-reports-filters__field">
-            <label className="sa-reports-filters__label">Channel</label>
-            <div className="sa-reports-filters__input">
-              <span className="sa-reports-filters__input-text">All Channels</span>
-              <FiChevronDown className="sa-reports-filters__input-chevron" size={14} />
+          <div className="flex flex-col gap-[0.3rem] min-w-0 flex-[1_1_160px] lg:flex-[1_1_0%]">
+            <label className="text-[0.6875rem] font-semibold text-gray-500 dark:text-gray-400 leading-[1.2] tracking-[0.01em]">Channel</label>
+            <div className="flex items-center gap-[0.4rem] px-[0.65rem] py-[0.45rem] bg-white dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_1px_4px_rgba(99,102,241,0.08)]">
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis min-w-0">All Channels</span>
+              <FiChevronDown className="text-gray-400 flex-shrink-0 ml-auto" size={14} />
             </div>
           </div>
         </div>
 
-        <div className="sa-reports-filters__buttons">
-          <button className="sa-reports-filters__btn sa-reports-filters__btn--apply" type="button">
+        <div className="flex items-center gap-2 flex-shrink-0 lg:pb-px">
+          <button className="px-4 py-[0.45rem] text-[0.8125rem] font-semibold rounded-lg cursor-pointer whitespace-nowrap transition-[background-color,box-shadow,transform,border-color] duration-200 text-white bg-[linear-gradient(135deg,#6366f1,#8b5cf6)] border border-transparent shadow-[0_2px_6px_rgba(99,102,241,0.28)] hover:-translate-y-px hover:shadow-[0_4px_10px_rgba(99,102,241,0.32)]" type="button">
             Apply
           </button>
-          <button className="sa-reports-filters__btn sa-reports-filters__btn--reset" type="button">
+          <button className="px-4 py-[0.45rem] text-[0.8125rem] font-semibold rounded-lg cursor-pointer whitespace-nowrap transition-[background-color,box-shadow,transform,border-color] duration-200 text-gray-700 bg-white dark:text-gray-200 dark:bg-[#1e293b] border dark:border-[#334155] border-gray-200 hover:border-[#c7d2fe] hover:shadow-[0_1px_4px_rgba(99,102,241,0.06)]" type="button">
             Reset
           </button>
         </div>
       </div>
 
       {/* Charts row */}
-      <div className="sa-reports-charts-grid">
+      <div className="grid gap-4 w-full items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <ReportsRevenueOverview />
         <ReportsOrdersByStatus />
         <ReportsRevenueByCategory />

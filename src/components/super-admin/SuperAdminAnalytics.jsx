@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FiCalendar, FiChevronDown, FiFilter, FiZap } from "react-icons/fi";
 import useCountUp from "./useCountUp";
-import "./SuperAdminAnalytics.css";
 
 import revenueIcon from "../../assets/images/superadmin/total-revenue-admin.png";
 import ordersIcon from "../../assets/images/superadmin/total-orders-admin.png";
@@ -28,6 +27,16 @@ function rgbToRgba(hex, alpha) {
   const b = parseInt(h.substring(4, 6), 16);
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+const PANEL =
+  "bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-5 min-w-0 flex flex-col";
+const PANEL_HEADER = "flex items-center justify-between gap-3 mb-4";
+const PANEL_TITLE =
+  "text-base font-semibold text-gray-900 dark:text-gray-100 leading-[1.2]";
+const PANEL_DROPDOWN =
+  "inline-flex items-center gap-[0.35rem] px-[0.7rem] py-[0.4rem] bg-gray-50 dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg text-xs font-medium text-gray-500 dark:text-gray-400 cursor-pointer whitespace-nowrap transition-[border-color,background-color] duration-200 hover:border-[#c7d2fe] hover:text-indigo-600 dark:hover:text-[#a5b4fc]";
+const VIEW_ALL_BTN =
+  "px-[0.7rem] py-[0.4rem] bg-gray-50 dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg text-xs font-medium text-gray-500 dark:text-gray-400 cursor-pointer whitespace-nowrap transition-[border-color,color] duration-200 hover:border-[#c7d2fe] hover:text-indigo-600";
 
 /* ---------------- KPI mini sparkline ---------------- */
 
@@ -73,7 +82,9 @@ function MiniSpark({ color, data }) {
   return (
     <svg
       ref={ref}
-      className={`sa-analytics__mini ${drawn ? "sa-analytics__mini--drawn" : ""}`}
+      className={`block w-full h-[34px] mt-2 [transition:opacity_500ms_ease,transform_500ms_ease] motion-reduce:[transition:none] motion-reduce:opacity-100 motion-reduce:transform-none ${
+        drawn ? "opacity-100 scale-y-100" : "opacity-0 scale-y-[0.85]"
+      }`}
       viewBox={`0 0 ${W} ${H}`}
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -178,27 +189,27 @@ function KpiCard({ card }) {
   const animated = useCountUp(numeric, { duration: 1000 });
 
   return (
-    <article className="sa-stat-card">
-      <div className="sa-stat-card__body">
-        <div className="sa-stat-card__info">
-          <h3 className="sa-stat-card__title">{card.title}</h3>
-          <p className="sa-stat-card__value">
+    <article className="bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-[0.875rem] min-w-0 flex flex-col hover:shadow-[0_6px_18px_rgba(0,0,0,0.08)] hover:-translate-y-[2px] transition-[box-shadow,transform] duration-200">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex flex-col gap-[0.2rem] min-w-0">
+          <h3 className="text-[0.6875rem] font-medium text-gray-500 dark:text-gray-400 leading-[1.3]">{card.title}</h3>
+          <p className="text-[1.15rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.2] whitespace-nowrap">
             {prefix}
             {Math.round(animated).toLocaleString("en-IN")}
           </p>
           <span
-            className={`sa-stat-card__trend ${
-              isUp ? "sa-stat-card__trend--up" : "sa-stat-card__trend--down"
+            className={`inline-flex items-center gap-[0.3rem] text-[0.72rem] font-semibold leading-[1.2] ${
+              isUp ? "text-green-600" : "text-red-600"
             }`}
           >
-            <span className="sa-stat-card__arrow">{isUp ? "↑" : "↓"}</span>
-            {card.trend.percent}{" "}
-            <span className="sa-stat-card__trend-label">vs last week</span>
+            <span className="text-[0.8125rem] font-bold">{isUp ? "↑" : "↓"}</span>
+            {card.trend.percent}
+            <span className="font-normal text-gray-400 dark:text-gray-500 whitespace-nowrap">vs last week</span>
           </span>
         </div>
 
-        <div className="sa-stat-card__icon" style={{ backgroundColor: card.iconBg }}>
-          <img src={card.icon} alt="" className="sa-stat-card__icon-img" />
+        <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-[0.625rem] overflow-hidden" style={{ backgroundColor: card.iconBg }}>
+          <img src={card.icon} alt="" className="w-[68%] h-[68%] object-contain" />
         </div>
       </div>
 
@@ -282,18 +293,18 @@ function RevenueOverview() {
   }, []);
 
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Revenue Overview</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Revenue Overview</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__chart-wrap">
+      <div className="relative w-full">
         <svg
           viewBox={`0 0 ${REV_W} ${REV_H}`}
-          className={`sa-analytics__line-svg ${drawn ? "sa-analytics__svg--drawn" : ""}`}
+          className="w-full h-auto aspect-[600/220] block overflow-visible"
           role="img"
           aria-label="Revenue overview for the week"
           preserveAspectRatio="none"
@@ -318,7 +329,7 @@ function RevenueOverview() {
               />
             );
           })}
-          <g className={drawn ? "sa-analytics__area-reveal sa-analytics__area-reveal--done" : "sa-analytics__area-reveal"}>
+          <g className={`[transform-box:fill-box] [transform-origin:left_center] [transition:transform_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none] ${drawn ? "[transform:scaleX(1)]" : "[transform:scaleX(0)]"}`}>
             <path d={areaPath} fill="url(#sa-rev-fill)" />
           </g>
           <path
@@ -331,12 +342,12 @@ function RevenueOverview() {
             strokeLinejoin="round"
             strokeDasharray={trendLen || 1}
             strokeDashoffset={drawn ? 0 : trendLen || 1}
-            className="sa-analytics__line-draw"
+            className="[transition:stroke-dashoffset_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none]"
           />
           {points.map((p) => (
             <circle
               key={p.label}
-              className="sa-analytics__data-point"
+              className={`${drawn ? "opacity-100" : "opacity-0"} [transition:opacity_260ms_ease] motion-reduce:opacity-100 motion-reduce:[transition:none]`}
               cx={p.x}
               cy={p.y}
               r="5"
@@ -351,25 +362,25 @@ function RevenueOverview() {
             />
           ))}
         </svg>
-        <div className="sa-analytics__xaxis">
+        <div className="absolute left-0 right-0 bottom-0 h-[34px] pointer-events-none">
           {points.map((p) => (
             <span
               key={p.label}
-              className="sa-analytics__xlabel"
+              className="absolute bottom-1 -translate-x-1/2 text-[0.65rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
               style={{ left: `${(p.x / REV_W) * 100}%` }}
             >
               {p.label}
             </span>
           ))}
         </div>
-        <div className="sa-analytics__yaxis">
+        <div className="absolute left-0 top-0 bottom-0 w-[9.2%] pointer-events-none">
           {REV_YLABELS.map((label, idx) => {
             const v = REV_GRID[idx];
             const y = REV_PT + REV_IH - (v / REV_MAX) * REV_IH;
             return (
               <span
                 key={label}
-                className="sa-analytics__ylabel"
+                className="absolute right-1 -translate-y-1/2 text-[0.65rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
                 style={{ top: `${(y / REV_H) * 100}%` }}
               >
                 {label}
@@ -436,19 +447,19 @@ function OrderOverview() {
   const progress = useCountUp(1, { duration: 1000 });
 
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Order Overview</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Order Overview</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__order-body">
-        <div className="sa-analytics__donut">
+      <div className="flex flex-col md:flex-row items-center gap-5 flex-1">
+        <div className="relative w-[170px] max-w-[45%] aspect-square flex-shrink-0">
           <svg
             viewBox={`0 0 ${ORD_SIZE} ${ORD_SIZE}`}
-            className="sa-analytics__donut-svg"
+            className="w-full h-full block"
             role="img"
             aria-label="Order status breakdown"
           >
@@ -464,20 +475,20 @@ function OrderOverview() {
               <OrdSegmentArc key={seg.label} segment={seg} progress={progress} />
             ))}
           </svg>
-          <div className="sa-analytics__center">
-            <span className="sa-analytics__center-value">{ORD_TOTAL}</span>
-            <span className="sa-analytics__center-label">Total Orders</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+            <span className="text-[1.3rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.1] whitespace-nowrap">{ORD_TOTAL}</span>
+            <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 mt-0.5">Total Orders</span>
           </div>
         </div>
-        <ul className="sa-analytics__legend">
+        <ul className="flex-1 min-w-0 list-none flex flex-col gap-[0.6rem] w-full md:w-auto">
           {ORD_STATUS.map((d) => (
-            <li key={d.label} className="sa-analytics__legend-item">
-              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
-              <span className="sa-analytics__legend-name">{d.label}</span>
-              <span className="sa-analytics__legend-value">
+            <li key={d.label} className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">{d.label}</span>
+              <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">
                 {d.value.toLocaleString("en-IN")}
               </span>
-              <span className="sa-analytics__legend-percent">{d.percent}</span>
+              <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 text-right whitespace-nowrap min-w-[3.4rem]">{d.percent}</span>
             </li>
           ))}
         </ul>
@@ -531,18 +542,18 @@ function UserGrowth() {
   }, []);
 
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">User Growth</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>User Growth</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__chart-wrap">
+      <div className="relative w-full">
         <svg
           viewBox={`0 0 ${UG_W} ${UG_H}`}
-          className={`sa-analytics__line-svg ${drawn ? "sa-analytics__svg--drawn" : ""}`}
+          className="w-full h-auto aspect-[600/220] block overflow-visible"
           role="img"
           aria-label="User growth for the week"
           preserveAspectRatio="none"
@@ -567,7 +578,7 @@ function UserGrowth() {
               />
             );
           })}
-          <g className={drawn ? "sa-analytics__area-reveal sa-analytics__area-reveal--done" : "sa-analytics__area-reveal"}>
+          <g className={`[transform-box:fill-box] [transform-origin:left_center] [transition:transform_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none] ${drawn ? "[transform:scaleX(1)]" : "[transform:scaleX(0)]"}`}>
             <path d={areaPath} fill="url(#sa-ug-fill)" />
           </g>
           <path
@@ -580,12 +591,12 @@ function UserGrowth() {
             strokeLinejoin="round"
             strokeDasharray={trendLen || 1}
             strokeDashoffset={drawn ? 0 : trendLen || 1}
-            className="sa-analytics__line-draw"
+            className="[transition:stroke-dashoffset_1300ms_cubic-bezier(0.22,1,0.36,1)] motion-reduce:[transition:none]"
           />
           {points.map((p) => (
             <circle
               key={p.label}
-              className="sa-analytics__data-point"
+              className={`${drawn ? "opacity-100" : "opacity-0"} [transition:opacity_260ms_ease] motion-reduce:opacity-100 motion-reduce:[transition:none]`}
               cx={p.x}
               cy={p.y}
               r="5"
@@ -600,25 +611,25 @@ function UserGrowth() {
             />
           ))}
         </svg>
-        <div className="sa-analytics__xaxis">
+        <div className="absolute left-0 right-0 bottom-0 h-[34px] pointer-events-none">
           {points.map((p) => (
             <span
               key={p.label}
-              className="sa-analytics__xlabel"
+              className="absolute bottom-1 -translate-x-1/2 text-[0.65rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
               style={{ left: `${(p.x / UG_W) * 100}%` }}
             >
               {p.label}
             </span>
           ))}
         </div>
-        <div className="sa-analytics__yaxis">
+        <div className="absolute left-0 top-0 bottom-0 w-[9.2%] pointer-events-none">
           {UG_YLABELS.map((label, idx) => {
             const v = UG_GRID[idx];
             const y = UG_PT + UG_IH - (v / UG_MAX) * UG_IH;
             return (
               <span
                 key={label}
-                className="sa-analytics__ylabel"
+                className="absolute right-1 -translate-y-1/2 text-[0.65rem] text-gray-400 dark:text-slate-500 whitespace-nowrap"
                 style={{ top: `${(y / UG_H) * 100}%` }}
               >
                 {label}
@@ -643,34 +654,37 @@ const TC_DATA = [
 
 function TopCategories() {
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Top Categories</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Top Categories</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__cat-list">
+      <div className="flex flex-col flex-1">
         {TC_DATA.map((cat, i) => (
           <div
             key={cat.name}
-            className="sa-analytics__cat-row"
+            className="flex items-center gap-[0.65rem] py-2"
             style={i < TC_DATA.length - 1 ? { borderBottom: "1px solid #f1f5f9" } : undefined}
           >
-            <div className="sa-analytics__cat-icon" style={{ backgroundColor: rgbToRgba(cat.color, 0.14), color: cat.color }}>
+            <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg text-[0.7rem] font-bold" style={{ backgroundColor: rgbToRgba(cat.color, 0.14), color: cat.color }}>
               <span>{cat.initials}</span>
             </div>
-            <div className="sa-analytics__cat-info">
-              <span className="sa-analytics__cat-name">{cat.name}</span>
-              <span className="sa-analytics__cat-orders">{cat.orders}</span>
+            <div className="flex-1 min-w-0 flex flex-col gap-[0.05rem]">
+              <span className="text-[0.8125rem] font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap overflow-hidden text-ellipsis">{cat.name}</span>
+              <span className="text-[0.72rem] text-gray-400 dark:text-slate-500 whitespace-nowrap">{cat.orders}</span>
             </div>
-            <span className="sa-analytics__cat-percent">{cat.percent}</span>
+            <span className="text-[0.78rem] font-semibold text-green-600 whitespace-nowrap flex-shrink-0">{cat.percent}</span>
           </div>
         ))}
       </div>
-      <div className="sa-analytics__card-footer">
-        <button className="sa-analytics__card-footer-link" type="button">View All Categories</button>
+      <div className="flex justify-center mt-[0.85rem] pt-[0.6rem] border-t border-[#f1f5f9]">
+        <button
+          className="text-[0.75rem] font-semibold text-[#8b5cf6] bg-none border-none cursor-pointer px-1 py-0.5 hover:text-[#6d28d9] hover:underline dark:text-[#a78bfa]"
+          type="button"
+        >View All Categories</button>
       </div>
     </article>
   );
@@ -730,19 +744,19 @@ function SalesByChannel() {
   const progress = useCountUp(1, { duration: 1000 });
 
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Sales by Channel</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Sales by Channel</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__channel-body">
-        <div className="sa-analytics__donut">
+      <div className="flex flex-col md:flex-row items-center gap-4 flex-1">
+        <div className="relative w-[170px] max-w-[45%] aspect-square flex-shrink-0">
           <svg
             viewBox={`0 0 ${SC_SIZE} ${SC_SIZE}`}
-            className="sa-analytics__donut-svg"
+            className="w-full h-full block"
             role="img"
             aria-label="Sales by channel breakdown"
           >
@@ -758,18 +772,18 @@ function SalesByChannel() {
               <ScSegmentArc key={seg.label} segment={seg} progress={progress} />
             ))}
           </svg>
-          <div className="sa-analytics__center">
-            <span className="sa-analytics__center-value">{SC_TOTAL}</span>
-            <span className="sa-analytics__center-label">Total Revenue</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+            <span className="text-[1.3rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.1] whitespace-nowrap">{SC_TOTAL}</span>
+            <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 mt-0.5">Total Revenue</span>
           </div>
         </div>
-        <ul className="sa-analytics__legend">
+        <ul className="flex-1 min-w-0 list-none flex flex-col gap-[0.6rem] w-full md:w-auto">
           {SC_DATA.map((d) => (
-            <li key={d.label} className="sa-analytics__legend-item">
-              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
-              <span className="sa-analytics__legend-name">{d.label}</span>
-              <span className="sa-analytics__legend-value">{d.value}</span>
-              <span className="sa-analytics__legend-percent">{d.percent}</span>
+            <li key={d.label} className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">{d.label}</span>
+              <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">{d.value}</span>
+              <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 text-right whitespace-nowrap min-w-[3.4rem]">{d.percent}</span>
             </li>
           ))}
         </ul>
@@ -790,26 +804,26 @@ const TV_DATA = [
 
 function TopVendorsBySales() {
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Top Vendors by Sales</h2>
-        <button className="sa-analytics__view-all-btn" type="button">View All</button>
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Top Vendors by Sales</h2>
+        <button className={VIEW_ALL_BTN} type="button">View All</button>
       </div>
-      <div className="sa-analytics__vendor-list">
+      <div className="flex flex-col flex-1">
         {TV_DATA.map((vendor, i) => (
           <div
             key={vendor.name}
-            className="sa-analytics__vendor-row"
+            className="flex items-center gap-[0.65rem] py-2"
             style={i < TV_DATA.length - 1 ? { borderBottom: "1px solid #f1f5f9" } : undefined}
           >
-            <div className="sa-analytics__vendor-avatar" style={{ backgroundColor: rgbToRgba(vendor.color, 0.14), color: vendor.color }}>
+            <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full text-[0.6rem] font-bold" style={{ backgroundColor: rgbToRgba(vendor.color, 0.14), color: vendor.color }}>
               <span>{vendor.initials}</span>
             </div>
-            <div className="sa-analytics__vendor-info">
-              <span className="sa-analytics__vendor-name">{vendor.name}</span>
-              <span className="sa-analytics__vendor-sales">{vendor.sales}</span>
+            <div className="flex-1 min-w-0 flex flex-col gap-[0.05rem]">
+              <span className="text-[0.8125rem] font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap overflow-hidden text-ellipsis">{vendor.name}</span>
+              <span className="text-[0.72rem] text-gray-400 dark:text-slate-500 whitespace-nowrap">{vendor.sales}</span>
             </div>
-            <span className="sa-analytics__vendor-growth">
+            <span className="text-[0.78rem] font-semibold text-green-600 whitespace-nowrap flex-shrink-0">
               ↑ {vendor.growth}
             </span>
           </div>
@@ -831,27 +845,27 @@ const SP_DATA = [
 
 function TopServiceProviders() {
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Top Service Providers</h2>
-        <button className="sa-analytics__view-all-btn" type="button">View All</button>
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Top Service Providers</h2>
+        <button className={VIEW_ALL_BTN} type="button">View All</button>
       </div>
-      <div className="sa-analytics__sp-list">
+      <div className="flex flex-col flex-1">
         {SP_DATA.map((sp, i) => (
           <div
             key={sp.name}
-            className="sa-analytics__sp-row"
+            className="flex items-center gap-[0.65rem] py-2"
             style={i < SP_DATA.length - 1 ? { borderBottom: "1px solid #f1f5f9" } : undefined}
           >
-            <div className="sa-analytics__sp-icon" style={{ backgroundColor: rgbToRgba(sp.color, 0.14), color: sp.color }}>
+            <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg" style={{ backgroundColor: rgbToRgba(sp.color, 0.14), color: sp.color }}>
               <FiZap size={14} />
             </div>
-            <div className="sa-analytics__sp-info">
-              <span className="sa-analytics__sp-name">{sp.name}</span>
-              <span className="sa-analytics__sp-bookings">{sp.bookings}</span>
+            <div className="flex-1 min-w-0 flex flex-col gap-[0.05rem]">
+              <span className="text-[0.8125rem] font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap overflow-hidden text-ellipsis">{sp.name}</span>
+              <span className="text-[0.72rem] text-gray-400 dark:text-slate-500 whitespace-nowrap">{sp.bookings}</span>
             </div>
-            <span className="sa-analytics__sp-rating">
-              <span className="sa-analytics__sp-star">★</span>
+            <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap flex-shrink-0">
+              <span className="text-amber-500 mr-[0.15rem]">★</span>
               {sp.rating}
             </span>
           </div>
@@ -879,33 +893,33 @@ const RO_STATUS_COLORS = {
 
 function RecentOrdersOverview() {
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Recent Orders Overview</h2>
-        <button className="sa-analytics__view-all-btn" type="button">View All</button>
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Recent Orders Overview</h2>
+        <button className={VIEW_ALL_BTN} type="button">View All</button>
       </div>
-      <div className="sa-analytics__orders-table-wrap">
-        <table className="sa-analytics__orders-table">
+      <div className="w-full overflow-x-auto [-webkit-overflow-scrolling:touch]">
+        <table className="w-full border-collapse text-[0.78rem]">
           <thead>
             <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Vendor</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Date</th>
+              <th className="text-left text-[0.7rem] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-[0.03em] pb-2 border-b border-[#f1f5f9] dark:border-[#334155] whitespace-nowrap">Order ID</th>
+              <th className="text-left text-[0.7rem] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-[0.03em] pb-2 border-b border-[#f1f5f9] dark:border-[#334155] whitespace-nowrap">Customer</th>
+              <th className="text-left text-[0.7rem] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-[0.03em] pb-2 border-b border-[#f1f5f9] dark:border-[#334155] whitespace-nowrap">Vendor</th>
+              <th className="text-left text-[0.7rem] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-[0.03em] pb-2 border-b border-[#f1f5f9] dark:border-[#334155] whitespace-nowrap">Amount</th>
+              <th className="text-left text-[0.7rem] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-[0.03em] pb-2 border-b border-[#f1f5f9] dark:border-[#334155] whitespace-nowrap">Status</th>
+              <th className="text-left text-[0.7rem] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-[0.03em] pb-2 border-b border-[#f1f5f9] dark:border-[#334155] whitespace-nowrap">Date</th>
             </tr>
           </thead>
           <tbody>
             {RO_DATA.map((row) => (
-              <tr key={row.id}>
-                <td className="sa-analytics__orders-id">{row.id}</td>
-                <td>{row.customer}</td>
-                <td>{row.vendor}</td>
-                <td className="sa-analytics__orders-amount">{row.amount}</td>
-                <td>
+              <tr key={row.id} className="last:[&>td]:border-b-0">
+                <td className="py-2 border-b border-[#f8f9fb] dark:border-[#334155] text-gray-700 dark:text-gray-200 whitespace-nowrap font-semibold text-[#8b5cf6] dark:text-[#a78bfa]">{row.id}</td>
+                <td className="py-2 border-b border-[#f8f9fb] dark:border-[#334155] text-gray-700 dark:text-gray-200 whitespace-nowrap">{row.customer}</td>
+                <td className="py-2 border-b border-[#f8f9fb] dark:border-[#334155] text-gray-700 dark:text-gray-200 whitespace-nowrap">{row.vendor}</td>
+                <td className="py-2 border-b border-[#f8f9fb] dark:border-[#334155] text-gray-700 dark:text-gray-200 whitespace-nowrap font-semibold">{row.amount}</td>
+                <td className="py-2 border-b border-[#f8f9fb] dark:border-[#334155] text-gray-700 dark:text-gray-200 whitespace-nowrap">
                   <span
-                    className="sa-analytics__orders-badge"
+                    className="inline-block px-[0.55rem] py-[0.15rem] rounded-full text-[0.68rem] font-semibold leading-[1.4] whitespace-nowrap"
                     style={{
                       backgroundColor: RO_STATUS_COLORS[row.status].bg,
                       color: RO_STATUS_COLORS[row.status].color,
@@ -914,7 +928,7 @@ function RecentOrdersOverview() {
                     {row.status}
                   </span>
                 </td>
-                <td className="sa-analytics__orders-date">{row.date}</td>
+                <td className="py-2 border-b border-[#f8f9fb] dark:border-[#334155] text-gray-700 dark:text-gray-200 whitespace-nowrap text-gray-400 dark:text-slate-500">{row.date}</td>
               </tr>
             ))}
           </tbody>
@@ -978,19 +992,19 @@ function CustomerDemographics() {
   const progress = useCountUp(1, { duration: 1000 });
 
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Customer Demographics</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Customer Demographics</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__channel-body">
-        <div className="sa-analytics__donut">
+      <div className="flex flex-col md:flex-row items-center gap-4 flex-1">
+        <div className="relative w-[170px] max-w-[45%] aspect-square flex-shrink-0">
           <svg
             viewBox={`0 0 ${CD_SIZE} ${CD_SIZE}`}
-            className="sa-analytics__donut-svg"
+            className="w-full h-full block"
             role="img"
             aria-label="Customer demographics breakdown"
           >
@@ -1007,13 +1021,13 @@ function CustomerDemographics() {
             ))}
           </svg>
         </div>
-        <ul className="sa-analytics__legend">
+        <ul className="flex-1 min-w-0 list-none flex flex-col gap-[0.6rem] w-full md:w-auto">
           {CD_DATA.map((d) => (
-            <li key={d.label} className="sa-analytics__legend-item">
-              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
-              <span className="sa-analytics__legend-name">{d.label}</span>
-              <span className="sa-analytics__legend-value" />
-              <span className="sa-analytics__legend-percent">{d.percent}%</span>
+            <li key={d.label} className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">{d.label}</span>
+              <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap" />
+              <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 text-right whitespace-nowrap min-w-[3.4rem]">{d.percent}%</span>
             </li>
           ))}
         </ul>
@@ -1082,19 +1096,19 @@ function DevicesPlatforms() {
   const progress = useCountUp(1, { duration: 1000 });
 
   return (
-    <article className="sa-panel sa-analytics__chart-card">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Devices &amp; Platforms</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className={PANEL}>
+      <div className={PANEL_HEADER}>
+        <h2 className={PANEL_TITLE}>Devices &amp; Platforms</h2>
+        <button className={PANEL_DROPDOWN} type="button">
           <span>This Week</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
-      <div className="sa-analytics__devices-body">
-        <div className="sa-analytics__semi-donut">
+      <div className="flex flex-col md:flex-row items-center gap-5 flex-1">
+        <div className="relative w-[200px] md:w-[170px] max-w-[70%] md:max-w-[50%] aspect-[2/1] flex-shrink-0">
           <svg
             viewBox={`0 0 ${DP_VIEW_W} ${DP_VIEW_H}`}
-            className="sa-analytics__semi-donut-svg"
+            className="w-full h-auto block"
             role="img"
             aria-label="Devices and platforms breakdown"
           >
@@ -1109,18 +1123,18 @@ function DevicesPlatforms() {
               <DpSegmentArc key={seg.label} segment={seg} progress={progress} />
             ))}
           </svg>
-          <div className="sa-analytics__semi-center">
-            <span className="sa-analytics__semi-label">Sessions</span>
-            <span className="sa-analytics__semi-value">68,932</span>
+          <div className="absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center pointer-events-none leading-[1.15]">
+            <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500">Sessions</span>
+            <span className="text-[1.25rem] font-bold text-gray-900 dark:text-gray-100 leading-[1.1] whitespace-nowrap">68,932</span>
           </div>
         </div>
-        <ul className="sa-analytics__legend">
+        <ul className="flex-1 min-w-0 list-none flex flex-col gap-[0.6rem] w-full md:w-auto">
           {DP_DATA.map((d) => (
-            <li key={d.label} className="sa-analytics__legend-item">
-              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
-              <span className="sa-analytics__legend-name">{d.label}</span>
-              <span className="sa-analytics__legend-value">{d.count}</span>
-              <span className="sa-analytics__legend-percent">({d.percent}%)</span>
+            <li key={d.label} className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+              <span className="text-[0.78rem] font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">{d.label}</span>
+              <span className="text-[0.78rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">{d.count}</span>
+              <span className="text-[0.7rem] font-medium text-gray-400 dark:text-slate-500 text-right whitespace-nowrap min-w-[3.4rem]">({d.percent}%)</span>
             </li>
           ))}
         </ul>
@@ -1135,41 +1149,46 @@ function SuperAdminAnalytics() {
   const [activePeriod, setActivePeriod] = useState("This Week");
 
   return (
-    <div className="sa-analytics-page">
+    <div className="flex flex-col gap-6 w-full max-w-full">
       {/* Header */}
-      <div className="sa-analytics-page__header">
-        <div className="sa-analytics-page__heading">
-          <nav className="sa-analytics-page__breadcrumb" aria-label="Breadcrumb">
-            <a href="/super-admin" className="sa-analytics-page__crumb-link">
+      <div className="flex flex-col gap-4 items-start justify-between md:flex-row md:items-center">
+        <div>
+          <nav className="flex items-center gap-[0.4rem] text-[0.8125rem] mb-1" aria-label="Breadcrumb">
+            <a href="/super-admin" className="text-[#8b5cf6] font-medium no-underline hover:underline dark:text-[#a78bfa]">
               Dashboard
             </a>
-            <span className="sa-analytics-page__crumb-sep">›</span>
-            <span className="sa-analytics-page__crumb-current">Analytics</span>
+            <span className="text-gray-400">›</span>
+            <span className="text-gray-500 font-medium dark:text-gray-400">Analytics</span>
           </nav>
-          <h1 className="sa-analytics-page__title">Analytics</h1>
-          <p className="sa-analytics-page__desc">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 leading-[1.2] mt-[0.1rem]">Analytics</h1>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 leading-[1.5] max-w-[620px]">
             Monitor your platform performance and business insights.
           </p>
         </div>
 
-        <button className="sa-analytics-page__daterange" type="button">
-          <FiCalendar className="sa-analytics-page__daterange-icon" size={17} />
-          <span className="sa-analytics-page__daterange-text">{RANGE_LABEL}</span>
-          <FiChevronDown className="sa-analytics-page__daterange-chevron" size={16} />
+        <button
+          className="inline-flex items-center gap-2 px-[0.9rem] py-[0.6rem] bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-gray-200 rounded-[0.625rem] shadow-[0_1px_2px_rgba(0,0,0,0.04)] cursor-pointer whitespace-nowrap transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_2px_8px_rgba(79,70,229,0.08)]"
+          type="button"
+        >
+          <FiCalendar className="text-indigo-500 dark:text-indigo-400 flex-shrink-0" size={17} />
+          <span className="text-[0.8125rem] font-medium text-gray-700 dark:text-gray-200">{RANGE_LABEL}</span>
+          <FiChevronDown className="text-gray-400 flex-shrink-0" size={16} />
         </button>
       </div>
 
       {/* Filter / Action row */}
-      <div className="sa-analytics-page__toolbar">
-        <div className="sa-analytics-page__periods" role="tablist">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-[0.35rem]" role="tablist">
           {PERIODS.map((p) => (
             <button
               key={p}
               type="button"
               role="tab"
               aria-selected={activePeriod === p}
-              className={`sa-analytics-page__period ${
-                activePeriod === p ? "sa-analytics-page__period--active" : ""
+              className={`px-3 py-[0.45rem] text-[0.8125rem] font-medium text-gray-800 bg-transparent border border-transparent rounded-lg cursor-pointer whitespace-nowrap transition-[color,background-color,border-color] duration-200 hover:text-indigo-600 hover:bg-[rgba(139,92,246,0.06)] dark:text-gray-200 dark:hover:text-[#a5b4fc] ${
+                activePeriod === p
+                  ? "text-[#7c3aed] bg-[#ede9fe] border-[#ddd6fe] font-semibold dark:text-[#c4b5fd] dark:bg-[rgba(139,92,246,0.18)] dark:border-[rgba(139,92,246,0.3)]"
+                  : ""
               }`}
               onClick={() => setActivePeriod(p)}
             >
@@ -1178,12 +1197,18 @@ function SuperAdminAnalytics() {
           ))}
         </div>
 
-        <div className="sa-analytics-page__actions">
-          <button className="sa-analytics-page__filter" type="button">
-            <FiFilter size={14} />
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button
+            className="inline-flex items-center gap-[0.4rem] px-[0.9rem] py-2 text-[0.8125rem] font-medium rounded-[0.625rem] cursor-pointer whitespace-nowrap transition-[background-color,box-shadow,transform] duration-200 text-gray-700 bg-white dark:text-gray-200 dark:bg-[#1e293b] border dark:border-[#334155] border-gray-200 hover:border-[#c7d2fe] hover:shadow-[0_2px_6px_rgba(99,102,241,0.08)]"
+            type="button"
+          >
+            <FiFilter size={14} className="text-indigo-500" />
             <span>Filters</span>
           </button>
-          <button className="sa-analytics-page__export" type="button">
+          <button
+            className="inline-flex items-center gap-[0.4rem] px-[0.9rem] py-2 text-[0.8125rem] font-medium rounded-[0.625rem] cursor-pointer whitespace-nowrap transition-[background-color,box-shadow,transform] duration-200 text-white bg-[linear-gradient(135deg,#6366f1,#8b5cf6)] border border-transparent shadow-[0_2px_8px_rgba(99,102,241,0.28)] hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(99,102,241,0.32)]"
+            type="button"
+          >
             <span>Export Report</span>
             <FiChevronDown size={14} />
           </button>
@@ -1191,21 +1216,21 @@ function SuperAdminAnalytics() {
       </div>
 
       {/* KPI cards */}
-      <div className="sa-analytics-page__grid">
+      <div className="grid gap-4 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {CARDS.map((card) => (
           <KpiCard key={card.id} card={card} />
         ))}
       </div>
 
       {/* Charts */}
-      <div className="sa-analytics-page__charts">
+      <div className="grid gap-4 w-full items-stretch grid-cols-1 md:grid-cols-3">
         <RevenueOverview />
         <OrderOverview />
         <UserGrowth />
       </div>
 
       {/* Additional insights */}
-      <div className="sa-analytics-page__insights">
+      <div className="grid gap-4 w-full items-stretch grid-cols-1 sm:grid-cols-2 min-[1220px]:grid-cols-4">
         <TopCategories />
         <SalesByChannel />
         <TopVendorsBySales />
@@ -1213,7 +1238,7 @@ function SuperAdminAnalytics() {
       </div>
 
       {/* New cards row */}
-      <div className="sa-analytics-page__new-cards">
+      <div className="grid gap-4 w-full items-stretch grid-cols-1 sm:grid-cols-2 min-[1220px]:grid-cols-3">
         <RecentOrdersOverview />
         <CustomerDemographics />
         <DevicesPlatforms />

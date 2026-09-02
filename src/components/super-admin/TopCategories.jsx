@@ -54,31 +54,44 @@ const CATEGORIES = [
 
 function TopCategories() {
   return (
-    <article className="sa-panel sa-categories">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Top Categories</h2>
-        <button className="sa-panel__dropdown" type="button">
+    <article className="bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-5 min-w-0 flex flex-col">
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-tight">
+          Top Categories
+        </h2>
+        <button className="inline-flex items-center gap-[0.35rem] px-[0.7rem] py-[0.4rem] bg-gray-50 dark:bg-[#0f172a] border dark:border-[#334155] border-gray-200 rounded-lg text-xs font-medium text-gray-500 dark:text-gray-400 cursor-pointer whitespace-nowrap transition-[border-color,background-color] duration-200 hover:border-[#c7d2fe] hover:text-indigo-600 dark:hover:text-[#a5b4fc]" type="button">
           <span>{RANGE_LABEL}</span>
-          <FiChevronDown size={14} />
+          <FiChevronDown size={14} className="flex-shrink-0 text-gray-400" />
         </button>
       </div>
 
-      <ul className="sa-categories__list">
-        {CATEGORIES.map((cat) => {
+      <ul className="list-none flex flex-col">
+        {CATEGORIES.map((cat, i) => {
           const Icon = cat.icon;
           return (
-            <li key={cat.name} className="sa-categories__row">
+            <li
+              key={cat.name}
+              className={`flex items-center gap-3 py-[0.62rem] ${
+                i > 0 ? "border-t border-[#f1f5f9] dark:border-[#334155]" : ""
+              }`}
+            >
               <span
-                className="sa-categories__icon"
+                className="flex-shrink-0 flex items-center justify-center w-[38px] h-[38px] rounded-[0.6rem]"
                 style={{ backgroundColor: cat.bg, color: cat.color }}
               >
                 <Icon size={17} />
               </span>
-              <div className="sa-categories__info">
-                <span className="sa-categories__name">{cat.name}</span>
-                <span className="sa-categories__orders">{cat.orders}</span>
+              <div className="flex-1 min-w-0 flex flex-col gap-[0.1rem]">
+                <span className="text-[0.85rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {cat.name}
+                </span>
+                <span className="text-[0.72rem] font-medium text-gray-400 dark:text-slate-500">
+                  {cat.orders}
+                </span>
               </div>
-              <span className="sa-categories__percent">{cat.percent}</span>
+              <span className="text-[0.85rem] font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                {cat.percent}
+              </span>
             </li>
           );
         })}

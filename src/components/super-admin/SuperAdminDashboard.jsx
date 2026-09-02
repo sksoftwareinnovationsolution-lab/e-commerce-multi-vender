@@ -4,7 +4,6 @@ import StatCard from "./StatCard";
 import SaAnalyticsSection from "./SaAnalyticsSection";
 import SaBottomSection from "./SaBottomSection";
 import SaAccessSection from "./SaAccessSection";
-import "./SuperAdminDashboard.css";
 
 import revenueIcon from "../../assets/images/superadmin/total-revenue-admin.png";
 import ordersIcon from "../../assets/images/superadmin/total-orders-admin.png";
@@ -86,26 +85,29 @@ function SuperAdminDashboard() {
   const [range] = useState("May 24, 2025 - May 30, 2025");
 
   return (
-    <div className="sa-dashboard">
+    <div className="flex flex-col gap-6 w-full max-w-full">
       {/* Header */}
-      <div className="sa-dashboard__header">
-        <div className="sa-dashboard__heading">
-          <h1 className="sa-dashboard__title">Dashboard</h1>
-          <p className="sa-dashboard__desc">
+      <div className="flex flex-col gap-4 items-start justify-between md:flex-row md:items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 leading-[1.2]">Dashboard</h1>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 leading-[1.5] max-w-[620px]">
             Welcome back, Super Admin! Here&apos;s what&apos;s happening on your
             platform.
           </p>
         </div>
 
-        <button className="sa-dashboard__daterange" type="button">
-          <FiCalendar className="sa-dashboard__daterange-icon" size={17} />
-          <span className="sa-dashboard__daterange-text">{range}</span>
-          <FiChevronDown className="sa-dashboard__daterange-chevron" size={16} />
+        <button
+          className="inline-flex items-center gap-2 px-[0.9rem] py-[0.6rem] bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-gray-200 rounded-[0.625rem] shadow-[0_1px_2px_rgba(0,0,0,0.04)] cursor-pointer whitespace-nowrap transition-[border-color,box-shadow] duration-200 hover:border-[#c7d2fe] hover:shadow-[0_2px_8px_rgba(79,70,229,0.08)]"
+          type="button"
+        >
+          <FiCalendar className="text-indigo-500 dark:text-indigo-400 flex-shrink-0" size={17} />
+          <span className="text-[0.8125rem] font-medium text-gray-700 dark:text-gray-200">{range}</span>
+          <FiChevronDown className="text-gray-400 flex-shrink-0" size={16} />
         </button>
       </div>
 
       {/* Stat cards */}
-      <div className="sa-dashboard__grid">
+      <div className="grid gap-4 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {CARDS.map((card) => (
           <StatCard key={card.id} {...card} />
         ))}
