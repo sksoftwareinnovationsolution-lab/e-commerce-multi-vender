@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FiCalendar, FiChevronDown, FiFilter } from "react-icons/fi";
+import { FiCalendar, FiChevronDown, FiFilter, FiZap } from "react-icons/fi";
 import useCountUp from "./useCountUp";
 import "./SuperAdminAnalytics.css";
 
@@ -631,6 +631,504 @@ function UserGrowth() {
   );
 }
 
+/* ---------------- Top Categories ---------------- */
+
+const TC_DATA = [
+  { name: "Electronics", orders: "2,540 Orders", percent: "20.2%", color: "#8b5cf6", initials: "E" },
+  { name: "Fashion", orders: "2,120 Orders", percent: "17.6%", color: "#ec4899", initials: "F" },
+  { name: "Home & Kitchen", orders: "1,950 Orders", percent: "15.5%", color: "#3b82f6", initials: "H" },
+  { name: "Beauty", orders: "1,530 Orders", percent: "12.1%", color: "#f97316", initials: "B" },
+  { name: "Grocery", orders: "1,440 Orders", percent: "9.1%", color: "#22c55e", initials: "G" },
+];
+
+function TopCategories() {
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Top Categories</h2>
+        <button className="sa-panel__dropdown" type="button">
+          <span>This Week</span>
+          <FiChevronDown size={14} />
+        </button>
+      </div>
+      <div className="sa-analytics__cat-list">
+        {TC_DATA.map((cat, i) => (
+          <div
+            key={cat.name}
+            className="sa-analytics__cat-row"
+            style={i < TC_DATA.length - 1 ? { borderBottom: "1px solid #f1f5f9" } : undefined}
+          >
+            <div className="sa-analytics__cat-icon" style={{ backgroundColor: rgbToRgba(cat.color, 0.14), color: cat.color }}>
+              <span>{cat.initials}</span>
+            </div>
+            <div className="sa-analytics__cat-info">
+              <span className="sa-analytics__cat-name">{cat.name}</span>
+              <span className="sa-analytics__cat-orders">{cat.orders}</span>
+            </div>
+            <span className="sa-analytics__cat-percent">{cat.percent}</span>
+          </div>
+        ))}
+      </div>
+      <div className="sa-analytics__card-footer">
+        <button className="sa-analytics__card-footer-link" type="button">View All Categories</button>
+      </div>
+    </article>
+  );
+}
+
+/* ---------------- Sales by Channel ---------------- */
+
+const SC_DATA = [
+  { label: "Web", value: "₹18,40,320", percent: "63.5%", color: "#22C55E" },
+  { label: "Mobile App", value: "₹8,75,430", percent: "30.2%", color: "#2563EB" },
+  { label: "Vendor Panel", value: "₹1,25,250", percent: "4.3%", color: "#EF4444" },
+  { label: "Other", value: "₹54,320", percent: "1.9%", color: "#7C3AED" },
+];
+
+const SC_TOTAL = "₹28,95,320";
+const SC_SIZE = 180;
+const SC_STROKE = 20;
+const SC_RADIUS = (SC_SIZE - SC_STROKE) / 2;
+const SC_CENTER = SC_SIZE / 2;
+const SC_CIRC = 2 * Math.PI * SC_RADIUS;
+
+function buildScSegments() {
+  const total = SC_DATA.reduce((s, d) => s + Number(d.percent), 0);
+  let acc = 0;
+  return SC_DATA.map((d) => {
+    const start = acc / total;
+    const fraction = Number(d.percent) / total;
+    acc += Number(d.percent);
+    return { ...d, start, fraction };
+  });
+}
+
+const SC_SEGMENTS = buildScSegments();
+
+function ScSegmentArc({ segment, progress }) {
+  const { start, fraction } = segment;
+  const dashLength = fraction * SC_CIRC * progress;
+  const gapLength = SC_CIRC - dashLength;
+  const offset = (1 - start) * SC_CIRC;
+  return (
+    <circle
+      cx={SC_CENTER}
+      cy={SC_CENTER}
+      r={SC_RADIUS}
+      fill="none"
+      stroke={segment.color}
+      strokeWidth={SC_STROKE}
+      strokeDasharray={`${dashLength} ${gapLength}`}
+      strokeDashoffset={offset}
+      strokeLinecap="butt"
+      transform={`rotate(-90 ${SC_CENTER} ${SC_CENTER})`}
+    />
+  );
+}
+
+function SalesByChannel() {
+  const progress = useCountUp(1, { duration: 1000 });
+
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Sales by Channel</h2>
+        <button className="sa-panel__dropdown" type="button">
+          <span>This Week</span>
+          <FiChevronDown size={14} />
+        </button>
+      </div>
+      <div className="sa-analytics__channel-body">
+        <div className="sa-analytics__donut">
+          <svg
+            viewBox={`0 0 ${SC_SIZE} ${SC_SIZE}`}
+            className="sa-analytics__donut-svg"
+            role="img"
+            aria-label="Sales by channel breakdown"
+          >
+            <circle
+              cx={SC_CENTER}
+              cy={SC_CENTER}
+              r={SC_RADIUS}
+              fill="none"
+              stroke="#f1f5f9"
+              strokeWidth={SC_STROKE}
+            />
+            {SC_SEGMENTS.map((seg) => (
+              <ScSegmentArc key={seg.label} segment={seg} progress={progress} />
+            ))}
+          </svg>
+          <div className="sa-analytics__center">
+            <span className="sa-analytics__center-value">{SC_TOTAL}</span>
+            <span className="sa-analytics__center-label">Total Revenue</span>
+          </div>
+        </div>
+        <ul className="sa-analytics__legend">
+          {SC_DATA.map((d) => (
+            <li key={d.label} className="sa-analytics__legend-item">
+              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
+              <span className="sa-analytics__legend-name">{d.label}</span>
+              <span className="sa-analytics__legend-value">{d.value}</span>
+              <span className="sa-analytics__legend-percent">{d.percent}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+/* ---------------- Top Vendors by Sales ---------------- */
+
+const TV_DATA = [
+  { name: "Tech World", sales: "₹2,45,320", growth: "12.5%", color: "#8b5cf6", initials: "TW" },
+  { name: "Fashion Hub", sales: "₹1,85,640", growth: "8.3%", color: "#3b82f6", initials: "FH" },
+  { name: "Grocery Mart", sales: "₹1,45,230", growth: "15.7%", color: "#22c55e", initials: "GM" },
+  { name: "Home Store", sales: "₹1,15,220", growth: "10.2%", color: "#f97316", initials: "HS" },
+  { name: "Beauty Zone", sales: "₹95,420", growth: "7.6%", color: "#ec4899", initials: "BZ" },
+];
+
+function TopVendorsBySales() {
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Top Vendors by Sales</h2>
+        <button className="sa-analytics__view-all-btn" type="button">View All</button>
+      </div>
+      <div className="sa-analytics__vendor-list">
+        {TV_DATA.map((vendor, i) => (
+          <div
+            key={vendor.name}
+            className="sa-analytics__vendor-row"
+            style={i < TV_DATA.length - 1 ? { borderBottom: "1px solid #f1f5f9" } : undefined}
+          >
+            <div className="sa-analytics__vendor-avatar" style={{ backgroundColor: rgbToRgba(vendor.color, 0.14), color: vendor.color }}>
+              <span>{vendor.initials}</span>
+            </div>
+            <div className="sa-analytics__vendor-info">
+              <span className="sa-analytics__vendor-name">{vendor.name}</span>
+              <span className="sa-analytics__vendor-sales">{vendor.sales}</span>
+            </div>
+            <span className="sa-analytics__vendor-growth">
+              ↑ {vendor.growth}
+            </span>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+/* ---------------- Top Service Providers ---------------- */
+
+const SP_DATA = [
+  { name: "Repair Services", bookings: "1,240 Bookings", rating: "4.8", color: "#8b5cf6", initials: "RS" },
+  { name: "Cleaning Services", bookings: "1,120 Bookings", rating: "4.6", color: "#3b82f6", initials: "CS" },
+  { name: "Home Services", bookings: "980 Bookings", rating: "4.7", color: "#22c55e", initials: "HS" },
+  { name: "Beauty Services", bookings: "860 Bookings", rating: "4.5", color: "#f97316", initials: "BS" },
+  { name: "Packers & Movers", bookings: "750 Bookings", rating: "4.4", color: "#ec4899", initials: "PM" },
+];
+
+function TopServiceProviders() {
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Top Service Providers</h2>
+        <button className="sa-analytics__view-all-btn" type="button">View All</button>
+      </div>
+      <div className="sa-analytics__sp-list">
+        {SP_DATA.map((sp, i) => (
+          <div
+            key={sp.name}
+            className="sa-analytics__sp-row"
+            style={i < SP_DATA.length - 1 ? { borderBottom: "1px solid #f1f5f9" } : undefined}
+          >
+            <div className="sa-analytics__sp-icon" style={{ backgroundColor: rgbToRgba(sp.color, 0.14), color: sp.color }}>
+              <FiZap size={14} />
+            </div>
+            <div className="sa-analytics__sp-info">
+              <span className="sa-analytics__sp-name">{sp.name}</span>
+              <span className="sa-analytics__sp-bookings">{sp.bookings}</span>
+            </div>
+            <span className="sa-analytics__sp-rating">
+              <span className="sa-analytics__sp-star">★</span>
+              {sp.rating}
+            </span>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+/* ---------------- Recent Orders Overview ---------------- */
+
+const RO_DATA = [
+  { id: "#ORD-12540", customer: "Ananya Singh", vendor: "Tech World", amount: "₹2,999", status: "Delivered", date: "May 30, 2025" },
+  { id: "#ORD-12539", customer: "Rohit Verma", vendor: "Fashion Hub", amount: "₹1,299", status: "Processing", date: "May 30, 2025" },
+  { id: "#ORD-12538", customer: "Priya Mehta", vendor: "Grocery Mart", amount: "₹850", status: "Delivered", date: "May 29, 2025" },
+  { id: "#ORD-12537", customer: "Vikram Patel", vendor: "Home Store", amount: "₹1,450", status: "Cancelled", date: "May 29, 2025" },
+  { id: "#ORD-12536", customer: "Neha Sharma", vendor: "Beauty Zone", amount: "₹999", status: "Processing", date: "May 28, 2025" },
+];
+
+const RO_STATUS_COLORS = {
+  Delivered: { bg: "#dcfce7", color: "#16a34a" },
+  Processing: { bg: "#ede9fe", color: "#7c3aed" },
+  Cancelled: { bg: "#fee2e2", color: "#dc2626" },
+};
+
+function RecentOrdersOverview() {
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Recent Orders Overview</h2>
+        <button className="sa-analytics__view-all-btn" type="button">View All</button>
+      </div>
+      <div className="sa-analytics__orders-table-wrap">
+        <table className="sa-analytics__orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Vendor</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {RO_DATA.map((row) => (
+              <tr key={row.id}>
+                <td className="sa-analytics__orders-id">{row.id}</td>
+                <td>{row.customer}</td>
+                <td>{row.vendor}</td>
+                <td className="sa-analytics__orders-amount">{row.amount}</td>
+                <td>
+                  <span
+                    className="sa-analytics__orders-badge"
+                    style={{
+                      backgroundColor: RO_STATUS_COLORS[row.status].bg,
+                      color: RO_STATUS_COLORS[row.status].color,
+                    }}
+                  >
+                    {row.status}
+                  </span>
+                </td>
+                <td className="sa-analytics__orders-date">{row.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </article>
+  );
+}
+
+/* ---------------- Customer Demographics ---------------- */
+
+const CD_DATA = [
+  { label: "18-24 Years", percent: 25.4, color: "#22C55E" },
+  { label: "25-34 Years", percent: 38.7, color: "#2563EB" },
+  { label: "35-44 Years", percent: 22.1, color: "#F97316" },
+  { label: "45-54 Years", percent: 9.8, color: "#EF4444" },
+  { label: "55+ Years", percent: 4.0, color: "#7C3AED" },
+];
+
+const CD_SIZE = 180;
+const CD_STROKE = 22;
+const CD_RADIUS = (CD_SIZE - CD_STROKE) / 2;
+const CD_CENTER = CD_SIZE / 2;
+const CD_CIRC = 2 * Math.PI * CD_RADIUS;
+
+function buildCdSegments() {
+  const total = CD_DATA.reduce((s, d) => s + d.percent, 0);
+  let acc = 0;
+  return CD_DATA.map((d) => {
+    const start = acc / total;
+    const fraction = d.percent / total;
+    acc += d.percent;
+    return { ...d, start, fraction };
+  });
+}
+
+const CD_SEGMENTS = buildCdSegments();
+
+function CdSegmentArc({ segment, progress }) {
+  const { start, fraction } = segment;
+  const dashLength = fraction * CD_CIRC * progress;
+  const gapLength = CD_CIRC - dashLength;
+  const offset = (1 - start) * CD_CIRC;
+  return (
+    <circle
+      cx={CD_CENTER}
+      cy={CD_CENTER}
+      r={CD_RADIUS}
+      fill="none"
+      stroke={segment.color}
+      strokeWidth={CD_STROKE}
+      strokeDasharray={`${dashLength} ${gapLength}`}
+      strokeDashoffset={offset}
+      strokeLinecap="butt"
+      transform={`rotate(-90 ${CD_CENTER} ${CD_CENTER})`}
+    />
+  );
+}
+
+function CustomerDemographics() {
+  const progress = useCountUp(1, { duration: 1000 });
+
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Customer Demographics</h2>
+        <button className="sa-panel__dropdown" type="button">
+          <span>This Week</span>
+          <FiChevronDown size={14} />
+        </button>
+      </div>
+      <div className="sa-analytics__channel-body">
+        <div className="sa-analytics__donut">
+          <svg
+            viewBox={`0 0 ${CD_SIZE} ${CD_SIZE}`}
+            className="sa-analytics__donut-svg"
+            role="img"
+            aria-label="Customer demographics breakdown"
+          >
+            <circle
+              cx={CD_CENTER}
+              cy={CD_CENTER}
+              r={CD_RADIUS}
+              fill="none"
+              stroke="#f1f5f9"
+              strokeWidth={CD_STROKE}
+            />
+            {CD_SEGMENTS.map((seg) => (
+              <CdSegmentArc key={seg.label} segment={seg} progress={progress} />
+            ))}
+          </svg>
+        </div>
+        <ul className="sa-analytics__legend">
+          {CD_DATA.map((d) => (
+            <li key={d.label} className="sa-analytics__legend-item">
+              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
+              <span className="sa-analytics__legend-name">{d.label}</span>
+              <span className="sa-analytics__legend-value" />
+              <span className="sa-analytics__legend-percent">{d.percent}%</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+/* ---------------- Devices & Platforms ---------------- */
+
+const DP_DATA = [
+  { label: "Mobile", count: "45,231", percent: 65.6, color: "#7C3AED" },
+  { label: "Desktop", count: "18,654", percent: 27.1, color: "#2563EB" },
+  { label: "Tablet", count: "3,847", percent: 5.6, color: "#06B6D4" },
+  { label: "Other", count: "1,200", percent: 1.7, color: "#F97316" },
+];
+
+const DP_VIEW_W = 200;
+const DP_VIEW_H = 100;
+const DP_CENTER = 100;
+const DP_RADIUS = 80;
+const DP_STROKE = 24;
+
+function buildDpSegments() {
+  const total = DP_DATA.reduce((s, d) => s + d.percent, 0);
+  let acc = 0;
+  return DP_DATA.map((d) => {
+    const start = acc / total;
+    const fraction = d.percent / total;
+    acc += d.percent;
+    return { ...d, start, fraction };
+  });
+}
+
+const DP_SEGMENTS = buildDpSegments();
+
+function dpPoint(fraction, r) {
+  const theta = Math.PI * (1 - fraction);
+  return [
+    DP_CENTER + r * Math.cos(theta),
+    DP_CENTER - r * Math.sin(theta),
+  ].map((n) => n.toFixed(2));
+}
+
+function dpArcPath(startFrac, endFrac, progress) {
+  const s = startFrac * progress;
+  const e = endFrac * progress;
+  const [x1, y1] = dpPoint(s, DP_RADIUS);
+  const [x2, y2] = dpPoint(e, DP_RADIUS);
+  return `M ${x1} ${y1} A ${DP_RADIUS} ${DP_RADIUS} 0 0 1 ${x2} ${y2}`;
+}
+
+function DpSegmentArc({ segment, progress }) {
+  return (
+    <path
+      d={dpArcPath(segment.start, segment.start + segment.fraction, progress)}
+      fill="none"
+      stroke={segment.color}
+      strokeWidth={DP_STROKE}
+      strokeLinecap="round"
+    />
+  );
+}
+
+function DevicesPlatforms() {
+  const progress = useCountUp(1, { duration: 1000 });
+
+  return (
+    <article className="sa-panel sa-analytics__chart-card">
+      <div className="sa-panel__header">
+        <h2 className="sa-panel__title">Devices &amp; Platforms</h2>
+        <button className="sa-panel__dropdown" type="button">
+          <span>This Week</span>
+          <FiChevronDown size={14} />
+        </button>
+      </div>
+      <div className="sa-analytics__devices-body">
+        <div className="sa-analytics__semi-donut">
+          <svg
+            viewBox={`0 0 ${DP_VIEW_W} ${DP_VIEW_H}`}
+            className="sa-analytics__semi-donut-svg"
+            role="img"
+            aria-label="Devices and platforms breakdown"
+          >
+            <path
+              d={dpArcPath(0, 1, 1)}
+              fill="none"
+              stroke="#f1f5f9"
+              strokeWidth={DP_STROKE}
+              strokeLinecap="round"
+            />
+            {DP_SEGMENTS.map((seg) => (
+              <DpSegmentArc key={seg.label} segment={seg} progress={progress} />
+            ))}
+          </svg>
+          <div className="sa-analytics__semi-center">
+            <span className="sa-analytics__semi-label">Sessions</span>
+            <span className="sa-analytics__semi-value">68,932</span>
+          </div>
+        </div>
+        <ul className="sa-analytics__legend">
+          {DP_DATA.map((d) => (
+            <li key={d.label} className="sa-analytics__legend-item">
+              <span className="sa-analytics__legend-dot" style={{ backgroundColor: d.color }} />
+              <span className="sa-analytics__legend-name">{d.label}</span>
+              <span className="sa-analytics__legend-value">{d.count}</span>
+              <span className="sa-analytics__legend-percent">({d.percent}%)</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
 /* ---------------- Page ---------------- */
 
 function SuperAdminAnalytics() {
@@ -704,6 +1202,21 @@ function SuperAdminAnalytics() {
         <RevenueOverview />
         <OrderOverview />
         <UserGrowth />
+      </div>
+
+      {/* Additional insights */}
+      <div className="sa-analytics-page__insights">
+        <TopCategories />
+        <SalesByChannel />
+        <TopVendorsBySales />
+        <TopServiceProviders />
+      </div>
+
+      {/* New cards row */}
+      <div className="sa-analytics-page__new-cards">
+        <RecentOrdersOverview />
+        <CustomerDemographics />
+        <DevicesPlatforms />
       </div>
     </div>
   );

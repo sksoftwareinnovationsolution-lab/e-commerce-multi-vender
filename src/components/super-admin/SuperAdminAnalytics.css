@@ -738,3 +738,468 @@
     width: 100%;
   }
 }
+
+/* ---------- Additional insights (Top Categories, Channels, etc.) ---------- */
+.sa-analytics-page__insights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .sa-analytics-page__insights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1220px) {
+  .sa-analytics-page__insights {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* View All footer action */
+.sa-analytics-page .sa-analytics__view-all-btn {
+  padding: 0.4rem 0.7rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.sa-analytics-page .sa-analytics__view-all-btn:hover {
+  border-color: #c7d2fe;
+  color: #4f46e5;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__view-all-btn {
+  background-color: #0f172a;
+  border-color: #334155;
+  color: #9ca3af;
+}
+
+/* Centered footer link */
+.sa-analytics-page .sa-analytics__card-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.sa-analytics-page .sa-analytics__card-footer-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.sa-analytics-page .sa-analytics__card-footer-link:hover {
+  color: #6d28d9;
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__card-footer-link {
+  color: #a78bfa;
+}
+
+/* ---------- Top Categories ---------- */
+.sa-analytics-page .sa-analytics__cat-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sa-analytics-page .sa-analytics__cat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
+.sa-analytics-page .sa-analytics__cat-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.sa-analytics-page .sa-analytics__cat-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.sa-analytics-page .sa-analytics__cat-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__cat-name {
+  color: #f3f4f6;
+}
+
+.sa-analytics-page .sa-analytics__cat-orders {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__cat-orders {
+  color: #64748b;
+}
+
+.sa-analytics-page .sa-analytics__cat-percent {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #16a34a;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ---------- Sales by Channel ---------- */
+.sa-analytics-page .sa-analytics__channel-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  .sa-analytics-page .sa-analytics__channel-body {
+    flex-direction: column;
+  }
+
+  .sa-analytics-page .sa-analytics__channel-body .sa-analytics__legend {
+    width: 100%;
+  }
+}
+
+/* ---------- Top Vendors by Sales ---------- */
+.sa-analytics-page .sa-analytics__vendor-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sa-analytics-page .sa-analytics__vendor-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
+.sa-analytics-page .sa-analytics__vendor-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.sa-analytics-page .sa-analytics__vendor-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.sa-analytics-page .sa-analytics__vendor-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__vendor-name {
+  color: #f3f4f6;
+}
+
+.sa-analytics-page .sa-analytics__vendor-sales {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__vendor-sales {
+  color: #64748b;
+}
+
+.sa-analytics-page .sa-analytics__vendor-growth {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #16a34a;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ---------- Top Service Providers ---------- */
+.sa-analytics-page .sa-analytics__sp-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sa-analytics-page .sa-analytics__sp-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
+.sa-analytics-page .sa-analytics__sp-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+}
+
+.sa-analytics-page .sa-analytics__sp-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.sa-analytics-page .sa-analytics__sp-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__sp-name {
+  color: #f3f4f6;
+}
+
+.sa-analytics-page .sa-analytics__sp-bookings {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__sp-bookings {
+  color: #64748b;
+}
+
+.sa-analytics-page .sa-analytics__sp-rating {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .sa-analytics-page .sa-analytics__sp-rating {
+  color: #f3f4f6;
+}
+
+.sa-analytics-page .sa-analytics__sp-star {
+  color: #f59e0b;
+  margin-right: 0.15rem;
+}
+
+/* ---------- New cards row (Recent Orders, Demographics, Devices) ---------- */
+.sa-analytics-page__new-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .sa-analytics-page__new-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1220px) {
+  .sa-analytics-page__new-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Recent Orders table ---------- */
+.sa-analytics__orders-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sa-analytics__orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.sa-analytics__orders-table thead th {
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0 0 0.5rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sa-analytics__orders-table thead th {
+  color: #64748b;
+  border-bottom-color: #334155;
+}
+
+.sa-analytics__orders-table tbody td {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f8f9fb;
+  color: #374151;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sa-analytics__orders-table tbody td {
+  color: #e5e7eb;
+  border-bottom-color: #334155;
+}
+
+.sa-analytics__orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sa-analytics__orders-id {
+  font-weight: 600;
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .sa-analytics__orders-id {
+  color: #a78bfa !important;
+}
+
+.sa-analytics__orders-amount {
+  font-weight: 600;
+}
+
+.sa-analytics__orders-date {
+  color: #9ca3af !important;
+}
+
+[data-theme="dark"] .sa-analytics__orders-date {
+  color: #64748b !important;
+}
+
+.sa-analytics__orders-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* ---------- Devices & Platforms semi-donut ---------- */
+.sa-analytics__devices-body {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.sa-analytics__semi-donut {
+  position: relative;
+  width: 170px;
+  max-width: 50%;
+  aspect-ratio: 2 / 1;
+  flex-shrink: 0;
+}
+
+.sa-analytics__semi-donut-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sa-analytics__semi-center {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  line-height: 1.15;
+}
+
+.sa-analytics__semi-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .sa-analytics__semi-label {
+  color: #64748b;
+}
+
+.sa-analytics__semi-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sa-analytics__semi-value {
+  color: #f3f4f6;
+}
+
+@media (max-width: 767px) {
+  .sa-analytics__devices-body {
+    flex-direction: column;
+  }
+
+  .sa-analytics__semi-donut {
+    width: 200px;
+    max-width: 70%;
+  }
+
+  .sa-analytics__legend {
+    width: 100%;
+  }
+}
