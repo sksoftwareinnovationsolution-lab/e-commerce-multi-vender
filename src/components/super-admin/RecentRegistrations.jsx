@@ -45,31 +45,44 @@ const REGISTRATIONS = [
 
 function RecentRegistrations() {
   return (
-    <article className="sa-panel sa-registrations">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Recent Registrations</h2>
-        <button className="sa-panel__viewall" type="button">
+    <article className="bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-[0.9rem_1rem] min-w-0 flex flex-col items-stretch">
+      <div className="flex items-center justify-between gap-3 mb-[0.6rem]">
+        <h2 className="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-tight">
+          Recent Registrations
+        </h2>
+        <button className="group inline-flex items-center gap-1 bg-none border-none p-[0.3rem_0.5rem] text-[0.8rem] font-semibold text-[#8b5cf6] cursor-pointer rounded-lg whitespace-nowrap transition-[background-color,color] duration-200 hover:bg-[rgba(139,92,246,0.08)] hover:text-[#7c3aed] dark:text-[#a78bfa] dark:hover:bg-[rgba(139,92,246,0.15)] dark:hover:text-[#c4b5fd]" type="button">
           <span>View All</span>
-          <FiChevronRight size={13} />
+          <FiChevronRight size={13} className="flex-shrink-0 transition-transform duration-200 group-hover:translate-x-[2px]" />
         </button>
       </div>
 
-      <ul className="sa-registrations__list">
-        {REGISTRATIONS.map((reg) => {
+      <ul className="list-none flex flex-col min-w-0">
+        {REGISTRATIONS.map((reg, i) => {
           const Icon = reg.icon;
           return (
-            <li key={`${reg.name}-${reg.role}`} className="sa-registrations__row">
+            <li
+              key={`${reg.name}-${reg.role}`}
+              className={`flex items-center gap-3 py-[0.4rem] min-w-0 ${
+                i > 0 ? "border-t border-[#f1f5f9] dark:border-[#334155]" : ""
+              }`}
+            >
               <span
-                className="sa-registrations__icon"
+                className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-[0.6rem]"
                 style={{ backgroundColor: reg.bg, color: reg.color }}
               >
                 <Icon size={16} />
               </span>
-              <div className="sa-registrations__info">
-                <span className="sa-registrations__name">{reg.name}</span>
-                <span className="sa-registrations__role">{reg.role}</span>
+              <div className="flex-1 min-w-0 flex flex-col gap-[0.1rem]">
+                <span className="text-[0.85rem] font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {reg.name}
+                </span>
+                <span className="text-[0.72rem] font-medium text-gray-400 dark:text-slate-500">
+                  {reg.role}
+                </span>
               </div>
-              <span className="sa-registrations__date">{reg.date}</span>
+              <span className="flex-shrink-0 text-[0.68rem] font-medium text-gray-400 dark:text-slate-500 text-right whitespace-nowrap">
+                {reg.date}
+              </span>
             </li>
           );
         })}

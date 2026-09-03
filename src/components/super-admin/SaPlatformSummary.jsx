@@ -27,30 +27,45 @@ const SUMMARY_STATS = [
   },
 ];
 
-function SummaryStat({ stat }) {
+function SummaryStat({ stat, index }) {
   const numeric = Number(stat.value.replace(/\D/g, "")) || 0;
   const animated = useCountUp(numeric, { duration: 1000 });
 
+  const borderClass =
+    index === 0
+      ? "border-b border-r border-slate-100 dark:border-slate-700"
+      : index === 1
+      ? "border-b border-slate-100 dark:border-slate-700 md:border-r md:border-slate-100 md:dark:border-slate-700"
+      : index === 2
+      ? "border-r border-slate-100 dark:border-slate-700"
+      : "";
+
   return (
-    <li className="sa-summary__item">
-      <span className="sa-summary__value" style={{ color: stat.color }}>
+    <li
+      className={`flex flex-col items-center justify-center gap-[0.3rem] p-[0.5rem_0.4rem] min-w-0 text-center ${borderClass}`}
+    >
+      <span className="text-[1.3rem] font-bold tracking-[-0.02em] leading-[1.15] whitespace-nowrap" style={{ color: stat.color }}>
         {Math.round(animated).toLocaleString("en-IN")}
       </span>
-      <span className="sa-summary__label">{stat.label}</span>
+      <span className="text-[0.72rem] font-medium text-gray-500 dark:text-gray-400 leading-[1.25]">
+        {stat.label}
+      </span>
     </li>
   );
 }
 
 function SaPlatformSummary() {
   return (
-    <article className="sa-panel sa-summary">
-      <div className="sa-panel__header">
-        <h2 className="sa-panel__title">Platform Summary</h2>
+    <article className="bg-white dark:bg-[#1e293b] border dark:border-[#334155] border-[#eef0f3] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-[1rem_1.1rem] min-w-0 flex flex-col items-stretch">
+      <div className="flex items-center justify-between gap-3 mb-[0.6rem]">
+        <h2 className="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-tight">
+          Platform Summary
+        </h2>
       </div>
 
-      <ul className="sa-summary__list">
-        {SUMMARY_STATS.map((stat) => (
-          <SummaryStat key={stat.id} stat={stat} />
+      <ul className="flex-1 min-w-0 grid grid-cols-2 content-center md:grid-cols-4 gap-y-[0.4rem] md:gap-y-0">
+        {SUMMARY_STATS.map((stat, i) => (
+          <SummaryStat key={stat.id} stat={stat} index={i} />
         ))}
       </ul>
     </article>

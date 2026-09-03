@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import SuperAdminLayout from "../components/super-admin/SuperAdminLayout";
 import SuperAdminDashboard from "../components/super-admin/SuperAdminDashboard";
+import SuperAdminAnalytics from "../components/super-admin/SuperAdminAnalytics";
+import SuperAdminReports from "../components/super-admin/SuperAdminReports";
 import VendorDashboardLayout from "../components/vendor/VendorDashboardLayout";
 import VendorDashboard from "../components/vendor/VendorDashboard";
 import Home from "../pages/Home/Home";
@@ -39,6 +41,8 @@ function AppRoutes() {
         <Route path="account/forgot-password" element={<ForgotPassword />} />
         <Route path="super-admin" element={<SuperAdminLayout />}>
           <Route index element={<SuperAdminDashboard />} />
+          <Route path="analytics" element={<SuperAdminAnalytics />} />
+          <Route path="reports" element={<SuperAdminReports />} />
         </Route>
         <Route path="vendor-dashboard" element={<VendorDashboardLayout />}>
           <Route index element={<VendorDashboard />} />
