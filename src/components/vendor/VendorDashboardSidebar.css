@@ -65,6 +65,15 @@
   gap: 0.75rem;
 }
 
+/* Hidden scrollbar – keeps scrolling functional */
+.vd-sidebar__scroll::-webkit-scrollbar {
+  display: none;
+}
+.vd-sidebar__scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Vendor profile card (always dark blue, never changes on hover) */
 .vd-profile-card {
   display: flex;
@@ -191,3 +200,14 @@
 }
 
 /* Toggle button / menu header (for mobile closed state) is handled by navbar */
+
+/* Section title */
+.vd-section-title {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  padding: 0.5rem 0.75rem 0.25rem;
+  user-select: none;
+}

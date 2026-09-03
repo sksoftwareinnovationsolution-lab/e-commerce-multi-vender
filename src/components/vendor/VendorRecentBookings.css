@@ -1,0 +1,236 @@
+/* ========================================
+   Vendor Dashboard - Recent Bookings
+   ======================================== */
+
+.vd-recent-bookings {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.vd-recent-bookings__card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  border-radius: 0.625rem;
+  border: 1px solid #eef0f3;
+  background-color: #ffffff;
+  padding: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .vd-recent-bookings__card {
+  border-color: #334155;
+  background-color: #1e293b;
+}
+
+/* Header row */
+.vd-recent-bookings__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.vd-recent-bookings__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .vd-recent-bookings__title {
+  color: #f3f4f6;
+}
+
+/* "View All" button */
+.vd-recent-bookings__viewall {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: none;
+  border: none;
+  padding: 0.15rem 0.3rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vd-recent-bookings__viewall:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: #7c3aed;
+}
+
+[data-theme="dark"] .vd-recent-bookings__viewall {
+  color: #a78bfa;
+}
+
+[data-theme="dark"] .vd-recent-bookings__viewall:hover {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #c4b5fd;
+}
+
+.vd-recent-bookings__viewall-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.vd-recent-bookings__viewall:hover .vd-recent-bookings__viewall-icon {
+  transform: translateX(2px);
+}
+
+/* Table wrapper */
+.vd-recent-bookings__table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table */
+.vd-recent-bookings__table {
+  width: 100%;
+  min-width: 380px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.625rem;
+}
+
+/* Column widths: ID | Service | Customer | Date | Amount | Status */
+.vd-recent-bookings__th:nth-child(1),
+.vd-recent-bookings__cell--id {
+  width: 15%;
+}
+
+.vd-recent-bookings__th:nth-child(2),
+.vd-recent-bookings__cell--service {
+  width: 17%;
+}
+
+.vd-recent-bookings__th:nth-child(3),
+.vd-recent-bookings__cell--customer {
+  width: 17%;
+}
+
+.vd-recent-bookings__th:nth-child(4),
+.vd-recent-bookings__cell--date {
+  width: 20%;
+}
+
+.vd-recent-bookings__th:nth-child(5),
+.vd-recent-bookings__cell--amount {
+  width: 15%;
+}
+
+.vd-recent-bookings__th:nth-child(6) {
+  width: 16%;
+}
+
+/* Table header */
+.vd-recent-bookings__thead {
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  text-align: left;
+}
+
+.vd-recent-bookings__th {
+  padding: 0.3rem 0.25rem;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vd-recent-bookings__th--right {
+  text-align: right;
+}
+
+/* Table body */
+.vd-recent-bookings__row {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.15s ease;
+}
+
+[data-theme="dark"] .vd-recent-bookings__row {
+  border-bottom-color: #334155;
+}
+
+.vd-recent-bookings__row:last-child {
+  border-bottom: none;
+}
+
+.vd-recent-bookings__row:hover {
+  background-color: rgba(249, 250, 251, 0.6);
+}
+
+.vd-recent-bookings__cell {
+  padding: 0.3rem 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vd-recent-bookings__cell--id {
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.vd-recent-bookings__cell--service {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+[data-theme="dark"] .vd-recent-bookings__cell--service {
+  color: #e5e7eb;
+}
+
+.vd-recent-bookings__cell--customer,
+.vd-recent-bookings__cell--date {
+  color: #4b5563;
+}
+
+[data-theme="dark"] .vd-recent-bookings__cell--customer,
+[data-theme="dark"] .vd-recent-bookings__cell--date {
+  color: #cbd5e1;
+}
+
+.vd-recent-bookings__cell--amount {
+  text-align: right;
+  font-weight: 600;
+  color: #111827;
+}
+
+[data-theme="dark"] .vd-recent-bookings__cell--amount {
+  color: #f3f4f6;
+}
+
+/* Status badges */
+.vd-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.vd-badge--green {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.vd-badge--red {
+  background-color: #fee2e2;
+  color: #dc2626;
+}

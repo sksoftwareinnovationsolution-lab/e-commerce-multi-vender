@@ -5,7 +5,34 @@
 .vd-dashboard {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 100%;
   max-width: 100%;
+}
+
+/* ========================================
+   Vendor Dashboard - Grid Layouts
+   ======================================== */
+
+.vd-grid-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+  width: 100%;
+  max-width: 100%;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .vd-grid-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .vd-grid-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.875rem;
+    align-items: stretch;
+  }
 }

@@ -1,0 +1,207 @@
+/* ========================================
+   Vendor Dashboard - Earnings Summary
+   ======================================== */
+
+.vd-earnings-summary {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.vd-earnings-summary__card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  border-radius: 0.625rem;
+  border: 1px solid #eef0f3;
+  background-color: #ffffff;
+  padding: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .vd-earnings-summary__card {
+  border-color: #334155;
+  background-color: #1e293b;
+}
+
+/* Header row */
+.vd-earnings-summary__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.vd-earnings-summary__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .vd-earnings-summary__title {
+  color: #f3f4f6;
+}
+
+/* Period select dropdown */
+.vd-earnings-summary__select {
+  cursor: pointer;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  padding: 0.15rem 0.375rem;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: #374151;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vd-earnings-summary__select:focus {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+[data-theme="dark"] .vd-earnings-summary__select {
+  border-color: #475569;
+  background-color: #334155;
+  color: #e5e7eb;
+}
+
+/* Earnings rows container */
+.vd-earnings-summary__rows {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Single earnings row */
+.vd-earnings-summary__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.vd-earnings-summary__row:last-child {
+  border-bottom: none;
+}
+
+.vd-earnings-summary__row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.vd-earnings-summary__row-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+}
+
+.vd-earnings-summary__row-icon--violet {
+  background-color: #ede9fe;
+  color: #7c3aed;
+}
+
+.vd-earnings-summary__row-icon--pink {
+  background-color: #fce7f3;
+  color: #ec4899;
+}
+
+.vd-earnings-summary__row-icon--orange {
+  background-color: #ffedd5;
+  color: #f97316;
+}
+
+.vd-earnings-summary__row-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+[data-theme="dark"] .vd-earnings-summary__row-label {
+  color: #cbd5e1;
+}
+
+.vd-earnings-summary__row-value {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+[data-theme="dark"] .vd-earnings-summary__row-value {
+  color: #f3f4f6;
+}
+
+.vd-earnings-summary__row-value--positive {
+  color: #16a34a;
+}
+
+/* Net earnings footer */
+.vd-earnings-summary__net {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #f5f3ff;
+  padding: 0.5rem 0.625rem;
+}
+
+[data-theme="dark"] .vd-earnings-summary__net {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.vd-earnings-summary__net-left {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.vd-earnings-summary__net-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+  background-color: #ede9fe;
+  color: #7c3aed;
+}
+
+.vd-earnings-summary__net-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .vd-earnings-summary__net-label {
+  color: #f3f4f6;
+}
+
+.vd-earnings-summary__net-sublabel {
+  font-size: 0.5rem;
+  color: #6b7280;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .vd-earnings-summary__net-sublabel {
+  color: #9ca3af;
+}
+
+.vd-earnings-summary__net-value {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #16a34a;
+}
